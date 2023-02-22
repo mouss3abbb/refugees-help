@@ -14,4 +14,4 @@ An app that aims to help refugees in Egypt
 
 - Abdullah Aly Kamshishi
 - Esraa Maged Soliman
-- Rahma khaled
+- Rahma khaled AbdElmordy
