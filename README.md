@@ -13,3 +13,7 @@ An app that aims to help refugees in Egypt
 ## Team Members
 
 - Abdullah Aly Kamshishi
+- Esraa Maged Soliman
+- Rahma khaled AbdElmordy
+- Mostafa Mahmoud Selim
+- Sara Samir Abdelsamei
