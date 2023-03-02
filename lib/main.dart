@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:refugees_help/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,6 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const MaterialApp(
+        home: SplashScreen(),
+    );
   }
 }
