@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:refugees_help/screens/main_screen.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
 
 void main() {
@@ -11,7 +13,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        home: SplashScreen(),
+      locale: Locale('ar'),
+      localizationsDelegates: [
+        GlobalWidgetsLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('ar'),
+      ],
+      home: MainScreen(),
     );
   }
 }
