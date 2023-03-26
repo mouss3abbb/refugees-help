@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -19,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 119, 119, 119),
           extendBody: true,
-          body: const Home(),
+          body: selectedPage == 1?const Home():SavedItems(),
           bottomNavigationBar: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 2),
@@ -44,11 +46,15 @@ class _MainScreenState extends State<MainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
+                      onPressed: () {
+                        setState(() {
+                          selectedPage = 0;
+                        });
+                      },
+                      icon: Icon(
                         Icons.bookmarks_outlined,
                         size: 20,
-                        color: Color(0xFF92918D),
+                        color:Color(selectedPage == 0? 0xFFE8E5E1: 0xFF92918D),
                       )),
                   CircleAvatar(
                     radius: 20,
@@ -57,11 +63,15 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                   IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
+                      onPressed: () {
+                        setState(() {
+                          selectedPage = 1;
+                        });
+                      },
+                      icon: Icon(
                         Icons.home_filled,
                         size: 20,
-                        color: Color(0xFFE8E5E1),
+                        color: Color(selectedPage == 1? 0xFFE8E5E1: 0xFF92918D),
                       )),
                 ],
               ),
@@ -123,17 +133,23 @@ class _HomeState extends State<Home> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          CarouselSlider(
+            items: jobPostersList(),
+            options: CarouselOptions(
               height: 250,
-              width: double.infinity,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: jobPosterAssets.length,
-                itemBuilder: (context, index) => JobPoster(
-                  imageAsset: jobPosterAssets[index],
-                  description: jobPosterDescriptions[index],
-                ),
-              )),
+              padEnds: false,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              reverse: false,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 3),
+              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              autoPlayCurve: Curves.fastOutSlowIn,
+              enlargeCenterPage: true,
+              enlargeFactor: 0.3,
+              scrollDirection: Axis.horizontal,
+            ),
+          ),
           const SizedBox(
             height: 16,
           ),
@@ -205,6 +221,14 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  List<Widget> jobPostersList(){
+    List<Widget> posters = [];
+    for(var i = 0; i<jobPosterAssets.length;i++){
+      posters.add(JobPoster(description: jobPosterDescriptions[i], imageAsset: jobPosterAssets[i]));
+    }
+    return posters;
+  }
 }
 
 class IdiomCard extends StatefulWidget {
@@ -230,7 +254,7 @@ class _IdiomCardState extends State<IdiomCard> {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 61, 43, 26),
+          color: Color.fromARGB(255, 94, 66, 40),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: GestureDetector(
@@ -287,26 +311,23 @@ class CityPoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => openCity(name),
-      onDoubleTap: () => saveCity(name),
+      onTap: () => openCity(context,name),
+      onDoubleTap: () => saveCity(context,name),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: Stack(children: [
-            Image.asset(
-              imageAsset,
-              fit: BoxFit.cover,
-              width: 350,
+            SizedBox(
               height: 300,
-            ),
-            Container(
-              width: 350,
-              height: 300,
-              color: const Color.fromARGB(86, 22, 22, 22),
+              width: 340,
+              child: Image.asset(
+                imageAsset,
+                fit: BoxFit.fitHeight,
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
+              padding: const EdgeInsets.only(right: 16.0),
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
@@ -332,9 +353,33 @@ class CityPoster extends StatelessWidget {
     );
   }
 
-  openCity(String name) {}
+  openCity(BuildContext context,String name) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Placeholder(),));
+  }
 
-  saveCity(String name) {}
+  saveCity(BuildContext context, String name) {
+    var box = Hive.box('saved_cities');
+    box.put(name,'');
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("تم الحفظ",style: TextStyle(color: Colors.black54),),
+              IconButton(onPressed: (){
+                box.delete(name);
+              },
+                icon: Icon(Icons.undo,color: Colors.black54,),
+                  iconSize: 20,
+              ),
+            ],
+          ),
+          duration: const Duration(seconds: 2),
+          backgroundColor: Colors.white,
+          dismissDirection: DismissDirection.horizontal,
+        )
+    );
+  }
 }
 
 class JobPoster extends StatelessWidget {
@@ -350,16 +395,19 @@ class JobPoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => openJob(description),
-      onDoubleTap: () => saveJob(imageAsset, description),
+      onTap: () => openJob(context,description),
+      onDoubleTap: () => saveJob(context,imageAsset, description),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(25),
           child: Stack(children: [
-            Image.asset(
-              imageAsset,
-              fit: BoxFit.cover,
+            SizedBox(
+              height: 250,
+              child: Image.asset(
+                imageAsset,
+                fit: BoxFit.cover,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
@@ -369,7 +417,7 @@ class JobPoster extends StatelessWidget {
                   description,
                   style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 26,
+                      fontSize: 22,
                       fontWeight: FontWeight.w700,
                       shadows: [
                         Shadow(
@@ -387,9 +435,33 @@ class JobPoster extends StatelessWidget {
     );
   }
 
-  openJob(String description) {}
+  openJob(BuildContext context,String description) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Placeholder(),));
+  }
 
-  saveJob(String imageAsset, String description) {}
+  saveJob(BuildContext context,String imageAsset, String description) {
+    var box = Hive.box('saved_jobs');
+    box.put(imageAsset,description);
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("تم الحفظ",style: TextStyle(color: Colors.black54),),
+              IconButton(onPressed: (){
+                box.delete(imageAsset);
+              },
+                icon: Icon(Icons.undo,color: Colors.black54,),
+                iconSize: 20,
+              ),
+            ],
+          ),
+          duration: const Duration(seconds: 2),
+          backgroundColor: Colors.white,
+          dismissDirection: DismissDirection.horizontal,
+        )
+    );
+  }
 }
 
 class BlurEffect extends StatelessWidget {
@@ -414,4 +486,167 @@ class BlurEffect extends StatelessWidget {
       ),
     );
   }
+}
+
+class SavedItems extends StatefulWidget {
+  const SavedItems({Key? key}) : super(key: key);
+
+  @override
+  State<SavedItems> createState() => _SavedItemsState();
+}
+
+class _SavedItemsState extends State<SavedItems> {
+  var cityBox = Hive.box('saved_cities');
+  Set cities = {};
+
+  var jobBox = Hive.box('saved_jobs');
+  Set jobsAssets = {};
+  Set jobsDescription = {};
+
+  @override
+  Widget build(BuildContext context) {
+    cities.addAll(cityBox.keys);
+    jobsAssets.addAll(jobBox.keys);
+    jobsDescription.addAll(jobBox.values);
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(right: 16.0,top: 12.0),
+            child: Text(
+                "المدن المحفوظة",
+              style: TextStyle(
+                  fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 300,
+            child: ListView.builder(
+              itemCount: cities.length,
+              itemBuilder: (context, index) => Stack(
+                  children: [
+                    buildCity(cities.toList()[index]),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        onPressed: (){
+                          setState(() {
+                            var removed = cities.toList()[index];
+                            cityBox.delete(removed);
+                            cities.remove(removed);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("تم الحذف",style: TextStyle(color: Colors.black54),),
+                                      IconButton(onPressed: (){
+                                        setState(() {
+                                          cityBox.put(removed, '');
+                                          cities.add(removed);
+                                        });
+
+                                      },
+                                        icon: Icon(Icons.undo,color: Colors.black54,),
+                                        iconSize: 20,
+                                      ),
+                                    ],
+                                  ),
+                                  duration: const Duration(seconds: 2),
+                                  backgroundColor: Colors.white,
+                                  dismissDirection: DismissDirection.horizontal,
+                                )
+                            );
+                          });
+                        },
+                        icon: Icon(Icons.close,color: Colors.white,),
+                      ),
+                    )
+                  ],
+              ),
+              scrollDirection: Axis.horizontal,
+            ),
+          ),
+
+          const Padding(
+            padding: EdgeInsets.only(right: 16.0,top: 12.0),
+            child: Text(
+                "الوظائف المحفوظة",
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            height: 250,
+            margin: EdgeInsets.only(bottom: 80.0),
+            child: ListView.builder(
+              itemCount: jobsAssets.length,
+              itemBuilder: (context, index) => Stack(
+                children: [
+                  JobPoster(description: jobsDescription.toList()[index], imageAsset: jobsAssets.toList()[index]),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      onPressed: (){
+                        setState(() {
+                          var removedAsset = jobsAssets.toList()[index];
+                          var removedDescription = jobsDescription.toList()[index];
+                          jobBox.delete(removedAsset);
+                          jobsAssets.remove(removedAsset);
+                          jobsDescription.remove(removedDescription);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("تم الحذف",style: TextStyle(color: Colors.black54),),
+                                    IconButton(onPressed: (){
+                                      setState(() {
+                                        jobBox.put(removedAsset,removedDescription);
+                                        jobsAssets.add(removedAsset);
+                                        jobsDescription.add(removedDescription);
+                                      });
+
+                                    },
+                                      icon: Icon(Icons.undo,color: Colors.black54,),
+                                      iconSize: 20,
+                                    ),
+                                  ],
+                                ),
+                                duration: const Duration(seconds: 2),
+                                backgroundColor: Colors.white,
+                                dismissDirection: DismissDirection.horizontal,
+                              )
+                          );
+                        });
+                      },
+                      icon: Icon(Icons.close,color: Colors.white,),
+                    ),
+                  )
+                ],
+              ),
+              scrollDirection: Axis.horizontal,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  CityPoster buildCity(at) {
+    String imageAsset = '';
+    print(at);
+    if(at =='مدينة السادات')imageAsset = 'images/sadat.jpeg';
+    if(at == 'أكتوبر')imageAsset = 'images/october.jpg';
+    if(at == 'القاهرة')imageAsset = 'images/cairo.jpeg';
+    return CityPoster(name: at, imageAsset: imageAsset);
+  }
+
 }
