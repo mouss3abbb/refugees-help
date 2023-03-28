@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 119, 119, 119),
           extendBody: true,
-          body: selectedPage == 1?const Home():SavedItems(),
+          body: selectedPage == 1?const Home():const SavedItems(),
           bottomNavigationBar: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 2),
@@ -105,16 +105,30 @@ List cityPosterNames = [
 ];
 
 List popularIdioms = [
-  Idiom(phrase: 'Example', explanation: 'Explanation'),
-  Idiom(phrase: 'Example', explanation: 'Explanation'),
-  Idiom(phrase: 'Example', explanation: 'Explanation'),
-  Idiom(phrase: 'Example', explanation: 'Explanation'),
-  Idiom(phrase: 'Example', explanation: 'Explanation'),
+  Idiom(phrase: 'عَلاولَه - تملي', explanation: 'دائما'),
+  Idiom(phrase: 'شفتشي', explanation: 'ألوان زاهية'),
+  Idiom(phrase: 'عفارم - براوة', explanation: 'لفظ اطراء بمعنى أحسنت'),
+  Idiom(phrase: 'أونطجي - بلهاموطي', explanation: 'مخادع'),
+  Idiom(phrase: 'سُك', explanation: 'أغلق'),
+  Idiom(phrase: 'لُكلُك', explanation: 'ثرثرة'),
+  Idiom(phrase: 'لكلاك - رغاي', explanation: 'كثير الكلام'),
+  Idiom(phrase: 'لِمِض', explanation: 'كثير الجدال'),
+  Idiom(phrase: 'هَجص - هَبد - فَتي - فَشر', explanation: 'تكلم بغير علم'),
+  Idiom(phrase: 'ماتاخدنيش في دُوكَة', explanation: 'الهاء عن موضوع رئيسي'),
+  Idiom(phrase: 'كروتة - طلسأة', explanation: 'استعجال العمل'),
+  Idiom(phrase: 'فلوكَة', explanation: 'قارب صغير'),
+  Idiom(phrase: 'طَنش - سِيبك', explanation: 'لا تشغل بالك'),
+  Idiom(phrase: 'بقشيش', explanation: 'اكرامية'),
+  Idiom(phrase: 'كل سنة وأنت طيب يا باشا', explanation: 'أين الاكرامية'),
+  Idiom(phrase: 'فين الشاي - فين الحلاوة', explanation: 'كناية عن اكرامية'),
+  Idiom(phrase: 'فكك مني', explanation: 'غير مستعد للحديث'),
+  Idiom(phrase: 'بتاع', explanation: 'هو كل شيء تشير اليه او تتحدث عنه'),
+
 ];
 
 class Idiom {
-  var phrase, explanation;
-  Idiom({this.phrase, this.explanation});
+  String phrase, explanation;
+  Idiom({required this.phrase, required this.explanation});
 }
 
 class Home extends StatefulWidget {
@@ -142,8 +156,8 @@ class _HomeState extends State<Home> {
               enableInfiniteScroll: true,
               reverse: false,
               autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              autoPlayInterval: const Duration(seconds: 3),
+              autoPlayAnimationDuration: const Duration(milliseconds: 800),
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeCenterPage: true,
               enlargeFactor: 0.3,
@@ -202,19 +216,31 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           isDropdownOpen
-              ? SizedBox(
-                  height: 400,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: popularIdioms.length,
-                    itemBuilder: (context, index) =>
-                        IdiomCard(idiom: popularIdioms[index]),
+              ? Column(
+                children: [
+                  IdiomCard(idiom: popularIdioms[0]),
+                  IdiomCard(idiom: popularIdioms[1]),
+                  IdiomCard(idiom: popularIdioms[2]),
+                  IdiomCard(idiom: popularIdioms[3]),
+                  TextButton(
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const IdiomsPage(),));
+                      },
+                      child: const Text(
+                        "المزيد",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w200,
+                        ),
+                      ),
                   ),
-                )
+                ],
+              )
               : Container(),
-          SizedBox(
+          const SizedBox(
             height: 100,
           ),
         ],
@@ -230,6 +256,33 @@ class _HomeState extends State<Home> {
     return posters;
   }
 }
+
+
+class IdiomsPage extends StatelessWidget {
+  const IdiomsPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.black54,
+        foregroundColor: Colors.white70,
+      ),
+      backgroundColor: Colors.white54,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: ListView.builder(
+          shrinkWrap: true,
+            itemCount: popularIdioms.length,
+            itemBuilder: (context, index) => IdiomCard(idiom: popularIdioms[index]),
+        ),
+      ),
+    );
+  }
+}
+
+
 
 class IdiomCard extends StatefulWidget {
   const IdiomCard({super.key, required this.idiom});
@@ -254,7 +307,7 @@ class _IdiomCardState extends State<IdiomCard> {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 94, 66, 40),
+          color: Colors.black12,
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: GestureDetector(
@@ -269,7 +322,7 @@ class _IdiomCardState extends State<IdiomCard> {
                 children: [
                   Text(
                     idiom.phrase,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
@@ -277,13 +330,13 @@ class _IdiomCardState extends State<IdiomCard> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               isCardShown
                   ? Text(
                       idiom.explanation,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
@@ -365,11 +418,11 @@ class CityPoster extends StatelessWidget {
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("تم الحفظ",style: TextStyle(color: Colors.black54),),
+              const Text("تم الحفظ",style: TextStyle(color: Colors.black54),),
               IconButton(onPressed: (){
                 box.delete(name);
               },
-                icon: Icon(Icons.undo,color: Colors.black54,),
+                icon: const Icon(Icons.undo,color: Colors.black54,),
                   iconSize: 20,
               ),
             ],
@@ -436,7 +489,7 @@ class JobPoster extends StatelessWidget {
   }
 
   openJob(BuildContext context,String description) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Placeholder(),));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const Placeholder(),));
   }
 
   saveJob(BuildContext context,String imageAsset, String description) {
@@ -447,11 +500,11 @@ class JobPoster extends StatelessWidget {
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("تم الحفظ",style: TextStyle(color: Colors.black54),),
+              const Text("تم الحفظ",style: TextStyle(color: Colors.black54),),
               IconButton(onPressed: (){
                 box.delete(imageAsset);
               },
-                icon: Icon(Icons.undo,color: Colors.black54,),
+                icon: const Icon(Icons.undo,color: Colors.black54,),
                 iconSize: 20,
               ),
             ],
@@ -543,7 +596,7 @@ class _SavedItemsState extends State<SavedItems> {
                                   content: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("تم الحذف",style: TextStyle(color: Colors.black54),),
+                                      const Text("تم الحذف",style: TextStyle(color: Colors.black54),),
                                       IconButton(onPressed: (){
                                         setState(() {
                                           cityBox.put(removed, '');
@@ -551,7 +604,7 @@ class _SavedItemsState extends State<SavedItems> {
                                         });
 
                                       },
-                                        icon: Icon(Icons.undo,color: Colors.black54,),
+                                        icon: const Icon(Icons.undo,color: Colors.black54,),
                                         iconSize: 20,
                                       ),
                                     ],
@@ -563,7 +616,7 @@ class _SavedItemsState extends State<SavedItems> {
                             );
                           });
                         },
-                        icon: Icon(Icons.close,color: Colors.white,),
+                        icon: const Icon(Icons.close,color: Colors.white,),
                       ),
                     )
                   ],
@@ -585,7 +638,7 @@ class _SavedItemsState extends State<SavedItems> {
           ),
           Container(
             height: 250,
-            margin: EdgeInsets.only(bottom: 80.0),
+            margin: const EdgeInsets.only(bottom: 80.0),
             child: ListView.builder(
               itemCount: jobsAssets.length,
               itemBuilder: (context, index) => Stack(
@@ -606,7 +659,7 @@ class _SavedItemsState extends State<SavedItems> {
                                 content: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("تم الحذف",style: TextStyle(color: Colors.black54),),
+                                    const Text("تم الحذف",style: TextStyle(color: Colors.black54),),
                                     IconButton(onPressed: (){
                                       setState(() {
                                         jobBox.put(removedAsset,removedDescription);
@@ -615,7 +668,7 @@ class _SavedItemsState extends State<SavedItems> {
                                       });
 
                                     },
-                                      icon: Icon(Icons.undo,color: Colors.black54,),
+                                      icon: const Icon(Icons.undo,color: Colors.black54,),
                                       iconSize: 20,
                                     ),
                                   ],
@@ -627,7 +680,7 @@ class _SavedItemsState extends State<SavedItems> {
                           );
                         });
                       },
-                      icon: Icon(Icons.close,color: Colors.white,),
+                      icon: const Icon(Icons.close,color: Colors.white,),
                     ),
                   )
                 ],
