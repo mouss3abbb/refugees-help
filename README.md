@@ -16,4 +16,8 @@ An app that aims to help refugees in Egypt
 - Esraa Maged Soliman
 - Rahma khaled AbdElmordy
 - Mostafa Mahmoud Selim
+<<<<<<< HEAD
 - Sara Samir Abdelsamei 
+=======
+- Sara Samir Abdelsamei
+>>>>>>> 1f96f6428252941d0b0ab9206f9eef3519ff571f

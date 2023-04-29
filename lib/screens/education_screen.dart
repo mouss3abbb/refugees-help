@@ -6,6 +6,22 @@ import 'package:flutter/material.dart';
 
 
 class education_screen extends StatelessWidget {
+  const education_screen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MySub1(),
+    );
+  }
+}
+class MySub1 extends StatefulWidget {
+  MySub1({super.key});
+
+  @override
+  State<MySub1> createState() => _MySub1();
+}
+class _MySub1 extends State<MySub1> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
