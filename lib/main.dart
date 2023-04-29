@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:refugees_help/screens/main_screen.dart';
+import 'package:refugees_help/screens/education_screen.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
 
 Future main() async {
