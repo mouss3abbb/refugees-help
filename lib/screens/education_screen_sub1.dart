@@ -37,7 +37,7 @@ List<data> school=[
     address:'الظهير الصحراوى لمدينة السادات، المنوفية',
     addressURL: 'https://goo.gl/maps/z3PHxg1BTri8td5H6',
     phone:'11111111111',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 0),
   ),
   data( schoolName: 'مدارس الجيل الجديد الدولية',
     schoolNameE: 'New Generation International School',
@@ -47,7 +47,7 @@ List<data> school=[
     address:' شارع ابوبكر الصديق، بجوار مول دار مصر',
     addressURL: 'https://goo.gl/maps/VAyMW7wEUW1LY5RR6',
     phone:'0155 555 2082',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 1),
   ),
   data( schoolName: 'مدارس النيل المصرية',
     schoolNameE:'Nile Egyptian Schools',
@@ -57,7 +57,7 @@ List<data> school=[
     address:'المنطقة السابعه، مدينة السادات',
     addressURL: 'https://goo.gl/maps/uHZy4tc5ZgTMuvwo6',
     phone:'01275931480',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 2),
   ),
   data( schoolName: 'مدرسة Oxford college ',
     schoolNameE:'Oxford college School',
@@ -67,7 +67,7 @@ List<data> school=[
     address:'المنطقة التاسعة، مدينة السادات',
     addressURL: '',
     phone:'01200512557',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 3),
   ),
   data( schoolName: 'مدارس المستقبل الدولية',
     schoolNameE:'Future International School',
@@ -77,7 +77,7 @@ List<data> school=[
     address:'الظهير الصحراوى لمدينة السادات، المنوفية',
     addressURL: 'https://goo.gl/maps/EkhvxtmqBHfQztNP8',
     phone:'0121 144 4464',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 4),
   ),
   data( schoolName: 'مدرسة كامبريدج للغات',
     schoolNameE:'Cambridge Languages School',
@@ -87,7 +87,7 @@ List<data> school=[
     address:' المنطقة الثانية عشر، مدينة السادات',
     addressURL: 'https://goo.gl/maps/pBxwkBLUFfLdLtLV9',
     phone:'0155 628 8008',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 5),
   ),
   data( schoolName:'مدرسة سارة سعد نواره',
     schoolNameE: 'Sara Saad Nawara School',
@@ -97,7 +97,7 @@ List<data> school=[
     address:'المنطقة التاسعة، مدينة السادات',
     addressURL: 'https://goo.gl/maps/KHTCLiTniaKbULq87',
     phone:'01234567890',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 6),
   ),
   data( schoolName: 'مدرسة السادات الرسمية لغات',
     schoolNameE:'Sadat Experimental School of Languages',
@@ -107,7 +107,7 @@ List<data> school=[
     address:'المنطقة الثالثة، مدينة السادات',
     addressURL: 'https://goo.gl/maps/AdF6mT8uJEum3NnQ9',
     phone:'2610001',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 7),
   ),
   data( schoolName:'مدرسة السادات الثانويه للبنات',
     schoolNameE: 'Sadat City High School for girls',
@@ -117,7 +117,7 @@ List<data> school=[
     address:'شارع عبدالله بن رواحة، مدينة السادات',
     addressURL: 'https://goo.gl/maps/pSB9NzKhMhSzFijz9',
     phone:'048 3558221',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 8),
   ),
   data( schoolName:'مدرسه الفاروق الثانويه للبنين',
     schoolNameE: 'Alfarouk High School for boys',
@@ -127,7 +127,7 @@ List<data> school=[
     address:'المنطقة السكنية الحادية عشر، مدينة السادات',
     addressURL: 'https://goo.gl/maps/hWjCBHRdRTry7PPr5',
     phone:'048 2610006',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 9),
   ),
   data( schoolName:'مدرسه القادسية الخاصة',
     schoolNameE: 'Al-Qadisiyah school',
@@ -137,7 +137,7 @@ List<data> school=[
     address:'جابر بن حيان بجوار مسجد الايمان',
     addressURL: 'https://goo.gl/maps/7vSagp6nFCFtP8rDA',
     phone:'01280658581',
-    schoolScreen:details(),
+    schoolScreen:details(dataIndex: 10),
   ),
 ];
 class education_screen_sub1 extends StatelessWidget {
@@ -246,6 +246,10 @@ Widget buildCount(data d,BuildContext context){
 
 class details extends StatelessWidget {
 
+  final int dataIndex;
+
+  const details({super.key, required this.dataIndex});
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -260,11 +264,7 @@ class details extends StatelessWidget {
         backgroundColor: Color(0xffEFECE7),
         body: Container(
           margin: EdgeInsets.all(10),
-          child:ListView.separated(
-            itemBuilder: (context, index) => buildCount2(school[index], context),
-            separatorBuilder: (context, index) => SizedBox(height: 15),
-            itemCount: 1, // update itemCount to display only one item
-          )
+    child: buildCount2(school[dataIndex], context),
 
         ),
       ),

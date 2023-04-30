@@ -25,19 +25,19 @@ List<data> college=[
     collegeImg: 'assets/images/fcai.png',
     collegeURL: 'http://fcai.usc.edu.eg/',
 
-    collegeScreen:details(),
+    collegeScreen:details(dataIndex: 0),
   ),
   data( collegeName: 'كلية إدارة الأعمال',
     collegeNameE: 'aa',
     collegeImg: 'assets/images/pharmacy.jfif',
     collegeURL: '',
-    collegeScreen:details(),
+    collegeScreen:details(dataIndex: 1),
   ),
   data( collegeName: 'كلية الدراسات التربوية',
     collegeNameE: 'bb',
     collegeImg: 'assets/images/vet.png',
     collegeURL: '',
-    collegeScreen:details(),
+    collegeScreen:details(dataIndex: 2),
   ),
 
 
@@ -127,6 +127,10 @@ Widget buildCount(data d,BuildContext context){
 }
 class details extends StatelessWidget {
 
+  final int dataIndex;
+
+  const details({super.key, required this.dataIndex});
+
   @override
   Widget build(BuildContext context) {
 
@@ -141,11 +145,7 @@ class details extends StatelessWidget {
         ),
         body: Container(
             margin: EdgeInsets.all(10),
-            child:ListView.separated(
-              itemBuilder: (context, index) => buildCount2(college[index], context),
-              separatorBuilder: (context, index) => SizedBox(height: 15),
-              itemCount: 1, // update itemCount to display only one item
-            )
+            child:buildCount2(college[dataIndex], context)
         ),
       ),
     );

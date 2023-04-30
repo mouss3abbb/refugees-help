@@ -23,56 +23,56 @@ List<data> college=[
     collegeNameE: 'Faculty of Computers and Artificial Intelligence',
     collegeImg: 'assets/images/fcai.png',
     collegeURL: 'http://fcai.usc.edu.eg/',
-    collegeScreen:details(0),
+    collegeScreen:details(dataIndex: 0,),
   ),
   data( collegeName: 'كلية الصيدلة',
     collegeNameE: 'Faculty of Pharmacy',
     collegeImg: 'assets/images/pharmacy.jfif',
     collegeURL: 'https://fop.usc.edu.eg/ar',
-    collegeScreen:details(1),
+    collegeScreen:details(dataIndex: 1),
   ),
   data( collegeName: 'كلية الطب البيطري',
     collegeNameE: 'Faculty of Veterinary Medicine',
     collegeImg: 'assets/images/vet.png',
     collegeURL: 'https://vet.usc.edu.eg/ar',
-    collegeScreen:details(2),
+    collegeScreen:details(dataIndex: 2),
   ),
   data( collegeName: 'كلية التجارة',
     collegeNameE: 'Faculty of Commerce',
     collegeImg: 'assets/images/comm.jfif',
     collegeURL: 'https://com.usc.edu.eg/ar',
-    collegeScreen:details(3),
+    collegeScreen:details(dataIndex: 3),
   ),
   data( collegeName: 'كلية التربية',
     collegeNameE: 'Faculty of Education',
     collegeImg: 'assets/images/edus.jfif',
     collegeURL: 'https://edu.usc.edu.eg/ar',
-    collegeScreen:details(4),
+    collegeScreen:details(dataIndex: 4),
   ),
 
   data( collegeName: 'كلية التربية الرياضية',
     collegeNameE: 'Faculty of Sport Education',
     collegeImg: 'assets/images/sport.jfif',
     collegeURL: 'https://phed.usc.edu.eg/ar',
-    collegeScreen:details(5),
+    collegeScreen:details(dataIndex: 5),
   ),
   data( collegeName: 'كلية الحقوق',
     collegeNameE: 'Faculty of Law',
     collegeImg: 'assets/images/law.png',
     collegeURL: 'https://law.usc.edu.eg/ar',
-    collegeScreen:details(6),
+    collegeScreen:details(dataIndex: 6),
   ),
   data( collegeName: 'كلية السياحة والفنادق',
     collegeNameE: 'Faculty of Tourism and Hotels',
     collegeImg: 'assets/images/tour.png',
     collegeURL: 'https://fth.usc.edu.eg/ar',
-    collegeScreen:details(7),
+    collegeScreen:details(dataIndex: 7),
   ),
   data( collegeName: 'كلية التربية للطفولة المبكرة',
     collegeNameE: 'Faculty of Early Childhood Education',
     collegeImg: 'assets/images/educ.jfif',
     collegeURL: 'https://ech.usc.edu.eg/',
-    collegeScreen:details(8),
+    collegeScreen:details(dataIndex: 8),
   ),
 ];
 class education_screen_sub2 extends StatelessWidget {
@@ -165,9 +165,10 @@ Widget buildCount(data d,BuildContext context){
 class details extends StatelessWidget {
 
 
-  details(int i){
+  final int dataIndex;
 
-  }
+  const details({super.key, required this.dataIndex});
+
 
   @override
   Widget build(BuildContext context) {
@@ -183,11 +184,7 @@ class details extends StatelessWidget {
         ),
         body: Container(
             margin: EdgeInsets.all(10),
-            child:ListView.separated(
-              itemBuilder: (context, index) => buildCount2(college[2], context),
-              separatorBuilder: (context, index) => SizedBox(height: 15),
-              itemCount: 1, // update itemCount to display only one item
-            )
+            child:buildCount2(college[dataIndex], context),
 
         ),
       ),

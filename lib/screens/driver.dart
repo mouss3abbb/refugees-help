@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:jobbb/job.dart';
 import 'package:url_launcher/url_launcher.dart';
 class driver extends StatelessWidget {
   const driver({Key? key}) : super(key: key);
