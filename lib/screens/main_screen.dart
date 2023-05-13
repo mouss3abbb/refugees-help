@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:refugees_help/screens/city_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -102,6 +103,12 @@ List cityPosterNames = [
   'مدينة السادات',
   'أكتوبر',
   'القاهرة',
+];
+List cityScreens=[
+  city_screen(),
+  city_screen(),
+  city_screen(),
+
 ];
 
 List popularIdioms = [
@@ -356,6 +363,7 @@ class CityPoster extends StatelessWidget {
     super.key,
     required this.name,
     required this.imageAsset,
+
   });
 
   final String name;
@@ -407,7 +415,7 @@ class CityPoster extends StatelessWidget {
   }
 
   openCity(BuildContext context,String name) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const Placeholder(),));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const city_screen(),));
   }
 
   saveCity(BuildContext context, String name) {
