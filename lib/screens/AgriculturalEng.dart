@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:refugees_help/screens/job.dart';
+import 'package:refugees_help/screens/job_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 class AgriculturalEng extends StatelessWidget {
   const AgriculturalEng({Key? key}) : super(key: key);

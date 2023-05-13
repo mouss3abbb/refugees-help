@@ -254,6 +254,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_google_street_view:
+    dependency: "direct main"
+    description:
+      name: flutter_google_street_view
+      sha256: "4dcc4cb0c382f8cdac00a4c2d1cac34e1c32c4b11c473007699659a5d1376c5d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.8"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -309,6 +317,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  google_maps:
+    dependency: transitive
+    description:
+      name: google_maps
+      sha256: eb20a162d642599a05179e2d155b9e803899cb377764fdec9044fa7fa474bfb8
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.0"
   graphs:
     dependency: transitive
     description:
@@ -429,6 +445,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
+  js_wrapping:
+    dependency: transitive
+    description:
+      name: js_wrapping
+      sha256: e385980f7c76a8c1c9a560dfb623b890975841542471eade630b2871d243851c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.4"
   json_annotation:
     dependency: transitive
     description:
@@ -437,6 +461,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.0"
+  kotlin_scope_function:
+    dependency: transitive
+    description:
+      name: kotlin_scope_function
+      sha256: "73d53ae58e36ee44ae538411766091e8c2fb36054dc048c70d95cbf3aab3d85c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   lints:
     dependency: transitive
     description:
@@ -770,6 +802,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  street_view_platform_interface:
+    dependency: transitive
+    description:
+      name: street_view_platform_interface
+      sha256: "0f7a259e95c1192b9054328b1e3591f4867b045ce279dec4e0528f3f999f3ba8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.8"
   string_scanner:
     dependency: transitive
     description:
