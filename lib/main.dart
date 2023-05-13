@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:refugees_help/screens/job.dart';
-import 'package:refugees_help/screens/login_screen.dart';
+import 'package:refugees_help/screens/city_screen.dart';
 import 'package:refugees_help/screens/main_screen.dart';
+import 'package:refugees_help/screens/job_screen.dart';
+import 'package:refugees_help/screens/login_screen.dart';
 import 'package:refugees_help/screens/education_screen.dart';
 import 'package:refugees_help/screens/register_screen.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
@@ -12,7 +13,6 @@ Future main() async {
   await Hive.initFlutter();
   var cityBox = await Hive.openBox('saved_cities');
   var jobBox = await Hive.openBox('saved_jobs');
-
   runApp(const MyApp());
 }
 

@@ -55,8 +55,8 @@ List<data> job=[
 ];
 
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class job_screen extends StatelessWidget {
+  const job_screen({super.key});
 
 
 

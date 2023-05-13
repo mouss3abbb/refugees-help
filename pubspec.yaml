@@ -41,6 +41,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter:
   font_awesome_flutter:
+  flutter_google_street_view: ^2.2.4
+
 
 dev_dependencies:
   flutter_test:
