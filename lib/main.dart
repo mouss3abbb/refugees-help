@@ -5,6 +5,7 @@ import 'package:refugees_help/screens/job.dart';
 import 'package:refugees_help/screens/login_screen.dart';
 import 'package:refugees_help/screens/main_screen.dart';
 import 'package:refugees_help/screens/education_screen.dart';
+import 'package:refugees_help/screens/on_boarding_screen.dart';
 import 'package:refugees_help/screens/register_screen.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'refugees_help',
       locale: Locale('ar'),
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar'),
       ],
-      home: MainScreen(),
+      theme: ThemeData(fontFamily: 'Massir'),
+      home: OnBoardingScreen(),
     );
   }
 }
