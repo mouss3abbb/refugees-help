@@ -44,7 +44,8 @@ dependencies:
   theme_provider:
   image_picker: ^0.8.7+4
   flutter_rating_bar: ^4.0.1
-
+  animated_splash_screen:
+  page_transition:
   community_material_icon: ^5.9.5
   # switch animation between light and dark theme
   animated_theme_switcher: ^2.0.1-nullsafety.0

@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar'),
       ],
-      home: MainScreen(),
+      theme: ThemeData(fontFamily: 'Massir'),
+      home: OnBoardingScreen(),
     );
   }
 }

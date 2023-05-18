@@ -1,10 +1,22 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:refugees_help/main.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:refugees_help/screens/on_boarding_screen.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class Splash extends StatelessWidget {
+  const Splash({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return AnimatedSplashScreen(
+        splashIconSize: 200,
+        backgroundColor: Colors.white,
+        pageTransitionType: PageTransitionType.topToBottom,
+        splashTransition: SplashTransition.fadeTransition,
+        splash: Image.asset('assets/images/home.gif',width: 1.5*MediaQuery.of(context).size.width/2,),
+        nextScreen: const OnBoardingScreen(),
+        duration: 4000,
+        animationDuration: const Duration(seconds: 2));
   }
 }
