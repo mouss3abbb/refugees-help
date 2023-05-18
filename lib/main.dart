@@ -12,8 +12,9 @@ import 'package:refugees_help/screens/splash_screen.dart';
 
 Future main() async {
   await Hive.initFlutter();
-  await Hive.openBox('saved_cities');
-  await Hive.openBox('saved_jobs');
+  var cityBox = await Hive.openBox('saved_cities');
+  var jobBox = await Hive.openBox('saved_jobs');
+  var usersBox = await Hive.openBox('users');
   runApp(const MyApp());
 }
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         Locale('ar'),
       ],
       theme: ThemeData(fontFamily: 'Massir'),
-      home: const Splash(),
+      home: OnBoardingScreen(),
     );
   }
 }
