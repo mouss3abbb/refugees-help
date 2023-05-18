@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:refugees_help/screens/city_screen.dart';
+import 'package:refugees_help/screens/job_screen.dart';
+import 'package:refugees_help/screens/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -57,10 +59,15 @@ class _MainScreenState extends State<MainScreen> {
                         size: 20,
                         color:Color(selectedPage == 0? 0xFFE8E5E1: 0xFF92918D),
                       )),
-                  CircleAvatar(
-                    radius: 20,
-                    child: ClipOval(
-                      child: Image.asset('images/pfp.jpeg', scale: 1),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+                    },
+                    child: CircleAvatar(
+                      radius: 20,
+                      child: ClipOval(
+                        child: Image.asset('images/pfp.jpeg', scale: 1),
+                      ),
                     ),
                   ),
                   IconButton(
@@ -115,7 +122,7 @@ List popularIdioms = [
   Idiom(phrase: 'عَلاولَه - تملي', explanation: 'دائما'),
   Idiom(phrase: 'شفتشي', explanation: 'ألوان زاهية'),
   Idiom(phrase: 'عفارم - براوة', explanation: 'لفظ اطراء بمعنى أحسنت'),
-  Idiom(phrase: 'أونطجي - بلهاموطي', explanation: 'مخادع'),
+  Idiom(phrase: 'أونطجي', explanation: 'مخادع'),
   Idiom(phrase: 'سُك', explanation: 'أغلق'),
   Idiom(phrase: 'لُكلُك', explanation: 'ثرثرة'),
   Idiom(phrase: 'لكلاك - رغاي', explanation: 'كثير الكلام'),
@@ -497,7 +504,7 @@ class JobPoster extends StatelessWidget {
   }
 
   openJob(BuildContext context,String description) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const Placeholder(),));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const job_screen(),));
   }
 
   saveJob(BuildContext context,String imageAsset, String description) {

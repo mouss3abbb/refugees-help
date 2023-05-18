@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/menuScreen.dart';
+
+import 'menuScreen.dart';
 class RestaurantsPage extends StatefulWidget{
   @override
   RestaurantsState createState()=>RestaurantsState();
@@ -145,11 +146,6 @@ class RestaurantsState extends State<RestaurantsPage>{
           appBar: AppBar(
             elevation: 0.0,
             backgroundColor:Colors.grey ,
-            actions: [
-              IconButton(
-                  icon: Icon(Icons.arrow_forward_ios_rounded),
-                  onPressed: (){}),
-            ],
           ),
 
 

@@ -80,9 +80,7 @@ class education_screen_sub2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MySub2(),
-    );
+    return MySub2();
   }
 }
 class MySub2 extends StatefulWidget {
@@ -94,22 +92,15 @@ class MySub2 extends StatefulWidget {
 class _MySub2 extends State<MySub2>{
   Widget build(BuildContext context) {
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('الكليات المتاحة في جامعة مدينة السادات'),
           backgroundColor: Colors.grey,
           centerTitle: true,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const education_screen_sub21()),
-                );
-              }
+          leading: BackButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
           ),
         ),
 
@@ -121,7 +112,7 @@ class _MySub2 extends State<MySub2>{
               separatorBuilder: (context,index)=>SizedBox(height:15,)
               , itemCount: college.length),
         ),
-      ),);
+      );
   }
 }
 

@@ -10,9 +10,7 @@ class education_screen_sub21 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyStatefulWidget(),
-    );
+    return MyStatefulWidget();
   }
 }
 
@@ -29,14 +27,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
 
       appBar: AppBar(
         title: Text('الجامعات'),
         backgroundColor: Colors.grey,
         centerTitle: true,
-
+        leading: BackButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
       ),
 
       backgroundColor: Color(0xffEFECE7),

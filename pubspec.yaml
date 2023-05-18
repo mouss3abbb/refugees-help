@@ -80,6 +80,20 @@ flutter:
   assets:
     - assets/images/
     - images/
+    - images/aboAlsoud/
+    - images/alnadyAlmalaky/
+    - images/dajaj/
+    - images/fatatry/
+    - images/hamza/
+    - images/heartAttack/
+    - images/ketchup/
+    - images/primavera/
+    - images/qasrALemaratiya/
+    - images/robaia/
+    - images/shamy/
+    - images/taiba/
+    - images/tiger/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

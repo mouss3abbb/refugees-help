@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:refugees_help/screens/main_screen.dart';
 import 'package:refugees_help/screens/register_screen.dart';
 
 class Login extends StatefulWidget {
@@ -124,7 +125,9 @@ class _LoginState extends State<Login> {
                             fontSize: 18,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainScreen()));
+                        },
                       ),
                     ),
                     const SizedBox(

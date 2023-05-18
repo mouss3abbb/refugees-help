@@ -145,9 +145,7 @@ class education_screen_sub1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MySub1(),
-    );
+    return MySub1();
   }
 }
 class MySub1 extends StatefulWidget {
@@ -158,14 +156,16 @@ class MySub1 extends StatefulWidget {
 }
 class _MySub1 extends State<MySub1> {
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('المدارس'),
           backgroundColor: Colors.grey,
           centerTitle: true,
-
+          leading: BackButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          ),
         ),
         backgroundColor: Color(0xffEFECE7),
         body: Container(
@@ -177,7 +177,7 @@ class _MySub1 extends State<MySub1> {
               separatorBuilder: (context, index) => SizedBox(height: 15,)
               , itemCount: school.length),
         ),
-      ),);
+      );
   }
   calling()async{
     const url= 'tel:+201025027368';
@@ -252,9 +252,7 @@ class details extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("تفاصيل"),
           backgroundColor: Colors.grey,
@@ -267,7 +265,6 @@ class details extends StatelessWidget {
     child: buildCount2(school[dataIndex], context),
 
         ),
-      ),
     );
   }
 }

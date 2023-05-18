@@ -16,15 +16,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final user = UserPreferences.myUser;
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
+    return Scaffold(
         appBar: buildAppBar(context),
         body: ListView(
           physics: BouncingScrollPhysics(),
           children: [
             ProfileWidget(
-              imagePath: user.imagePath,
+              imagePath: user.imagePath!,
               onClicked: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => EditProfilePage()),
@@ -41,7 +39,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             buildAbout(user),
           ],
         ),
-      ),
     );
   }
 
@@ -52,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            user.name,
+            user.name!,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
         ],
@@ -63,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            user.country,
+            user.country!,
             style:
             TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
           ),
@@ -76,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           InkWell(
             child: Text(
-              user.phone,
+              user.phone!,
               style: TextStyle(color: Colors.grey),
             ),
             onTap: () {
@@ -92,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           InkWell(
             child: Text(
-              user.email,
+              user.email!,
               style: TextStyle(color: Colors.grey),
             ),
             onTap: () {
@@ -120,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         const SizedBox(height: 16),
         Text(
-          user.about,
+          user.about!,
           style: TextStyle(fontSize: 16, height: 1.4),
         ),
       ],

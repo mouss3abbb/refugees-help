@@ -63,11 +63,7 @@ class job_screen extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      home:  MyHomePage(),
-    );
+    return MyHomePage();
   }
 }
 
@@ -80,6 +76,15 @@ class MyHomePage extends StatelessWidget {
 
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: BackButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+      ),
       backgroundColor: Color(0xFF92918D),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -87,25 +92,27 @@ class MyHomePage extends StatelessWidget {
             padding: EdgeInsets.only(top: 25),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Icon(Icons.sort_rounded,
-                          color: Colors.white,
-                          size: 35,),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Icon(Icons.search,
-                          color: Colors.white,
-                          size: 35,),
-                      )
-                    ],
-                  ),),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 15),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       InkWell(
+                //         onTap: () {
+                //           Navigator.pop(context);
+                //         },
+                //         child: Icon(Icons.arrow_back,
+                //           color: Colors.white,
+                //           size: 35,),
+                //       ),
+                //       InkWell(
+                //         onTap: () {},
+                //         child: Icon(Icons.search,
+                //           color: Colors.transparent,
+                //           size: 35,),
+                //       )
+                //     ],
+                //   ),),
                 SizedBox(height: 5,),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),

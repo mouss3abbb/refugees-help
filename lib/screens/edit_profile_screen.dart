@@ -17,65 +17,70 @@ class _EditProfilePageState extends State<EditProfilePage> {
   User user = UserPreferences.myUser;
 
   @override
-  Widget build(BuildContext context) => Directionality(
-    textDirection: TextDirection.rtl,
-    child: Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: buildAppBar(context),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 32),
         physics: BouncingScrollPhysics(),
         children: [
           ProfileWidget(
-            imagePath: user.imagePath,
+            imagePath: user.imagePath!,
             isEdit: true,
-            onClicked: () async {},
+            onClicked: () async {
+            },
           ),
           const SizedBox(height: 24),
           TextFieldWidget(
             label: 'الاسم كامل',
             text: user.name,
-            onChanged: (name) {},
+            onChanged: (name) {
+            },
           ),
           const SizedBox(height: 24),
           TextFieldWidget(
             label: 'البريد الالكتروني',
             text: user.email,
-            onChanged: (email) {},
+            onChanged: (email) {
+            },
           ),
           const SizedBox(height: 24),
           TextFieldWidget(
             label: ' الهاتف',
             text: user.phone,
-            onChanged: (phone) {},
+            onChanged: (phone) {
+            },
           ),
           const SizedBox(height: 24),
           TextFieldWidget(
             label: ' الواتس آب',
             text: user.whats,
-            onChanged: (whats) {},
+            onChanged: (whats) {
+            },
           ),
           const SizedBox(height: 24),
           TextFieldWidget(
             label: ' الفيس بوك',
             text: user.face,
-            onChanged: (face) {},
+            onChanged: (face) {
+            },
           ),
           const SizedBox(height: 24),
           TextFieldWidget(
             label: ' الانستجرام',
             text: user.insta,
-            onChanged: (insta) {},
+            onChanged: (insta) {
+            },
           ),
           const SizedBox(height: 24),
           TextFieldWidget(
             label: 'حول',
             text: user.about,
             maxLines: 5,
-            onChanged: (about) {},
+            onChanged: (about) {
+            },
           ),
         ],
       ),
-    ),
   );
 }
 
