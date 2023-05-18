@@ -9,6 +9,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final formKey = GlobalKey<FormState>();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  bool isPassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,15 +56,19 @@ class _LoginState extends State<Login> {
               height: 20,
             ),
             Form(
+              key: formKey,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: const Color(0xfff2f9fc),
-                        labelText: 'اسم المستخدم',
+                        prefixIcon: const Icon(Icons.email),
+                        labelText: 'البريد الإلكتروني',
                         disabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                               color: Color.fromRGBO(238, 238, 238, 1)),
@@ -77,15 +85,42 @@ class _LoginState extends State<Login> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                                .hasMatch(value)) {
+                          return 'من فضلك قم بإدخال البريد الاكتروني ';
+                        }
+                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                            .hasMatch(value)) {
+                          return 'من فضلك ادخل البريد الاكتروني بطريقة صحيحة';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
+                      controller: passwordController,
+                      keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: const Color(0xfff2f9fc),
+                        prefixIcon: const Icon(Icons.lock),
                         labelText: 'كلمة المرور',
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isPassword = !isPassword;
+                            });
+                          },
+                          icon: Icon(
+                            isPassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                        ),
                         disabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                               color: Color.fromRGBO(238, 238, 238, 1)),
@@ -102,7 +137,16 @@ class _LoginState extends State<Login> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      obscureText: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'من فضبك ادخل كلمة المرور';
+                        }
+                        if (passwordController.text.length < 8) {
+                          return 'كلمة المرور يجب ان تتكون من 8 أحرف او أرقام علي الأقل';
+                        }
+                        return null;
+                      },
+                      obscureText: isPassword,
                     ),
                     const SizedBox(
                       height: 20,

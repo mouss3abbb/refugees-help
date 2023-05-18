@@ -13,6 +13,7 @@ Future main() async {
   await Hive.initFlutter();
   var cityBox = await Hive.openBox('saved_cities');
   var jobBox = await Hive.openBox('saved_jobs');
+  var usersBox = await Hive.openBox('users');
   runApp(const MyApp());
 }
 
