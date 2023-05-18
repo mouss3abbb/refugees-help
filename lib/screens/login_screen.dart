@@ -87,9 +87,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
-                                .hasMatch(value)) {
+                        if (value!.isEmpty) {
                           return 'من فضلك قم بإدخال البريد الاكتروني ';
                         }
                         if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
@@ -170,7 +168,10 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainScreen()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MainScreen()));
                         },
                       ),
                     ),

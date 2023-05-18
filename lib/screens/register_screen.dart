@@ -126,9 +126,7 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
-                                .hasMatch(value)) {
+                        if (value!.isEmpty) {
                           return 'من فضلك قم بإدخال البريد الاكتروني ';
                         }
                         if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
