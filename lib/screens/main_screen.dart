@@ -2,9 +2,8 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:refugees_help/screens/JobDescription.dart';
 import 'package:refugees_help/screens/city_screen.dart';
 import 'package:refugees_help/screens/job_screen.dart';
 import 'package:refugees_help/screens/profile_screen.dart';
@@ -504,33 +503,11 @@ class JobPoster extends StatelessWidget {
   }
 
   openJob(BuildContext context,String description) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const job_screen(),));
-  }
-
-  saveJob(BuildContext context,String imageAsset, String description) {
-    var box = Hive.box('saved_jobs');
-    box.put(imageAsset,description);
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("تم الحفظ",style: TextStyle(color: Colors.black54),),
-              IconButton(onPressed: (){
-                box.delete(imageAsset);
-              },
-                icon: const Icon(Icons.undo,color: Colors.black54,),
-                iconSize: 20,
-              ),
-            ],
-          ),
-          duration: const Duration(seconds: 2),
-          backgroundColor: Colors.white,
-          dismissDirection: DismissDirection.horizontal,
-        )
-    );
+    showModalBottomSheet(context: context, builder: (context) => JobDescription(imageAsset: imageAsset, title: description, details: description, requirements: '', contact: ''),);
   }
 }
+
+
 
 class BlurEffect extends StatelessWidget {
   const BlurEffect({super.key, this.child});

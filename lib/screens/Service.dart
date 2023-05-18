@@ -12,13 +12,7 @@ class Service extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-      ),
-      home:  MyHomePage(),
-    );
+    return MyHomePage();
   }
 }
 //✰
@@ -65,17 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0XFF92918D),
-          title: Center(
-            child: Text('الخدمات',style: TextStyle(
-              fontSize: 33,
-              fontWeight: FontWeight.bold,
-            ),),
-          ),
+          title: Text('الخدمات',style: TextStyle(
+            fontSize: 33,
+            fontWeight: FontWeight.bold,
+          ),),
+          centerTitle: true,
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(16),
@@ -184,7 +175,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-      ),
     );
   }
 }

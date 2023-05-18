@@ -1,10 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_google_street_view/flutter_google_street_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:refugees_help/screens/education_screen.dart';
 import 'package:refugees_help/screens/job_screen.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:refugees_help/screens/Service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'dart:ui';
 
@@ -147,39 +148,39 @@ class main_city_screen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Container(
-              //   child: Container(
-              //     /* decoration: BoxDecoration(
-              //       border: Border.all(
-              //         color: Colors.grey,
-              //         width: 10,
-              //       ),
-              //     ),*/
-              //     margin: EdgeInsets.all(10),
-              //     height: 300,
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(10),
-              //       border: Border.all(
-              //         color: Colors.grey,
-              //         style: BorderStyle.solid,
-              //         width: 10,
-              //       ),
-              //     ),
-              //     child: FlutterGoogleStreetView(
-              //       initPos: LatLng(29.9285, 30.9188),
-              //       initSource: StreetViewSource.outdoor,
-              //       initBearing: 30,
-              //       initTilt: 30,
-              //       initZoom: 1.5,
-              //       onStreetViewCreated: (controller) async {
-              //         controller.animateTo(
-              //             duration: 50,
-              //             camera: StreetViewPanoramaCamera(
-              //                 bearing: 15, tilt: 10, zoom: 3));
-              //       },
-              //     ),
-              //   ),
-              // ),
+              Container(
+                child: Container(
+                  /* decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 10,
+                    ),
+                  ),*/
+                  margin: EdgeInsets.all(10),
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.grey,
+                      style: BorderStyle.solid,
+                      width: 10,
+                    ),
+                  ),
+                  child: FlutterGoogleStreetView(
+                    initPos: LatLng(29.9285, 30.9188),
+                    initSource: StreetViewSource.outdoor,
+                    initBearing: 30,
+                    initTilt: 30,
+                    initZoom: 1.5,
+                    onStreetViewCreated: (controller) async {
+                      controller.animateTo(
+                          duration: 50,
+                          camera: StreetViewPanoramaCamera(
+                              bearing: 15, tilt: 10, zoom: 3));
+                    },
+                  ),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.only(
                     right: 20), //apply padding to all four sides
@@ -255,7 +256,8 @@ class optionsPoster extends StatelessWidget {
             Navigator.push(context, MaterialPageRoute(builder: (context) => job_screen()));
             break;
           case 2:
-        //    sevcies
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Service()));
+            break;
           case 3:
             Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantsPage()));
 

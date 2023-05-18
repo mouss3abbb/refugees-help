@@ -12,8 +12,8 @@ import 'package:refugees_help/screens/splash_screen.dart';
 
 Future main() async {
   await Hive.initFlutter();
-  var cityBox = await Hive.openBox('saved_cities');
-  var jobBox = await Hive.openBox('saved_jobs');
+  await Hive.openBox('saved_cities');
+  await Hive.openBox('saved_jobs');
   runApp(const MyApp());
 }
 
