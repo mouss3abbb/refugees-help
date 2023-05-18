@@ -43,6 +43,7 @@ dependencies:
   font_awesome_flutter:
   theme_provider:
   image_picker: ^0.8.7+4
+  flutter_rating_bar: ^4.0.1
 
   community_material_icon: ^5.9.5
   # switch animation between light and dark theme
