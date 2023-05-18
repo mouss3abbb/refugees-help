@@ -23,6 +23,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         alignment: Alignment.center,
         children: [
           LiquidSwipe(
+            enableLoop: false,
             liquidController: controller,
               onPageChangeCallback: (index)=>setState(() {
                 currentPage=index;
