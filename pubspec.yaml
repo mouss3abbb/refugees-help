@@ -47,6 +47,7 @@ dependencies:
   animated_splash_screen:
   page_transition:
   community_material_icon: ^5.9.5
+  get:
   # switch animation between light and dark theme
   animated_theme_switcher: ^2.0.1-nullsafety.0
   liquid_swipe: ^3.1.0
