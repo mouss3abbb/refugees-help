@@ -10,9 +10,7 @@ class education_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MySub1(),
-    );
+    return MySub1();
   }
 }
 class MySub1 extends StatefulWidget {
@@ -24,13 +22,17 @@ class MySub1 extends StatefulWidget {
 class _MySub1 extends State<MySub1> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return  Scaffold(
           backgroundColor: Colors.brown.shade50,
           appBar: AppBar(
             title: Text('التعليم'),
             backgroundColor: Colors.grey,
             centerTitle: true,
+            leading: BackButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
           ),
           body:
           SingleChildScrollView(
@@ -97,7 +99,7 @@ class _MySub1 extends State<MySub1> {
                       MaterialPageRoute(builder: (context) => const education_screen_sub21()),
                     );
                   },
-                  child: Text('الحامعات',style: TextStyle(fontWeight: FontWeight.bold),),
+                  child: Text('الجامعات',style: TextStyle(fontWeight: FontWeight.bold),),
 
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black, backgroundColor: Colors.grey.shade400,
@@ -111,7 +113,6 @@ class _MySub1 extends State<MySub1> {
             ]
             )),
           )
-      ),
     );
   }
 }

@@ -1,12 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_google_street_view/flutter_google_street_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:refugees_help/screens/education_screen.dart';
 import 'package:refugees_help/screens/job_screen.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:refugees_help/screens/Service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'dart:ui';
+
+import 'RestaurantsPage.dart';
 
 class data {
   @required
@@ -51,6 +54,14 @@ class _city_screen extends State<city_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 119, 119, 119),
+        appBar: AppBar(
+          backgroundColor: Colors.grey,
+          title: Text("مدينة السادات", textAlign: TextAlign.center),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
         extendBody: true,
         body: const main_city_screen(),
         bottomNavigationBar: Container(
@@ -116,21 +127,8 @@ class main_city_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 119, 119, 119),
-          appBar: AppBar(
-            backgroundColor: Colors.grey,
-            title: Text("مدينة السادات", textAlign: TextAlign.center),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-          body: Column(
+    return SingleChildScrollView(
+      child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
@@ -169,7 +167,7 @@ class main_city_screen extends StatelessWidget {
                     ),
                   ),
                   child: FlutterGoogleStreetView(
-                    initPos: LatLng(25.07808902, 121.5005234),
+                    initPos: LatLng(29.9285, 30.9188),
                     initSource: StreetViewSource.outdoor,
                     initBearing: 30,
                     initTilt: 30,
@@ -196,15 +194,7 @@ class main_city_screen extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      // Handle the click event here
-                    },
-                    child: Container(
+               Container(
                       width: 370,
                       height: 250,
                       margin: EdgeInsets.all(5),
@@ -227,13 +217,12 @@ class main_city_screen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                ],
+              const SizedBox(
+                height: 100,
               ),
             ],
-          ),
+
         ),
-      ),
     );
   }
 
@@ -241,7 +230,7 @@ class main_city_screen extends StatelessWidget {
     List<Widget> posters = [];
     for (var i = 0; i < optionPosterAssets.length; i++) {
       posters.add(optionsPoster(
-          title: optionPosterDescriptions[i], image: optionPosterAssets[i]));
+          index: i,));
     }
     return posters;
   }
@@ -250,16 +239,30 @@ class main_city_screen extends StatelessWidget {
 class optionsPoster extends StatelessWidget {
   const optionsPoster({
     super.key,
-    required this.title,
-    required this.image,
+    required this.index,
   });
 
-  final String title;
-  final String image;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: (){
+        switch(index){
+          case 0:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => education_screen()));
+            break;
+          case 1:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => job_screen()));
+            break;
+          case 2:
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Service()));
+            break;
+          case 3:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantsPage()));
+
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ClipRRect(
@@ -268,7 +271,7 @@ class optionsPoster extends StatelessWidget {
             SizedBox(
               height: 250,
               child: Image.asset(
-                image,
+                optionPosterAssets[index],
                 fit: BoxFit.cover,
               ),
             ),
@@ -287,7 +290,7 @@ class optionsPoster extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: Text(
-                    title,
+                    optionPosterDescriptions[index],
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22,

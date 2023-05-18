@@ -6,6 +6,7 @@ import 'package:refugees_help/screens/main_screen.dart';
 import 'package:refugees_help/screens/job_screen.dart';
 import 'package:refugees_help/screens/login_screen.dart';
 import 'package:refugees_help/screens/education_screen.dart';
+import 'package:refugees_help/screens/on_boarding_screen.dart';
 import 'package:refugees_help/screens/register_screen.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
 
@@ -13,7 +14,6 @@ Future main() async {
   await Hive.initFlutter();
   var cityBox = await Hive.openBox('saved_cities');
   var jobBox = await Hive.openBox('saved_jobs');
-  var usersBox = await Hive.openBox('users');
   runApp(const MyApp());
 }
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'refugees_help',
       locale: Locale('ar'),
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar'),
       ],
-      home: Login(),
+      home: MainScreen(),
     );
   }
 }

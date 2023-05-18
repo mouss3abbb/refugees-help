@@ -47,9 +47,7 @@ class education_screen_sub22 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MySub22(),
-    );
+    return MySub22();
   }
 }
 class MySub22 extends StatefulWidget {
@@ -61,21 +59,14 @@ class MySub22 extends StatefulWidget {
 class _MySub22 extends State<MySub22>{
   Widget build(BuildContext context) {
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('الكليات المتاحة في الجامعة المصرية للتعلم الإلكتروني الأهلية',
             style: TextStyle(fontSize: 15),),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const education_screen_sub21()),
-              );
-            }
+          leading: BackButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
           ),
           backgroundColor: Colors.grey,
           centerTitle: true,
@@ -90,7 +81,7 @@ class _MySub22 extends State<MySub22>{
               separatorBuilder: (context,index)=>SizedBox(height:15,)
               , itemCount: college.length),
         ),
-      ),);
+      );
   }
 }
 
@@ -134,9 +125,7 @@ class details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("تفاصيل"),
           backgroundColor: Colors.grey,
@@ -147,7 +136,6 @@ class details extends StatelessWidget {
             margin: EdgeInsets.all(10),
             child:buildCount2(college[dataIndex], context)
         ),
-      ),
     );
   }
 }

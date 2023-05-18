@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:refugees_help/screens/driver.dart';
-import 'package:refugees_help/screens/lawyer.dart';
-import 'package:refugees_help/screens/mechanic.dart';
-
-
-import 'AgriculturalEng.dart';
-import 'count.dart';
-import 'doc.dart';
-import 'eng.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'JobDescription.dart';
 
 class data{
   @required String? jobType;
@@ -16,44 +9,72 @@ class data{
   data({this.jobType,this.image,required this.screen});
 }
 
-List<data> job=[
-  data(
-    jobType: 'محاسب',
-    image: 'images/1.jpg',
-    screen: count()
-  ),
-  data(
-      jobType: 'مهندس مدني',
-      image: 'images/2.jpg',
-      screen: eng()
-  ),
-  data(
-      jobType: 'اخصائي تغذيه',
-      image: 'images/3.jpg',
-      screen: doc()
-  ),
-  data(
-      jobType: 'محامي',
-      image: 'images/4.jpg',
-      screen: lawyer()
-  ),
-  data(
-      jobType: 'مهندس ميكانيكا',
-      image: 'images/5.jpg',
-      screen: mec()
-  ),
-  data(
-      jobType: 'سائق',
-      image: 'images/8.jpg',
-      screen: driver()
-  ),
-  data(
-      jobType: 'مهندس زراعي',
-      image: 'images/9.jpg',
-      screen: AgriculturalEng()
-  ),
+List jobsList=[
+  JobDescription(imageAsset: 'images/1.jpg', title: 'محاسب', details: '''
+    مواعيد العمل من 7 صباحا الي 5 مساءا
+    المرتب 5 الاف جنيه شهريا
+  ''', requirements: '''
+    يحافظ على الضوابط المحاسبية
+    وضع وتنفيذ وتوثيق نظم حفظ السجلات والمحاسبة
+    2 - 10 سنوات خبرة
+    مؤهل عالي
+  ''', contact: ''),
+  JobDescription(imageAsset: 'images/3.jpg', title: 'أخصائي تغذية', details: '''
+    دوام كامل
+    المرتب 10 الاف جنيه شهريا
+  ''', requirements: '''
+  على علم بالثقافات الغذائية
+  يجيد خدمة العملاء بطريقة حسنة
+  ذو مهارات ادارية وتنظيمية
+  يجيد التعامل مع مشاكل المرضى بصورة جيدة
+  ''', contact: ''),
+  JobDescription(imageAsset: 'images/2.jpg', title: 'مهندس مدني', details: '''
+    دوام كامل
+    المرتب 15 الف جنيه شهريا
+  ''', requirements: '''
+    العمل في التنفيذ بمجال المقاولات
+    عدد سنوات خبرة في نفس المجال المطلوب
+    يجب ارفاق سابقة خبرة تؤكد العمل السابق
+  ''', contact: ''),
+  JobDescription(imageAsset: 'images/4.jpg', title: 'محامي', details: '''
+    العمل من 9 صباحا الى 5 مساءا
+    المرتب 5 الاف جنيه شهريا
+  ''', requirements: '''
+    مؤهل عالي
+    خبرة لا تقل عن 3 سنوات
+  ''', contact: ''),
+  JobDescription(imageAsset: 'images/5.jpg', title: 'مهندس ميكانيكا', details: '''
+    دوام كامل
+    المرتب حسب الخبرة الهندسية
+  ''', requirements: '''
+    خبرة لا تقل عن سنتين
+    حاصل على شهادة بكاليريوس
+  ''', contact: ''),
 ];
 
+saveJob(BuildContext context,String imageAsset, String description) {
+  var box = Hive.box('saved_jobs');
+  box.put(imageAsset,description);
+  ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("تم الحفظ",style: TextStyle(color: Colors.black54),),
+            IconButton(onPressed: (){
+              box.delete(imageAsset);
+            },
+              icon: const Icon(Icons.undo,color: Colors.black54,),
+              iconSize: 20,
+            ),
+          ],
+        ),
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.white,
+        dismissDirection: DismissDirection.horizontal,
+      )
+  );
+}
 
 class job_screen extends StatelessWidget {
   const job_screen({super.key});
@@ -63,11 +84,7 @@ class job_screen extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      home:  MyHomePage(),
-    );
+    return MyHomePage();
   }
 }
 
@@ -80,108 +97,74 @@ class MyHomePage extends StatelessWidget {
 
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: BackButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+      ),
       backgroundColor: Color(0xFF92918D),
       body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(top: 25),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Icon(Icons.sort_rounded,
-                          color: Colors.white,
-                          size: 35,),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Icon(Icons.search,
-                          color: Colors.white,
-                          size: 35,),
-                      )
-                    ],
-                  ),),
-                SizedBox(height: 5,),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Text("فرص العمل المتاحه ", style: TextStyle(
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 32,
-                  ),),
-                ),
-                SizedBox(height: 5,),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Text("اختر ما يناسبك", style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 22,
-                  ),),
-                ),
+        child: Padding(
+          padding: EdgeInsets.only(top: 25),
+          child: Column(
+            children: [
+              SizedBox(height: 5,),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Text("فرص العمل المتاحه ", style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 32,
+                ),),
+              ),
+              SizedBox(height: 5,),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Text("اختر ما يناسبك", style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 22,
+                ),),
+              ),
 
-                SizedBox(height:5,),
-                SingleChildScrollView(
-                  child: Container(
-                    height: 500,
-                    margin: EdgeInsets.all(30),
-                    child: ListView.builder(
-                        itemBuilder: (context,index)=> buildCount(job[index],context),
-                        //separatorBuilder: (context,index)=>SizedBox(height: 20,)
-                         itemCount: job.length,
-                    ),
-
+              SizedBox(height:5,),
+              SingleChildScrollView(
+                child: Container(
+                  height: 500,
+                  margin: EdgeInsets.all(30),
+                  child: ListView.builder(
+                      itemBuilder: (context,index)=> buildCount(context,index),
+                      //separatorBuilder: (context,index)=>SizedBox(height: 20,)
+                       itemCount: jobsList.length,
                   ),
-                )
 
-              ],
+                ),
+              )
 
-            ),
+            ],
 
           ),
+
         ),
       ),
 
 
     );
   }
-  /*
-void createDatabase() async{
-    var database=await openDatabase(
-     //database name
-      version: 1,
-      onCreate: (database,version)async{
-        print('database created');
-        await database.execute('create table tasks(id integer primary key,title text)');
 
-      },
-      onOpen: (database){
-        print('database opened');
-
-    },
-    );
-}
-*/
 }
 
-Widget buildCount(data d,BuildContext context){
+Widget buildCount(BuildContext context, int index){
+  JobDescription data = jobsList[index];
    return Padding(
      padding: const EdgeInsets.all(8.0),
      child: Container(
         width: 250,
         height: 400,
         decoration: BoxDecoration(
-         /* boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.4),
-              spreadRadius: 1,
-              //blurRadius: 20,
-            ),
-          ],*/
           color: Color(0xFFE8E5E1),
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -190,7 +173,7 @@ Widget buildCount(data d,BuildContext context){
              Padding(
                padding: EdgeInsets.only(top: 20),
                child: Container(
-                 child: Text("${d.jobType}",
+                 child: Text(data.title,
                    style: TextStyle(
                        fontSize: 20,
                        fontWeight: FontWeight.w900,
@@ -204,7 +187,7 @@ Widget buildCount(data d,BuildContext context){
                margin: EdgeInsets.all(10),
                child:ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                  child: Image.asset("${d.image}",
+                  child: Image.asset(data.imageAsset,
                   ),
                        )
              ),
@@ -225,9 +208,7 @@ Widget buildCount(data d,BuildContext context){
                    showModalBottomSheet(
                      backgroundColor: Colors.transparent,
                        context: context, builder:
-                   (context)=>d.screen);
-                 /* Navigator.of(context).push(MaterialPageRoute(builder:
-                   (context)=>d.screen));*/
+                   (context)=>data);
                  },
                ),
              )
