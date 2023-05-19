@@ -29,8 +29,8 @@ class _JobDescriptionState extends State<JobDescription> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(25),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(25),
+      decoration: const BoxDecoration(
         color: Color(0xFF2B2A2D),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
@@ -47,7 +47,7 @@ class _JobDescriptionState extends State<JobDescription> {
               width: 60,
               color: Colors.grey.withOpacity(0.3),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -59,7 +59,7 @@ class _JobDescriptionState extends State<JobDescription> {
                         Container(
                             height: 250,
                             width: 250,
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 color: Colors.grey.withOpacity(0.1)
@@ -71,7 +71,7 @@ class _JobDescriptionState extends State<JobDescription> {
                               ),
                             )
                         ),
-                        SizedBox(width: 10,),
+                        const SizedBox(width: 10,),
                         IconButton(
                             onPressed: (){
                           setState(() {
@@ -92,13 +92,13 @@ class _JobDescriptionState extends State<JobDescription> {
                 ),
               ],
             ),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
 
             Container(
               width: 200,
               height: 50,
 
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey.withOpacity(0.1)
@@ -107,7 +107,7 @@ class _JobDescriptionState extends State<JobDescription> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("تفاصيل الشغل ", style: TextStyle(
+                  const Text("تفاصيل الشغل ", style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Colors.white70
@@ -115,29 +115,29 @@ class _JobDescriptionState extends State<JobDescription> {
                 ],
               ),
             ),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
             Padding(
               padding: const EdgeInsets.all(.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   //SizedBox(width: 100,),
-                  Text(details, style: TextStyle(
+                  Text(details, style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white
                   ),),
-                  SizedBox(width: 10,),
-                  Icon(Icons.access_time, color: Colors.yellow,),
+                  const SizedBox(width: 10,),
+                  const Icon(Icons.access_time, color: Colors.yellow,),
                 ],
               ),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Container(
               width: 200,
               height: 50,
 
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey.withOpacity(0.1)
@@ -146,7 +146,7 @@ class _JobDescriptionState extends State<JobDescription> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(': المتطلبات', style: TextStyle(
+                  const Text(': المتطلبات', style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Colors.white70
@@ -155,13 +155,13 @@ class _JobDescriptionState extends State<JobDescription> {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.all(.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(requirements, style: TextStyle(
+                  Text(requirements, style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white
@@ -169,12 +169,12 @@ class _JobDescriptionState extends State<JobDescription> {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Container(
               width: 200,
               height: 50,
 
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey.withOpacity(0.1)
@@ -183,7 +183,7 @@ class _JobDescriptionState extends State<JobDescription> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('.. تواصل معنا', style: TextStyle(
+                  const Text('.. تواصل معنا', style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Colors.white70
@@ -192,7 +192,7 @@ class _JobDescriptionState extends State<JobDescription> {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Container(
              // margin: EdgeInsets.symmetric(vertical: 25),
               height: 45,
@@ -211,11 +211,11 @@ class _JobDescriptionState extends State<JobDescription> {
                 onPressed: () {
                   whatsapp();
                 },
-                child: Icon(FontAwesomeIcons.whatsapp,size: 40,)
+                child: const Icon(FontAwesomeIcons.whatsapp,size: 40,)
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 25),
+              margin: const EdgeInsets.symmetric(vertical: 25),
               height: 45,
               width: double.maxFinite,
               child: ElevatedButton(
@@ -232,7 +232,7 @@ class _JobDescriptionState extends State<JobDescription> {
                   onPressed: () {
                     email();
                   },
-                  child: Icon(FontAwesomeIcons.envelope,size: 40,)
+                  child: const Icon(FontAwesomeIcons.envelope,size: 40,)
                 /*Text('Apply Now', style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
