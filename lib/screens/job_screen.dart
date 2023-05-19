@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'JobDescription.dart';
-
+import '../controllers/JobScreenController.dart';
+import 'package:get/get.dart';
 class data{
   @required String? jobType;
   @required String? image;
@@ -76,82 +77,71 @@ saveJob(BuildContext context,String imageAsset, String description) {
   );
 }
 
+
+
+
 class job_screen extends StatelessWidget {
-  const job_screen({super.key});
-
-
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MyHomePage();
-  }
-}
-
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          onPressed: (){
-            Navigator.pop(context);
-          },
+    return GetBuilder(
+      init: JobScreenController(),
+      builder: (controller) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: BackButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-      backgroundColor: Color(0xFF92918D),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(top: 25),
-          child: Column(
-            children: [
-              SizedBox(height: 5,),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text("فرص العمل المتاحه ", style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 32,
-                ),),
-              ),
-              SizedBox(height: 5,),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text("اختر ما يناسبك", style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 22,
-                ),),
-              ),
-
-              SizedBox(height:5,),
-              SingleChildScrollView(
-                child: Container(
-                  height: 500,
-                  margin: EdgeInsets.all(30),
-                  child: ListView.builder(
-                      itemBuilder: (context,index)=> buildCount(context,index),
-                      //separatorBuilder: (context,index)=>SizedBox(height: 20,)
-                       itemCount: jobsList.length,
-                  ),
-
+        backgroundColor: Color(0xFF92918D),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(top: 25),
+            child: Column(
+              children: [
+                SizedBox(height: 5,),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text("فرص العمل المتاحه ", style: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 32,
+                  ),),
                 ),
-              )
+                SizedBox(height: 5,),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text("اختر ما يناسبك", style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 22,
+                  ),),
+                ),
 
-            ],
+                SizedBox(height:5,),
+                SingleChildScrollView(
+                  child: Container(
+                    height: 500,
+                    margin: EdgeInsets.all(30),
+                    child: ListView.builder(
+                        itemBuilder: (context,index)=> buildCount(context,index),
+                        //separatorBuilder: (context,index)=>SizedBox(height: 20,)
+                         itemCount: jobsList.length,
+                    ),
+
+                  ),
+                )
+
+              ],
+
+            ),
 
           ),
-
         ),
+
+
       ),
-
-
     );
   }
 
@@ -159,63 +149,66 @@ class MyHomePage extends StatelessWidget {
 
 Widget buildCount(BuildContext context, int index){
   JobDescription data = jobsList[index];
-   return Padding(
-     padding: const EdgeInsets.all(8.0),
-     child: Container(
-        width: 250,
-        height: 400,
-        decoration: BoxDecoration(
-          color: Color(0xFFE8E5E1),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-         child: Column(
-           children: [
-             Padding(
-               padding: EdgeInsets.only(top: 20),
-               child: Container(
-                 child: Text(data.title,
-                   style: TextStyle(
-                       fontSize: 20,
-                       fontWeight: FontWeight.w900,
-                       color: Colors.black87
+   return GetBuilder(
+     init: JobScreenController(),
+     builder: (controller) => Padding(
+       padding: const EdgeInsets.all(8.0),
+       child: Container(
+          width: 250,
+          height: 400,
+          decoration: BoxDecoration(
+            color: Color(0xFFE8E5E1),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+           child: Column(
+             children: [
+               Padding(
+                 padding: EdgeInsets.only(top: 20),
+                 child: Container(
+                   child: Text(data.title,
+                     style: TextStyle(
+                         fontSize: 20,
+                         fontWeight: FontWeight.w900,
+                         color: Colors.black87
 
-                   ),),
-               ),
-             ),
-             Container(
-               width: 300,
-               margin: EdgeInsets.all(10),
-               child:ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                  child: Image.asset(data.imageAsset,
-                  ),
-                       )
-             ),
-             SizedBox(height: 2,),
-             Container(
-               margin: EdgeInsets.symmetric(vertical: 25),
-               height: 45,
-               width: 300,
-               //margin: EdgeInsets.all(10),
-               child: ElevatedButton(
-                 child: Text('التفاصيل'),
-                 style: ElevatedButton.styleFrom(
-                   backgroundColor: Color(0xFF2B2A2D),
-                   shape: StadiumBorder(),
-                   side: BorderSide(color: Colors.grey)
+                     ),),
                  ),
-                 onPressed: (){
-                   showModalBottomSheet(
-                     backgroundColor: Colors.transparent,
-                       context: context, builder:
-                   (context)=>data);
-                 },
                ),
-             )
-           ],
-         ),
+               Container(
+                 width: 300,
+                 margin: EdgeInsets.all(10),
+                 child:ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                    child: Image.asset(data.imageAsset,
+                    ),
+                         )
+               ),
+               SizedBox(height: 2,),
+               Container(
+                 margin: EdgeInsets.symmetric(vertical: 25),
+                 height: 45,
+                 width: 300,
+                 //margin: EdgeInsets.all(10),
+                 child: ElevatedButton(
+                   child: Text('التفاصيل'),
+                   style: ElevatedButton.styleFrom(
+                     backgroundColor: Color(0xFF2B2A2D),
+                     shape: StadiumBorder(),
+                     side: BorderSide(color: Colors.grey)
+                   ),
+                   onPressed: (){
+                     showModalBottomSheet(
+                       backgroundColor: Colors.transparent,
+                         context: context, builder:
+                     (context)=>data);
+                   },
+                 ),
+               )
+             ],
+           ),
 
-      ),
+        ),
+     ),
    );
 
 }

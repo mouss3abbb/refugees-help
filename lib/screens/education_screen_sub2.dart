@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:refugees_help/screens/education_screen_sub21.dart';
 import 'package:refugees_help/screens/education_screen_sub1.dart';
 import 'package:flutter/widgets.dart';
+import '../controllers/EduScreenController.dart';
+import 'package:get/get.dart';
 
 
 class data{
@@ -75,81 +78,75 @@ List<data> college=[
     collegeScreen:details(dataIndex: 8),
   ),
 ];
-class education_screen_sub2 extends StatelessWidget {
-  const education_screen_sub2({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MySub2();
-  }
-}
-class MySub2 extends StatefulWidget {
-  const MySub2({super.key});
-
-  @override
-  State<MySub2> createState() => _MySub2();
-}
-class _MySub2 extends State<MySub2>{
+class education_screen_sub2 extends StatelessWidget{
   Widget build(BuildContext context) {
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('الكليات المتاحة في جامعة مدينة السادات'),
-          backgroundColor: Colors.grey,
-          centerTitle: true,
-          leading: BackButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
+    return GetBuilder(
+      init: EduScreenController(),
+      builder: (controller) =>Scaffold(
+          appBar: AppBar(
+            title: Text('الكليات المتاحة في جامعة مدينة السادات'),
+            backgroundColor: Colors.grey,
+            centerTitle: true,
+            leading: BackButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
+          ),
+
+          backgroundColor: Color(0xffEFECE7),
+          body: Container(
+            margin: EdgeInsets.all(10),
+            child: ListView.separated(
+                itemBuilder: (context,index)=>buildCount(college[index], context),
+                separatorBuilder: (context,index)=>SizedBox(height:15,)
+                , itemCount: college.length),
           ),
         ),
-
-        backgroundColor: Color(0xffEFECE7),
-        body: Container(
-          margin: EdgeInsets.all(10),
-          child: ListView.separated(
-              itemBuilder: (context,index)=>buildCount(college[index], context),
-              separatorBuilder: (context,index)=>SizedBox(height:15,)
-              , itemCount: college.length),
-        ),
-      );
+    );
   }
 }
 
 Widget buildCount(data d,BuildContext context){
 
-  return SingleChildScrollView(
-    child:
-    Card(
-      //color: Color(0xffCCC8BF),
-      color: Colors.grey[400],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-  child: ListTile (
+  return GetBuilder(
+    init: EduScreenController(),
+    builder: (controller) =>SingleChildScrollView(
+      child:
+      Card(
+        //color: Color(0xffCCC8BF),
+        color: Colors.grey[400],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+    child: ListTile (
 
-          leading: CircleAvatar(
-            //  radius: 48, // Image radius
-            backgroundImage: AssetImage("${d.collegeImg}"),
-            backgroundColor: Colors.white,
-          ),
-          title:  Text("${d.collegeName}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15,),),
-          trailing: ElevatedButton(
-            child: Text('تفاصيل',style: TextStyle(fontSize: 12),),
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.black, backgroundColor: Colors.grey.shade400,
-              shape: StadiumBorder(),
+            leading: CircleAvatar(
+              //  radius: 48, // Image radius
+              backgroundImage: AssetImage("${d.collegeImg}"),
+              backgroundColor: Colors.white,
             ),
-            onPressed: () {
-              showModalBottomSheet(context: context, builder:(context)=>d.collegeScreen );
+            title:  Text("${d.collegeName}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15,),),
+            trailing: ElevatedButton(
+              child: Text('تفاصيل',style: TextStyle(fontSize: 12),),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black, backgroundColor: Colors.grey.shade400,
+                shape: StadiumBorder(),
+              ),
+              onPressed: () {
+              //  showModalBottomSheet(context: context, builder:(context)=>d.collegeScreen );
 
+                Get.bottomSheet(d.collegeScreen );
 
-            },
-            //_navigateToNextScreen(context);
-          )
-  ),
-      ),
+                    },
+              //_navigateToNextScreen(context);
+            )
+    ),
+        ),
 
+    ),
   );
 }
 
@@ -157,26 +154,28 @@ class details extends StatelessWidget {
 
 
   final int dataIndex;
-
   const details({super.key, required this.dataIndex});
 
 
   @override
   Widget build(BuildContext context) {
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("عرض المزيد"),
-          backgroundColor: Colors.grey,
-          centerTitle: true,
-          toolbarHeight: 40,
-        ),
-        body: Container(
-            margin: EdgeInsets.all(10),
-            child:buildCount2(college[dataIndex], context),
+    return GetBuilder(
+      init: EduScreenController(),
+      builder: (controller) => Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("عرض المزيد"),
+            backgroundColor: Colors.grey,
+            centerTitle: true,
+            toolbarHeight: 40,
+          ),
+          body: Container(
+              margin: EdgeInsets.all(10),
+              child:buildCount2(college[dataIndex], context),
 
+          ),
         ),
       ),
     );
@@ -185,56 +184,59 @@ class details extends StatelessWidget {
 
 Widget buildCount2(data d,BuildContext context){
 
-  return SingleChildScrollView(
-    child: Column(
-      children: [
-        ListTile (
-          leading: CircleAvatar(
-            //  radius: 48, // Image radius
-            backgroundColor: Colors.white,
-            backgroundImage: AssetImage("${d.collegeImg}"),
+  return GetBuilder(
+    init: EduScreenController(),
+    builder: (controller) => SingleChildScrollView(
+      child: Column(
+        children: [
+          ListTile (
+            leading: CircleAvatar(
+              //  radius: 48, // Image radius
+              backgroundColor: Colors.white,
+              backgroundImage: AssetImage("${d.collegeImg}"),
+            ),
+            title:  Text("${d.collegeName}\n ${d.collegeNameE}",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14,),),
           ),
-          title:  Text("${d.collegeName}\n ${d.collegeNameE}",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14,),),
-        ),
-        SizedBox(height: 20,),
-        SizedBox(height: 40,),
-        Row(
-            children:[
-              IconButton(
-                onPressed: (){
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.school),
-              ),
-              Text("${d.collegeURL}"),
+          SizedBox(height: 20,),
+          SizedBox(height: 40,),
+          Row(
+              children:[
+                IconButton(
+                  onPressed: (){
+                    //action coe when button is pressed
+                  },
+                  icon: Icon(Icons.school),
+                ),
+                Text("${d.collegeURL}"),
 
-            ]
-        ),
-        SizedBox(height: 100,),
-        Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,),),
+              ]
+          ),
+          SizedBox(height: 100,),
+          Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,),),
 
-        Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:[
-              IconButton(
-                onPressed: (){
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                IconButton(
+                  onPressed: (){
 
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.phone_enabled),
-              ),
-              IconButton(
-                onPressed: (){
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.message),
-              ),
-              //Text("${d.phone}"),
-            ]
-        ),
+                    //action coe when button is pressed
+                  },
+                  icon: Icon(Icons.phone_enabled),
+                ),
+                IconButton(
+                  onPressed: (){
+                    //action coe when button is pressed
+                  },
+                  icon: Icon(Icons.message),
+                ),
+                //Text("${d.phone}"),
+              ]
+          ),
 
-      ],
+        ],
+      ),
     ),
   );
 }
