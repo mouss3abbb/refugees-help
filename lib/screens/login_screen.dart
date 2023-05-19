@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:refugees_help/screens/main_screen.dart';
 import 'package:refugees_help/screens/register_screen.dart';
 
@@ -169,10 +170,7 @@ class _LoginState extends State<Login> {
                         ),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MainScreen()));
+                            login();
                           }
                         },
                       ),
@@ -204,5 +202,33 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void login() {
+    final usersBox = Hive.box('users');
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+    final user = usersBox.get(email);
+
+    if (user == null || user['password'] != password) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('البيانات غير صالحة'),
+          content: const Text('البريد الاكتروني او كلمة المرور غير صحيح'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('موافق'),
+            ),
+          ],
+        ),
+      );
+      emailController.clear();
+      passwordController.clear();
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MainScreen()));
+    }
   }
 }
