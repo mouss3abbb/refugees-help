@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:refugees_help/screens/education_screen_sub21.dart';
 import 'package:refugees_help/screens/education_screen_sub2.dart';
 import 'package:refugees_help/screens/education_screen.dart';
+import '../controllers/EduScreenController.dart';
+import 'package:get/get.dart';
+
 
 
 class data{
@@ -140,44 +143,34 @@ List<data> school=[
     schoolScreen:details(dataIndex: 10),
   ),
 ];
-class education_screen_sub1 extends StatelessWidget {
-  const education_screen_sub1({super.key});
-
-  @override
+class education_screen_sub1 extends StatelessWidget{
   Widget build(BuildContext context) {
-    return MySub1();
-  }
-}
-class MySub1 extends StatefulWidget {
-  MySub1({super.key});
+    return GetBuilder(
 
-  @override
-  State<MySub1> createState() => _MySub1();
-}
-class _MySub1 extends State<MySub1> {
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('المدارس'),
-          backgroundColor: Colors.grey,
-          centerTitle: true,
-          leading: BackButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
+        init: EduScreenController(),
+        builder: (controller) => Scaffold(
+          appBar: AppBar(
+            title: Text('المدارس'),
+            backgroundColor: Colors.grey,
+            centerTitle: true,
+            leading: BackButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          backgroundColor: Color(0xffEFECE7),
+          body: Container(
+
+            margin: EdgeInsets.all(10),
+            child: ListView.separated(
+                itemBuilder: (context, index) =>
+                    buildCount(school[index], context),
+                separatorBuilder: (context, index) => SizedBox(height: 15,)
+                , itemCount: school.length),
           ),
         ),
-        backgroundColor: Color(0xffEFECE7),
-        body: Container(
-
-          margin: EdgeInsets.all(10),
-          child: ListView.separated(
-              itemBuilder: (context, index) =>
-                  buildCount(school[index], context),
-              separatorBuilder: (context, index) => SizedBox(height: 15,)
-              , itemCount: school.length),
-        ),
-      );
+    );
   }
   calling()async{
     const url= 'tel:+201025027368';
@@ -252,105 +245,109 @@ class details extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("تفاصيل"),
-          backgroundColor: Colors.grey,
-          centerTitle: true,
-          toolbarHeight: 40,
-        ),
-        backgroundColor: Color(0xffEFECE7),
-        body: Container(
-          margin: EdgeInsets.all(10),
-    child: buildCount2(school[dataIndex], context),
+    return GetBuilder(
+      init: EduScreenController(),
+      builder: (controller) => Scaffold(
+          appBar: AppBar(
+            title: Text("تفاصيل"),
+            backgroundColor: Colors.grey,
+            centerTitle: true,
+            toolbarHeight: 40,
+          ),
+          backgroundColor: Color(0xffEFECE7),
+          body: Container(
+            margin: EdgeInsets.all(10),
+      child: buildCount2(school[dataIndex], context),
 
-        ),
+          ),
+      ),
     );
   }
 }
 
 Widget buildCount2(data d,BuildContext context){
-  return SingleChildScrollView(
-    child: Column(
-      children: [
-        SizedBox(height: 20,),
-        Card(
-          color: Colors.grey.shade400,
-      shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
+  return GetBuilder(
+    init: EduScreenController(),
+    builder: (controller) => SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 20,),
+          Card(
+            color: Colors.grey.shade400,
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
 
-    ),
-       child: ListTile (
-              leading: CircleAvatar(
-                  radius: 25, // Image radius
-                backgroundColor: Colors.white,
-                backgroundImage: AssetImage("${d.schoolImg}"),
-              ),
-              title:  Text("${d.schoolName}\n ${d.schoolNameE}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14,),),
-              trailing: Text("${d.schoolType}",style: TextStyle(color: Colors.grey[700], fontSize: 14,),),
-              ),
       ),
-        SizedBox(height: 40,),
-        Row(
-            children:[
-              IconButton(
-                onPressed: (){
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.school),
-              ),
-              Text("${d.schoolURL}"),
-            ]
+         child: ListTile (
+                leading: CircleAvatar(
+                    radius: 25, // Image radius
+                  backgroundColor: Colors.white,
+                  backgroundImage: AssetImage("${d.schoolImg}"),
+                ),
+                title:  Text("${d.schoolName}\n ${d.schoolNameE}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14,),),
+                trailing: Text("${d.schoolType}",style: TextStyle(color: Colors.grey[700], fontSize: 14,),),
+                ),
         ),
-        Row(
-            children:[
-              IconButton(
-                onPressed: (){
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.location_city),
-              ),
-              Text("${d.address}"),
-            ]
-        ),
-        Row(
-            children:[
-              IconButton(
-                onPressed: (){
+          SizedBox(height: 40,),
+          Row(
+              children:[
+                IconButton(
+                  onPressed: (){
+                    //action coe when button is pressed
                   },
-                icon: Icon(Icons.location_on),
-              ),
-              Text("${d.addressURL}"),
-            ]
-        ),
+                  icon: Icon(Icons.school),
+                ),
+                Text("${d.schoolURL}"),
+              ]
+          ),
+          Row(
+              children:[
+                IconButton(
+                  onPressed: (){
+                    //action coe when button is pressed
+                  },
+                  icon: Icon(Icons.location_city),
+                ),
+                Text("${d.address}"),
+              ]
+          ),
+          Row(
+              children:[
+                IconButton(
+                  onPressed: (){
+                    },
+                  icon: Icon(Icons.location_on),
+                ),
+                Text("${d.addressURL}"),
+              ]
+          ),
 
 
 
-        SizedBox(height: 40,),
-        Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,),),
+          SizedBox(height: 40,),
+          Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,),),
 
-        Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:[
-              IconButton(
-                onPressed: (){
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                IconButton(
+                  onPressed: (){
 
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.phone_enabled),
-              ),
-              IconButton(
-                onPressed: (){
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.message),
-              ),
-              //Text("${d.phone}"),
-            ]
-        ),
-
-
-      ],
+                    //action coe when button is pressed
+                  },
+                  icon: Icon(Icons.phone_enabled),
+                ),
+                IconButton(
+                  onPressed: (){
+                    //action coe when button is pressed
+                  },
+                  icon: Icon(Icons.message),
+                ),
+                //Text("${d.phone}"),
+              ]
+          ),
+        ],
+      ),
     ),
   );
 }
