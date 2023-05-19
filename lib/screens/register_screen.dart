@@ -269,7 +269,9 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           onPressed: () {
-                            formKey.currentState!.validate();
+                            if (formKey.currentState!.validate()) {
+                              register();
+                            }
                           }),
                     ),
                     const SizedBox(
@@ -301,12 +303,66 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  void register() async {
+  void register() {
     final usersBox = Hive.box('users');
-    usersBox.put('name', nameController.text.trimLeft());
-    usersBox.put('email', emailController.text.trim());
-    usersBox.put('password', passswordController.text);
-    usersBox.put('country', countryController.text);
-    usersBox.put('phone', phoneController.text);
+    final email = emailController.text.trim();
+    final name = nameController.text;
+    final password = passswordController.text;
+    final country = countryController.text;
+    final phone = phoneController.text;
+
+    if (usersBox.containsKey(email)) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('حساب موجود'),
+          content:
+              const Text('هذا البريد موجود بالفعل استخدم بريد الكتروني أخر'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('موافق'),
+            ),
+          ],
+        ),
+      );
+      emailController.clear();
+      nameController.clear();
+      passswordController.clear();
+      countryController.clear();
+      phoneController.clear();
+      return;
+    }
+
+    usersBox.put(email, {
+      'password': password,
+      'name': name,
+      'phone': phone,
+      'country': country,
+      'profilePhoto': null,
+      'facebookLink': null,
+      'istagramLink': null,
+      'whatsAppLink': null,
+      'about': null,
+    });
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('نجاح'),
+        content: const Text('تم التسجيل بنجاح برجاء العودة لتسجيل الدخول'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('موافق'),
+          ),
+        ],
+      ),
+    );
+    emailController.clear();
+    nameController.clear();
+    passswordController.clear();
+    countryController.clear();
+    phoneController.clear();
   }
 }

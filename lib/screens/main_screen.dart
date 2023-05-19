@@ -2,272 +2,212 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:refugees_help/screens/JobDescription.dart';
 import 'package:refugees_help/screens/city_screen.dart';
 import 'package:refugees_help/screens/job_screen.dart';
 import 'package:refugees_help/screens/profile_screen.dart';
 
-class MainScreen extends StatefulWidget {
+import '../controllers/main_screen_controller.dart';
+
+
+class MainScreen extends StatelessWidget {
+
   const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  var selectedPage = 1;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 119, 119, 119),
-          extendBody: true,
-          body: selectedPage == 1?const Home():const SavedItems(),
-          bottomNavigationBar: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 2),
-            margin: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(50)),
-              border: Border.all(
-                  color: const Color(0xff171817).withOpacity(0.05), width: 3),
-              color: Colors.transparent,
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xff171817).withOpacity(0.2),
-                  spreadRadius: 5,
-                  blurRadius: 0,
-                  offset: const Offset(0, 0),
-                ),
-              ],
-            ),
-            child: BlurEffect(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedPage = 0;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.bookmarks_outlined,
-                        size: 20,
-                        color:Color(selectedPage == 0? 0xFFE8E5E1: 0xFF92918D),
-                      )),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
-                    },
-                    child: CircleAvatar(
-                      radius: 20,
-                      child: ClipOval(
-                        child: Image.asset('images/pfp.jpeg', scale: 1),
-                      ),
-                    ),
+      child: GetBuilder(
+        init: MainScreenController(),
+        builder: (controller) => Scaffold(
+            backgroundColor: const Color.fromARGB(255, 119, 119, 119),
+            extendBody: true,
+            body: controller.selectedPage == 1?const Home():const SavedItems(),
+            bottomNavigationBar: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              margin: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
+                border: Border.all(
+                    color: const Color(0xff171817).withOpacity(0.05), width: 3),
+                color: Colors.transparent,
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xff171817).withOpacity(0.2),
+                    spreadRadius: 5,
+                    blurRadius: 0,
+                    offset: const Offset(0, 0),
                   ),
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedPage = 1;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.home_filled,
-                        size: 20,
-                        color: Color(selectedPage == 1? 0xFFE8E5E1: 0xFF92918D),
-                      )),
                 ],
               ),
-            ),
-          )),
+              child: BlurEffect(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          controller.bookmarkSelected();
+                        },
+                        icon: Icon(
+                          Icons.bookmarks_outlined,
+                          size: 20,
+                          color:Color(controller.selectedPage == 0? 0xFFE8E5E1: 0xFF92918D),
+                        )),
+                    GestureDetector(
+                      onTap: (){
+                        // Navigator.pushNamed(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+                        Get.to(ProfileScreen());
+                      },
+                      child: CircleAvatar(
+                        radius: 20,
+                        child: ClipOval(
+                          child: Image.asset('images/pfp.jpeg', scale: 1),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          controller.homeSelected();
+                        },
+                        icon: Icon(
+                          Icons.home_filled,
+                          size: 20,
+                          color: Color(controller.selectedPage == 1? 0xFFE8E5E1: 0xFF92918D),
+                        )),
+                  ],
+                ),
+              ),
+            )),
+      ),
     );
   }
 }
 
-List jobPosterAssets = [
-  'images/poster1.png',
-  'images/poster2.png',
-  'images/poster3.png',
-];
 
-List jobPosterDescriptions = [
-  "بمرتب 4000\nمندوب مبيعات في أكتوبر",
-  "محاسب بدون خبرة في السادات\nمرتب 3000 ومتوفر سكن",
-  "مطلوب مضيفات طيران\nشركةFly Emirates"
-];
-
-List cityPosterAssets = [
-  'images/sadat.jpeg',
-  'images/october.jpg',
-  'images/cairo.jpeg',
-];
-List cityPosterNames = [
-  'مدينة السادات',
-  'أكتوبر',
-  'القاهرة',
-];
-List cityScreens=[
-  city_screen(),
-  city_screen(),
-  city_screen(),
-
-];
-
-List popularIdioms = [
-  Idiom(phrase: 'عَلاولَه - تملي', explanation: 'دائما'),
-  Idiom(phrase: 'شفتشي', explanation: 'ألوان زاهية'),
-  Idiom(phrase: 'عفارم - براوة', explanation: 'لفظ اطراء بمعنى أحسنت'),
-  Idiom(phrase: 'أونطجي', explanation: 'مخادع'),
-  Idiom(phrase: 'سُك', explanation: 'أغلق'),
-  Idiom(phrase: 'لُكلُك', explanation: 'ثرثرة'),
-  Idiom(phrase: 'لكلاك - رغاي', explanation: 'كثير الكلام'),
-  Idiom(phrase: 'لِمِض', explanation: 'كثير الجدال'),
-  Idiom(phrase: 'هَجص - هَبد - فَتي - فَشر', explanation: 'تكلم بغير علم'),
-  Idiom(phrase: 'ماتاخدنيش في دُوكَة', explanation: 'الهاء عن موضوع رئيسي'),
-  Idiom(phrase: 'كروتة - طلسأة', explanation: 'استعجال العمل'),
-  Idiom(phrase: 'فلوكَة', explanation: 'قارب صغير'),
-  Idiom(phrase: 'طَنش - سِيبك', explanation: 'لا تشغل بالك'),
-  Idiom(phrase: 'بقشيش', explanation: 'اكرامية'),
-  Idiom(phrase: 'كل سنة وأنت طيب يا باشا', explanation: 'أين الاكرامية'),
-  Idiom(phrase: 'فين الشاي - فين الحلاوة', explanation: 'كناية عن اكرامية'),
-  Idiom(phrase: 'فكك مني', explanation: 'غير مستعد للحديث'),
-  Idiom(phrase: 'بتاع', explanation: 'هو كل شيء تشير اليه او تتحدث عنه'),
-
-];
 
 class Idiom {
   String phrase, explanation;
   Idiom({required this.phrase, required this.explanation});
 }
 
-class Home extends StatefulWidget {
+
+class Home extends StatelessWidget {
   const Home({super.key});
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  bool isDropdownOpen = false;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CarouselSlider(
-            items: jobPostersList(),
-            options: CarouselOptions(
-              height: 250,
-              padEnds: false,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 3),
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.3,
-              scrollDirection: Axis.horizontal,
-            ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          SizedBox(
-            height: 300,
-            width: double.infinity,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: cityPosterAssets.length,
-              itemBuilder: (context, index) => CityPoster(
-                  name: cityPosterNames[index],
-                  imageAsset: cityPosterAssets[index]),
-            ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: const BoxDecoration(
-                color: Color(0xff171817),
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+      child: GetBuilder(
+        init: MainScreenController(),
+        builder: (controller) => Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CarouselSlider(
+              items: controller.jobPostersList(),
+              options: CarouselOptions(
+                height: 250,
+                padEnds: false,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                enlargeFactor: 0.3,
+                scrollDirection: Axis.horizontal,
               ),
-              child: GestureDetector(
-                onTap: () => setState(() {
-                  isDropdownOpen = !isDropdownOpen;
-                }),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'عبارات مشهورة',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w400,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            SizedBox(
+              height: 300,
+              width: double.infinity,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: controller.cityPosterAssets.length,
+                itemBuilder: (context, index) => CityPoster(
+                    name: controller.cityPosterNames[index],
+                    imageAsset: controller.cityPosterAssets[index]),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: const BoxDecoration(
+                  color: Color(0xff171817),
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                child: GestureDetector(
+                  onTap: () => controller.dropDown(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'عبارات مشهورة',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Icon(
+                        controller.isDropdownOpen
+                            ? Icons.arrow_drop_up
+                            : Icons.arrow_drop_down,
                         color: Colors.white,
                       ),
-                    ),
-                    Icon(
-                      isDropdownOpen
-                          ? Icons.arrow_drop_up
-                          : Icons.arrow_drop_down,
-                      color: Colors.white,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          isDropdownOpen
-              ? Column(
-                children: [
-                  IdiomCard(idiom: popularIdioms[0]),
-                  IdiomCard(idiom: popularIdioms[1]),
-                  IdiomCard(idiom: popularIdioms[2]),
-                  IdiomCard(idiom: popularIdioms[3]),
-                  TextButton(
-                      onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const IdiomsPage(),));
-                      },
-                      child: const Text(
-                        "المزيد",
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w200,
+            const SizedBox(height: 16),
+            controller.isDropdownOpen
+                ? Column(
+                  children: [
+                    IdiomCard(idiom: controller.popularIdioms[0], index: 0,),
+                    IdiomCard(idiom: controller.popularIdioms[1],index: 1,),
+                    IdiomCard(idiom: controller.popularIdioms[2],index: 2),
+                    IdiomCard(idiom: controller.popularIdioms[3],index: 3),
+                    TextButton(
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const IdiomsPage(),));
+                        },
+                        child: const Text(
+                          "المزيد",
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w200,
+                          ),
                         ),
-                      ),
-                  ),
-                ],
-              )
-              : Container(),
-          const SizedBox(
-            height: 100,
-          ),
-        ],
+                    ),
+                  ],
+                )
+                : Container(),
+            const SizedBox(
+              height: 100,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  List<Widget> jobPostersList(){
-    List<Widget> posters = [];
-    for(var i = 0; i<jobPosterAssets.length;i++){
-      posters.add(JobPoster(description: jobPosterDescriptions[i], imageAsset: jobPosterAssets[i]));
-    }
-    return posters;
-  }
+
 }
 
 
@@ -276,19 +216,22 @@ class IdiomsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.black54,
-        foregroundColor: Colors.white70,
-      ),
-      backgroundColor: Colors.white54,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: ListView.builder(
-          shrinkWrap: true,
-            itemCount: popularIdioms.length,
-            itemBuilder: (context, index) => IdiomCard(idiom: popularIdioms[index]),
+    return GetBuilder(
+      init: MainScreenController(),
+      builder: (controller) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.black54,
+          foregroundColor: Colors.white70,
+        ),
+        backgroundColor: Colors.white54,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: ListView.builder(
+            shrinkWrap: true,
+              itemCount: controller.popularIdioms.length,
+              itemBuilder: (context, index) => IdiomCard(idiom: controller.popularIdioms[index],index: index,),
+          ),
         ),
       ),
     );
@@ -297,22 +240,13 @@ class IdiomsPage extends StatelessWidget {
 
 
 
-class IdiomCard extends StatefulWidget {
-  const IdiomCard({super.key, required this.idiom});
-  final Idiom idiom;
-  @override
-  State<IdiomCard> createState() => _IdiomCardState(idiom);
-}
+class IdiomCard extends StatelessWidget {
 
-class _IdiomCardState extends State<IdiomCard> {
-  bool isCardShown = false;
 
   final Idiom idiom;
 
-  _IdiomCardState(
-    this.idiom,
-  );
-
+  const IdiomCard({super.key, required this.idiom, required this.index});
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -323,40 +257,41 @@ class _IdiomCardState extends State<IdiomCard> {
           color: Colors.black12,
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-        child: GestureDetector(
-          onTap: () => setState(() {
-            isCardShown = !isCardShown;
-          }),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    idiom.phrase,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              isCardShown
-                  ? Text(
-                      idiom.explanation,
+        child: GetBuilder(
+          init: MainScreenController(),
+          builder: (controller) => GestureDetector(
+            onTap: () => controller.showCard(index),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      idiom.phrase,
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 22,
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
                       ),
-                    )
-                  : Container(),
-            ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                controller.isCardShown[index]
+                    ? Text(
+                        idiom.explanation,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
+                      )
+                    : Container(),
+              ],
+            ),
           ),
         ),
       ),
@@ -421,7 +356,8 @@ class CityPoster extends StatelessWidget {
   }
 
   openCity(BuildContext context,String name) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const city_screen(),));
+     // Navigator.push(context, MaterialPageRoute(builder: (context) =>  city_screen(),));
+      Get.to(city_screen());
   }
 
   saveCity(BuildContext context, String name) {
@@ -533,154 +469,87 @@ class BlurEffect extends StatelessWidget {
   }
 }
 
-class SavedItems extends StatefulWidget {
-  const SavedItems({Key? key}) : super(key: key);
 
-  @override
-  State<SavedItems> createState() => _SavedItemsState();
-}
+class SavedItems extends StatelessWidget{
+  const SavedItems({super.key});
 
-class _SavedItemsState extends State<SavedItems> {
-  var cityBox = Hive.box('saved_cities');
-  Set cities = {};
 
-  var jobBox = Hive.box('saved_jobs');
-  Set jobsAssets = {};
-  Set jobsDescription = {};
 
   @override
   Widget build(BuildContext context) {
-    cities.addAll(cityBox.keys);
-    jobsAssets.addAll(jobBox.keys);
-    jobsDescription.addAll(jobBox.values);
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(right: 16.0,top: 12.0),
-            child: Text(
-                "المدن المحفوظة",
-              style: TextStyle(
-                  fontSize: 24,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+      child: GetBuilder(
+        init: MainScreenController(),
+        builder: (controller) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 16.0,top: 12.0),
+              child: Text(
+                  "المدن المحفوظة",
+                style: TextStyle(
+                    fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 300,
-            child: ListView.builder(
-              itemCount: cities.length,
-              itemBuilder: (context, index) => Stack(
+            SizedBox(
+              height: 300,
+              child: ListView.builder(
+                  itemCount: controller.cities.length,
+                  itemBuilder: (context, index) => Stack(
+                      children: [
+                        buildCity(controller.cities.toList()[index]),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: IconButton(
+                            onPressed: (){
+                              controller.removeCity(context, index);
+                            },
+                            icon: const Icon(Icons.close,color: Colors.white,),)
+                          ),
+                      ],
+                  ),
+                  scrollDirection: Axis.horizontal,
+                ),
+            ),
+
+            const Padding(
+              padding: EdgeInsets.only(right: 16.0,top: 12.0),
+              child: Text(
+                  "الوظائف المحفوظة",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              height: 250,
+              margin: const EdgeInsets.only(bottom: 80.0),
+              child: ListView.builder(
+                itemCount: controller.jobsAssets.length,
+                itemBuilder: (context, index) => Stack(
                   children: [
-                    buildCity(cities.toList()[index]),
+                    JobPoster(description: controller.jobsDescription.toList()[index], imageAsset: controller.jobsAssets.toList()[index]),
                     Align(
                       alignment: Alignment.topRight,
                       child: IconButton(
                         onPressed: (){
-                          setState(() {
-                            var removed = cities.toList()[index];
-                            cityBox.delete(removed);
-                            cities.remove(removed);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text("تم الحذف",style: TextStyle(color: Colors.black54),),
-                                      IconButton(onPressed: (){
-                                        setState(() {
-                                          cityBox.put(removed, '');
-                                          cities.add(removed);
-                                        });
-
-                                      },
-                                        icon: const Icon(Icons.undo,color: Colors.black54,),
-                                        iconSize: 20,
-                                      ),
-                                    ],
-                                  ),
-                                  duration: const Duration(seconds: 2),
-                                  backgroundColor: Colors.white,
-                                  dismissDirection: DismissDirection.horizontal,
-                                )
-                            );
-                          });
+                          controller.removeJob(context, index);
                         },
                         icon: const Icon(Icons.close,color: Colors.white,),
                       ),
                     )
                   ],
-              ),
-              scrollDirection: Axis.horizontal,
-            ),
-          ),
-
-          const Padding(
-            padding: EdgeInsets.only(right: 16.0,top: 12.0),
-            child: Text(
-                "الوظائف المحفوظة",
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+                ),
+                scrollDirection: Axis.horizontal,
               ),
             ),
-          ),
-          Container(
-            height: 250,
-            margin: const EdgeInsets.only(bottom: 80.0),
-            child: ListView.builder(
-              itemCount: jobsAssets.length,
-              itemBuilder: (context, index) => Stack(
-                children: [
-                  JobPoster(description: jobsDescription.toList()[index], imageAsset: jobsAssets.toList()[index]),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                      onPressed: (){
-                        setState(() {
-                          var removedAsset = jobsAssets.toList()[index];
-                          var removedDescription = jobsDescription.toList()[index];
-                          jobBox.delete(removedAsset);
-                          jobsAssets.remove(removedAsset);
-                          jobsDescription.remove(removedDescription);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text("تم الحذف",style: TextStyle(color: Colors.black54),),
-                                    IconButton(onPressed: (){
-                                      setState(() {
-                                        jobBox.put(removedAsset,removedDescription);
-                                        jobsAssets.add(removedAsset);
-                                        jobsDescription.add(removedDescription);
-                                      });
-
-                                    },
-                                      icon: const Icon(Icons.undo,color: Colors.black54,),
-                                      iconSize: 20,
-                                    ),
-                                  ],
-                                ),
-                                duration: const Duration(seconds: 2),
-                                backgroundColor: Colors.white,
-                                dismissDirection: DismissDirection.horizontal,
-                              )
-                          );
-                        });
-                      },
-                      icon: const Icon(Icons.close,color: Colors.white,),
-                    ),
-                  )
-                ],
-              ),
-              scrollDirection: Axis.horizontal,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
