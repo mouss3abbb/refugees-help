@@ -301,12 +301,17 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  void register() async {
+  void register() {
     final usersBox = Hive.box('users');
-    usersBox.put('name', nameController.text.trimLeft());
-    usersBox.put('email', emailController.text.trim());
-    usersBox.put('password', passswordController.text);
-    usersBox.put('country', countryController.text);
-    usersBox.put('phone', phoneController.text);
+    usersBox.put(emailController.text.trim(), [
+      'name',
+      nameController.text.trimRight(),
+      'password',
+      passswordController,
+      'country',
+      countryController.text.trim(),
+      'phone',
+      phoneController,
+    ]);
   }
 }

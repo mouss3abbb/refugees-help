@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -12,9 +14,9 @@ import 'package:refugees_help/screens/splash_screen.dart';
 
 Future main() async {
   await Hive.initFlutter();
-  var cityBox = await Hive.openBox('saved_cities');
-  var jobBox = await Hive.openBox('saved_jobs');
-  var usersBox = await Hive.openBox('users');
+  await Hive.openBox('saved_cities');
+  await Hive.openBox('saved_jobs');
+  await Hive.openBox('users');
   runApp(const MyApp());
 }
 
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
         Locale('ar'),
       ],
       theme: ThemeData(fontFamily: 'Massir'),
-      home: OnBoardingScreen(),
+      home: Splash(),
     );
   }
 }
