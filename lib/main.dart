@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         Locale('ar'),
       ],
       theme: ThemeData(fontFamily: 'Massir'),
-      home: OnBoardingScreen(),
+      home: Splash(),
     );
   }
 }
