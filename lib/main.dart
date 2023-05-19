@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
-
+import 'package:get/get.dart';
 Future main() async {
   await Hive.initFlutter();
   await Hive.openBox('saved_cities');

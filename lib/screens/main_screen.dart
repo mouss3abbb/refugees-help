@@ -356,7 +356,8 @@ class CityPoster extends StatelessWidget {
   }
 
   openCity(BuildContext context,String name) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const city_screen(),));
+     // Navigator.push(context, MaterialPageRoute(builder: (context) =>  city_screen(),));
+      Get.to(city_screen());
   }
 
   saveCity(BuildContext context, String name) {
