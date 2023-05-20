@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:refugees_help/main.dart';
 import 'package:refugees_help/screens/main_screen.dart';
 import 'package:refugees_help/screens/register_screen.dart';
 
@@ -211,6 +212,7 @@ class _LoginState extends State<Login> {
     final user = usersBox.get(email);
 
     if (user == null || user['password'] != password) {
+      print(user['password']);
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -227,6 +229,7 @@ class _LoginState extends State<Login> {
       emailController.clear();
       passwordController.clear();
     } else {
+      loggedUser = email;
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const MainScreen()));
     }

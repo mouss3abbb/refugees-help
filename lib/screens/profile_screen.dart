@@ -1,55 +1,81 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:refugees_help/model/user.dart';
 import 'package:refugees_help/screens/edit_profile_screen.dart';
 import 'package:refugees_help/utils/user_prefs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../main.dart';
+import 'main_screen.dart';
+
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
-
 class _ProfileScreenState extends State<ProfileScreen> {
+
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
-
     return Scaffold(
         appBar: buildAppBar(context),
-        body: ListView(
-          physics: BouncingScrollPhysics(),
-          children: [
-            ProfileWidget(
-              imagePath: user.imagePath!,
-              onClicked: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => EditProfilePage()),
-                );
-              },
-            ),
-            const SizedBox(height: 24),
-            buildName(user),
-            const SizedBox(height: 25),
-            // Center(child: buildUpgradeButton()),
-            // const SizedBox(height: 24),
-            ContactWidget(),
-            const SizedBox(height: 20),
-            buildAbout(user),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => EditProfilePage()),
+                  );
+                },
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width/3,
+                  height: MediaQuery.of(context).size.width/3,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset(user['profilePhoto'],fit: BoxFit.cover,),
+                    ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                          child: Icon(Icons.add_a_photo,size: 30,)
+                      ),
+                    ]
+                  ),
+                ),
+              ),
+              // ProfileWidget(
+              //   imagePath: user['profilePhoto'],
+              //   onClicked: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(builder: (context) => EditProfilePage()),
+              //     );
+              //   },
+              // ),
+              const SizedBox(height: 24),
+              buildName(user),
+              const SizedBox(height: 25),
+              // Center(child: buildUpgradeButton()),
+              // const SizedBox(height: 24),
+              ContactWidget(),
+              const SizedBox(height: 20),
+              buildAbout(user),
+            ],
+          ),
         ),
     );
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildName(user) => Column(
     children: [
       Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            user.name!,
+            user['name'],
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
         ],
@@ -60,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            user.country!,
+            user['country'],
             style:
             TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
           ),
@@ -73,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           InkWell(
             child: Text(
-              user.phone!,
+              user['phone'],
               style: TextStyle(color: Colors.grey),
             ),
             onTap: () {
@@ -89,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           InkWell(
             child: Text(
-              user.email!,
+              loggedUser,
               style: TextStyle(color: Colors.grey),
             ),
             onTap: () {
@@ -106,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     onClicked: () {},
   );
 
-  Widget buildAbout(User user) => Container(
+  Widget buildAbout(user) => Container(
     padding: EdgeInsets.symmetric(horizontal: 48),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,14 +143,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         const SizedBox(height: 16),
         Text(
-          user.about!,
+          user['about'],
           style: TextStyle(fontSize: 16, height: 1.4),
         ),
       ],
     ),
   );
   calling() async {
-    const url = 'tel:+201025027368';
+    var url = user['phone'];
     if (await canLaunch(url)) {
       await launch(url);
     } else {

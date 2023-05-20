@@ -5,6 +5,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
 import 'package:get/get.dart';
 
+String loggedUser = "";
+
 Future main() async {
   await Hive.initFlutter();
   await Hive.openBox('saved_cities');
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'refugees_help',
       locale: Locale('ar'),

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:refugees_help/main.dart';
 import 'package:refugees_help/screens/JobDescription.dart';
 import 'package:refugees_help/screens/city_screen.dart';
 import 'package:refugees_help/screens/job_screen.dart';
@@ -14,6 +15,7 @@ class MainScreen extends StatefulWidget {
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
+var user = Hive.box('users').get(loggedUser);
 
 class _MainScreenState extends State<MainScreen> {
   var selectedPage = 1;
@@ -65,7 +67,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: CircleAvatar(
                       radius: 20,
                       child: ClipOval(
-                        child: Image.asset('images/pfp.jpeg', scale: 1),
+                        child: Image.asset(user['profilePhoto'], scale: 1),
                       ),
                     ),
                   ),

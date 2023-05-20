@@ -1,85 +1,144 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:refugees_help/main.dart';
 import 'package:refugees_help/model/user.dart';
 import 'package:refugees_help/utils/user_prefs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../themes.dart';
+import 'main_screen.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
-  User user = UserPreferences.myUser;
+Map<String,String> newUser = {
+  'name': '',
+  'phone': '',
+  'country': '',
+  'profilePhoto': 'assets/images/pfp.webp',
+  'facebookLink': '',
+  'istagramLink': '',
+  'whatsAppLink': '',
+  'about': '',
+};
 
+
+List<String> fields = ['name','phone','country','facebookLink','istagramLink','whatsAppLink','about'];
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  ImagePicker picker = ImagePicker();
+  XFile? image;
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: buildAppBar(context),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 32),
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath: user.imagePath!,
-            isEdit: true,
-            onClicked: () async {
-            },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () async {
+                  image = await picker.pickImage(source: ImageSource.gallery);
+                  setState(() {
+                    user['profilePhoto'] = Image.memory(File(image!.path).readAsBytes() as Uint8List).image;
+                  });
+                },
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width/3,
+                  height: MediaQuery.of(context).size.width/3,
+                  child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.asset(user['profilePhoto'],fit: BoxFit.cover,),
+                        ),
+                        Align(
+                            alignment: Alignment.bottomRight,
+                            child: Icon(Icons.add_a_photo,size: 30,)
+                        ),
+                      ]
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              TextFieldWidget(
+                label: 'الاسم كامل',
+                text: user['name'],
+                onChanged: (name) {
+                  newUser['name'] = name;
+                },
+              ),
+              const SizedBox(height: 24),
+              TextFieldWidget(
+                label: ' الهاتف',
+                text: user['phone'],
+                onChanged: (phone) {
+                  newUser['phone'] = phone;
+                },
+              ),
+              const SizedBox(height: 24),
+              TextFieldWidget(
+                label: ' الواتس آب',
+                text: user['whatsAppLink'],
+                onChanged: (whats) {
+                  newUser['whatsappLink'] = whats;
+                },
+              ),
+              const SizedBox(height: 24),
+              TextFieldWidget(
+                label: ' الفيس بوك',
+                text: user['facebookLink'],
+                onChanged: (face) {
+                  newUser['facebookLink'] = face;
+                },
+              ),
+              const SizedBox(height: 24),
+              TextFieldWidget(
+                label: ' الانستجرام',
+                text: user['istagramLink'],
+                onChanged: (insta) {
+                  newUser['istagramLink'] = insta;
+                },
+              ),
+              const SizedBox(height: 24),
+              TextFieldWidget(
+                label: 'حول',
+                text: user['about'],
+                maxLines: 5,
+                onChanged: (about) {
+                  newUser['about'] = about;
+                },
+              ),
+              ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      for(int i = 0;i<fields.length;i++){
+                        if(newUser[fields[i]]!.isNotEmpty){
+                          user[fields[i]] = newUser[fields[i]];
+                        }
+                      }
+                      Hive.box('users').put(loggedUser, user);
+                    });
+                  },
+                  child: Text(
+                    'حفظ'
+                  ),
+              ),
+              SizedBox(
+                height: 60,
+              )
+            ],
           ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: 'الاسم كامل',
-            text: user.name,
-            onChanged: (name) {
-            },
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: 'البريد الالكتروني',
-            text: user.email,
-            onChanged: (email) {
-            },
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: ' الهاتف',
-            text: user.phone,
-            onChanged: (phone) {
-            },
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: ' الواتس آب',
-            text: user.whats,
-            onChanged: (whats) {
-            },
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: ' الفيس بوك',
-            text: user.face,
-            onChanged: (face) {
-            },
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: ' الانستجرام',
-            text: user.insta,
-            onChanged: (insta) {
-            },
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: 'حول',
-            text: user.about,
-            maxLines: 5,
-            onChanged: (about) {
-            },
-          ),
-        ],
+        ),
       ),
   );
 }

@@ -339,11 +339,11 @@ class _RegisterState extends State<Register> {
       'name': name,
       'phone': phone,
       'country': country,
-      'profilePhoto': null,
-      'facebookLink': null,
-      'istagramLink': null,
-      'whatsAppLink': null,
-      'about': null,
+      'profilePhoto': 'assets/images/pfp.webp',
+      'facebookLink': '',
+      'istagramLink': '',
+      'whatsAppLink': '',
+      'about': '',
     });
 
     showDialog(
