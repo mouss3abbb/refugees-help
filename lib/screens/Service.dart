@@ -59,122 +59,117 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0XFF92918D),
-          title: Text('الخدمات',style: TextStyle(
-            fontSize: 33,
-            fontWeight: FontWeight.bold,
-          ),),
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('المقترحه',style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold
-              ),),
-              SizedBox(height: 5,),
-              Container(
-                height: 220,
-                margin: EdgeInsets.all(5),
-                child: ListView(
-                  children: [
-                    CarouselSlider.builder(
-                      itemCount:ca.length ,
-                      itemBuilder: (context,int itemIndex,int pageIndex){
-                        return slider(ca[itemIndex],context);
-                      },
-                      options: CarouselOptions(
-                        viewportFraction: 0.9,
-                        enlargeCenterPage: true,
-                        enlargeStrategy: CenterPageEnlargeStrategy.height,
-                        autoPlay: true,
-                        autoPlayInterval: Duration(seconds: 1),
-                        onPageChanged: (index,reason){
-                          setState((){
-                            currentIndex=index;
-                          });
+    return SafeArea(
+      child: Scaffold(
+       
+          body: SingleChildScrollView(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('المقترحه',style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold
+                ),),
+                SizedBox(height: 5,),
+                Container(
+                  height: 220,
+                  margin: EdgeInsets.all(5),
+                  child: ListView(
+                    children: [
+                      CarouselSlider.builder(
+                        itemCount:ca.length ,
+                        itemBuilder: (context,int itemIndex,int pageIndex){
+                          return slider(ca[itemIndex],context);
                         },
-
-                      ),),
-                    Align(
-                      alignment: Alignment.center,
-                      child: AnimatedSmoothIndicator(
-                        activeIndex: currentIndex,count: ca.length,
-                        effect: WormEffect(
-                          spacing: 8,
-                          radius: 4,
-                          dotHeight: 10.0,
-                          dotWidth: 10.0,
-                          dotColor: Colors.black,
-                          activeDotColor: Colors.white70,
+                        options: CarouselOptions(
+                          viewportFraction: 0.9,
+                          enlargeCenterPage: true,
+                          enlargeStrategy: CenterPageEnlargeStrategy.height,
+                          autoPlay: true,
+                          autoPlayInterval: Duration(seconds: 1),
+                          onPageChanged: (index,reason){
+                            setState((){
+                              currentIndex=index;
+                            });
+                          },
 
                         ),),
-                    )
+                      Align(
+                        alignment: Alignment.center,
+                        child: AnimatedSmoothIndicator(
+                          activeIndex: currentIndex,count: ca.length,
+                          effect: WormEffect(
+                            spacing: 8,
+                            radius: 4,
+                            dotHeight: 10.0,
+                            dotWidth: 10.0,
+                            dotColor: Colors.black,
+                            activeDotColor: Colors.white70,
+
+                          ),),
+                      )
+                    ],
+                  ),
+                ),
+
+                Divider(
+                  thickness: 1,
+                ),
+                SizedBox(height: 10,),
+                 Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('المستشفيات والصيدليات المتاحه',style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold
+                    ),),
                   ],
                 ),
-              ),
+                SizedBox(height: 5,),
+              /* Container(
+                  //width: double.maxFinite,
+                  //height: 60,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: DefaultTabController(length: 2,
+                      child: TabBar(
+                        isScrollable: true,
+                        indicatorColor: Colors.black,
+                        indicatorWeight: 3.5,
+                        labelColor: Colors.black,
+                        unselectedLabelColor: Colors.black45,
+                        tabs: [
+                          Tab(child:Text( 'المستشفيات',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),),
+                          Tab(child:Text( 'الصيدليات',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),*/
 
-              Divider(
-                thickness: 1,
-              ),
-              SizedBox(height: 10,),
-               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('المستشفيات والصيدليات المتاحه',style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold
-                  ),),
-                ],
-              ),
-              SizedBox(height: 5,),
-            /* Container(
-                //width: double.maxFinite,
-                //height: 60,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: DefaultTabController(length: 2,
-                    child: TabBar(
-                      isScrollable: true,
-                      indicatorColor: Colors.black,
-                      indicatorWeight: 3.5,
-                      labelColor: Colors.black,
-                      unselectedLabelColor: Colors.black45,
-                      tabs: [
-                        Tab(child:Text( 'المستشفيات',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),),
-                        Tab(child:Text( 'الصيدليات',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),)),
-                      ],
+
+                SizedBox(height: 20,),
+                SingleChildScrollView(
+                  child: Container(
+                    height: 1070,
+                    margin: EdgeInsets.all(5),
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context,index)=> newList(ca2[index]),
+                     // separatorBuilder: (context,index)=>SizedBox(height: 5,),
+                      itemCount: ca2.length,
                     ),
                   ),
                 ),
-              ),*/
 
-
-              SizedBox(height: 20,),
-              SingleChildScrollView(
-                child: Container(
-                  height: 1070,
-                  margin: EdgeInsets.all(5),
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context,index)=> newList(ca2[index]),
-                   // separatorBuilder: (context,index)=>SizedBox(height: 5,),
-                    itemCount: ca2.length,
-                  ),
-                ),
-              ),
-
-            ],
+              ],
+            ),
           ),
-        ),
+      ),
     );
   }
 }

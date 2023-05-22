@@ -31,7 +31,7 @@ class _JobDescriptionState extends State<JobDescription> {
     return Container(
       padding: const EdgeInsets.all(25),
       decoration: const BoxDecoration(
-        color: Color(0xFF2B2A2D),
+        color: Color(0xFFE8E5E1),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
@@ -45,7 +45,7 @@ class _JobDescriptionState extends State<JobDescription> {
             Container(
               height: 5,
               width: 60,
-              color: Colors.grey.withOpacity(0.3),
+                color: Color(0xff9cb5bc).withOpacity(0.99)
             ),
             const SizedBox(height: 30,),
             Column(
@@ -62,7 +62,7 @@ class _JobDescriptionState extends State<JobDescription> {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                color: Colors.grey.withOpacity(0.1)
+                                color: Colors.grey.withOpacity(0.4)
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(30),
@@ -83,9 +83,12 @@ class _JobDescriptionState extends State<JobDescription> {
                             isMark = !isMark;
                           });
                         }, icon: Icon(
-                          isMark? Icons.bookmark:
-                          Icons.bookmark_outline_rounded
-                        ))
+                            Icons.bookmark,
+                            size: 30,
+                            color: Color(isMark?  0xff3c4a50:  0xff9cb5bc ),
+
+                        )),
+
                       ],
                     ),
                   ],
@@ -101,7 +104,7 @@ class _JobDescriptionState extends State<JobDescription> {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.withOpacity(0.1)
+                  color: Color(0xff9cb5bc).withOpacity(0.5)
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +113,7 @@ class _JobDescriptionState extends State<JobDescription> {
                   const Text("تفاصيل الشغل ", style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white70
+                      color: Colors.black,
                   ),),
                 ],
               ),
@@ -119,16 +122,16 @@ class _JobDescriptionState extends State<JobDescription> {
             Padding(
               padding: const EdgeInsets.all(.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+
                 children: [
-                  //SizedBox(width: 100,),
                   Text(details, style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.black,
+
                   ),),
                   const SizedBox(width: 10,),
-                  const Icon(Icons.access_time, color: Colors.yellow,),
+
                 ],
               ),
             ),
@@ -140,16 +143,16 @@ class _JobDescriptionState extends State<JobDescription> {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.withOpacity(0.1)
+                  color: Color(0xff9cb5bc).withOpacity(0.5)
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(': المتطلبات', style: TextStyle(
+                  const Text('المتطلبات :', style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white70
+                      color: Colors.black,
                   ),)
 
                 ],
@@ -159,12 +162,11 @@ class _JobDescriptionState extends State<JobDescription> {
             Padding(
               padding: const EdgeInsets.all(.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(requirements, style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.black,
                   ),)
                 ],
               ),
@@ -177,7 +179,7 @@ class _JobDescriptionState extends State<JobDescription> {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.withOpacity(0.1)
+                  color: Color(0xff9cb5bc).withOpacity(0.5)
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -186,7 +188,7 @@ class _JobDescriptionState extends State<JobDescription> {
                   const Text('.. تواصل معنا', style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white70
+                      color: Colors.black,
                   ),)
 
                 ],
