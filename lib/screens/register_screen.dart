@@ -30,7 +30,7 @@ class _RegisterState extends State<Register> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.5,
                   decoration: const BoxDecoration(
-                    color: Colors.blueGrey,
+                    color: Color(0xff506169),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),
@@ -256,7 +256,7 @@ class _RegisterState extends State<Register> {
                       width: double.infinity,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueGrey,
+                            backgroundColor: Color(0xff506169),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
@@ -266,6 +266,7 @@ class _RegisterState extends State<Register> {
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                           onPressed: () {

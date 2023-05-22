@@ -22,6 +22,10 @@ class menuState extends State<menuScreen>{
       body:
       SingleChildScrollView(
         child: Container(
+          decoration: BoxDecoration(
+            color: Color(0xFFE8E5E1),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           width: double.infinity,
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -30,7 +34,7 @@ class menuState extends State<menuScreen>{
                 alignment: Alignment.centerRight,
                 child: Text("المنيو",
                   style: TextStyle(
-                      fontSize: 45,
+                      fontSize: 10,
                       fontWeight: FontWeight.w900,
                       color: Colors.black87
                   ),
@@ -59,7 +63,7 @@ class menuState extends State<menuScreen>{
                 alignment: Alignment.center,
                 child: Text("للمزيد من التفاصيل زوروا صفحتنا على الفيسبوك",
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 5,
                       fontWeight: FontWeight.w900,
                       color: Colors.black87
                   ),
@@ -95,7 +99,7 @@ Widget taiba(){
               alignment: Alignment.centerRight,
               child: Text("المنيو",
                 style: TextStyle(
-                    fontSize: 45,
+                    fontSize: 5,
                     fontWeight: FontWeight.w900,
                     color: Colors.black87
                 ),
@@ -148,69 +152,6 @@ Widget taiba(){
 
   );
 }
-/*Widget primavera(){
-  return Scaffold(
-    body:
-    SingleChildScrollView(
-      child: Container(
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              alignment: Alignment.centerRight,
-              child: Text("المنيو",
-                style: TextStyle(
-                    fontSize: 45,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black87
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                      child: Image.asset('images/2.jpeg',)),
-                  SizedBox(height: 30,),
-                  Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                      child: Image.asset('images/2.jpeg',)),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 20,),
-
-
-            Container(
-              alignment: Alignment.center,
-              child: Text("للمزيد من التفاصيل زوروا صفحتنا على الفيسبوك",
-                style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black87
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.topCenter,
-              child: IconButton(
-                  icon: Icon(Icons.facebook,color: Colors.blue,size: 50,),
-                  onPressed: (){})
-              ,),
-
-
-          ],
-        ),
-      ),
-    ),
-
-  );
-}*/
 Widget dajaj(){
   return Scaffold(
     body:
@@ -224,7 +165,7 @@ Widget dajaj(){
               alignment: Alignment.centerRight,
               child: Text("المنيو",
                 style: TextStyle(
-                    fontSize: 45,
+                    fontSize: 10,
                     fontWeight: FontWeight.w900,
                     color: Colors.black87
                 ),
@@ -926,66 +867,4 @@ Widget tiger(){
 
   );
 }
-/*Widget azar(){
-  return Scaffold(
-    body:
-    SingleChildScrollView(
-      child: Container(
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              alignment: Alignment.centerRight,
-              child: Text("المنيو",
-                style: TextStyle(
-                    fontSize: 45,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black87
-                ),
-              ),
-            ),
 
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                      child: Image.asset('images/2.jpeg',)),
-                  SizedBox(height: 30,),
-                  Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                      child: Image.asset('images/2.jpeg',)),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 20,),
-
-
-            Container(
-              alignment: Alignment.center,
-              child: Text("للمزيد من التفاصيل زوروا صفحتنا على الفيسبوك",
-                style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black87
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.topCenter,
-              child: IconButton(
-                  icon: Icon(Icons.facebook,color: Colors.blue,size: 50,),
-                  onPressed: (){})
-              ,),
-
-
-          ],
-        ),
-      ),
-    ),
-
-  );
-}*/

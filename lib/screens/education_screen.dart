@@ -22,97 +22,118 @@ class MySub1 extends StatefulWidget {
 class _MySub1 extends State<MySub1> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        backgroundColor: Colors.brown.shade50,
-        appBar: AppBar(
-          title: Text('التعليم'),
-          backgroundColor: Colors.grey,
-          centerTitle: true,
-          leading: BackButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        body:
-        SingleChildScrollView(
-          child: Center(
-              child: Column(children: <Widget>[
-                Container(
-                  margin: EdgeInsets.all(50),
-                ),
-                // image1
-                Container(
+    return  SafeArea(
+      child: Scaffold(
+          backgroundColor: Color(0xFFE8E5E1),
+          body:
+          SingleChildScrollView(
+            child: Center(
+                child: Column(children: <Widget>[
 
-                  height: 200,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 10,
-                      color: Colors.grey,),
-                    borderRadius: BorderRadius.circular(20),
-                    //<-- SEE HERE
+
+                  SizedBox(height: 40,),
+                  Text("التعليم",style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 30,
+
+                  ),),
+                  Container(
+                    margin: EdgeInsets.all(20),
                   ),
-                  child: Image.asset('assets/images/22.jpg'),
-                ),
-                //button1
-                Container(
-                    margin: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      child: Text('المدارس',style: TextStyle(fontWeight: FontWeight.bold),),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black, backgroundColor: Colors.grey.shade400,
-                        shape: StadiumBorder(),
-                        side: BorderSide(color: Colors.grey, width: 2),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const education_screen_sub1()),
-                        );
-                      },
+                  // image1
+                  Container(
 
-                      //_navigateToNextScreen(context);
-
-                    )
-                ),
-                // image2
-                Container(
-                  height: 200,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 10,
-                      color: Colors.grey,),
-                    borderRadius: BorderRadius.circular(20),
-                    //<-- SEE HERE
-                  ),
-                  child: Image.asset('assets/images/sadat-city-university.jpg'),
-                ),
-                //button2
-                Container(
-
-                    margin: EdgeInsets.all(10),
-                    child: ElevatedButton(
-
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const education_screen_sub21()),
-                        );
-                      },
-                      child: Text('الجامعات',style: TextStyle(fontWeight: FontWeight.bold),),
-
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black, backgroundColor: Colors.grey.shade400,
-
-                        shape: StadiumBorder(),
-                        side: BorderSide(color: Colors.grey, width: 2),
+                    height: 200,
+                    width: 300,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 5,
+                          color: Color(0xff3c4a50).withOpacity(0.7),),
+                        borderRadius: BorderRadius.circular(30),
+                        //<-- SEE HERE
                       ),
 
-                    )
-                ),
-              ]
-              )),
-        )
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(30),
+                        child: Image.asset('assets/images/22.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                  ),
+                  //button1
+                  Container(
+                      margin: EdgeInsets.symmetric(vertical: 25),
+                      height: 45,
+                      width: 200,
+                      child: ElevatedButton(
+                        child: Text('المدارس',style: TextStyle(fontWeight: FontWeight.bold),),
+
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Color(0xff3c4a50),
+                          shape: StadiumBorder(),
+                          side: BorderSide(color: Color(0xff3c4a50), width: 2),
+
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const education_screen_sub1()),
+                          );
+                        },
+
+                        //_navigateToNextScreen(context);
+
+                      )
+                  ),
+                  // image2
+                  SizedBox(height: 30,),
+                  Container(
+                    height: 200,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 5,
+                        color: Color(0xff3c4a50).withOpacity(0.7),),
+                      borderRadius: BorderRadius.circular(30),
+                      //<-- SEE HERE
+                    ),
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(30),
+                        child: Image.asset('assets/images/sadat-city-university.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                  ),
+                  //button2
+                  Container(
+                      margin: EdgeInsets.symmetric(vertical: 25),
+                      height: 45,
+                      width: 200,
+                      child: ElevatedButton(
+
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const education_screen_sub21()),
+                          );
+                        },
+                        child: Text('الجامعات',style: TextStyle(fontWeight: FontWeight.bold),),
+
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Color(0xff3c4a50),
+                          shape: StadiumBorder(),
+                          side: BorderSide(color: Color(0xff3c4a50), width: 2),
+
+                        ),
+
+                      )
+                  ),
+                ]
+                )),
+          )
+      ),
     );
   }
 }

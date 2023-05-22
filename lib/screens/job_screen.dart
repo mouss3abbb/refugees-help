@@ -96,62 +96,55 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      backgroundColor: Color(0xFF92918D),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(top: 25),
-          child: Column(
-            children: [
-              SizedBox(height: 5,),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text("فرص العمل المتاحه ", style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 32,
-                ),),
-              ),
-              SizedBox(height: 5,),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text("اختر ما يناسبك", style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 22,
-                ),),
-              ),
-
-              SizedBox(height:5,),
-              SingleChildScrollView(
-                child: Container(
-                  height: 500,
-                  margin: EdgeInsets.all(30),
-                  child: ListView.builder(
-                    itemBuilder: (context,index)=> buildCount(context,index),
-                    //separatorBuilder: (context,index)=>SizedBox(height: 20,)
-                    itemCount: jobsList.length,
-                  ),
-
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xFF36454C),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(top: 25),
+            child: Column(
+              children: [
+                SizedBox(height: 5,),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text("فرص العمل المتاحه ", style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 32,
+                  ),),
                 ),
-              )
+                SizedBox(height: 5,),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text("اختر ما يناسبك", style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 22,
+                  ),),
+                ),
 
-            ],
+                SizedBox(height:5,),
+                SingleChildScrollView(
+                  child: Container(
+                    height: 600,
+                    margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                    child: ListView.builder(
+                      itemBuilder: (context,index)=> buildCount(context,index),
+                      //separatorBuilder: (context,index)=>SizedBox(height: 20,)
+                      itemCount: jobsList.length,
+                    ),
+
+                  ),
+                )
+
+              ],
+
+            ),
 
           ),
-
         ),
+
+
       ),
-
-
     );
   }
 
@@ -160,7 +153,7 @@ class MyHomePage extends StatelessWidget {
 Widget buildCount(BuildContext context, int index){
   JobDescription data = jobsList[index];
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(10.0),
     child: Container(
       width: 250,
       height: 400,
@@ -198,11 +191,14 @@ Widget buildCount(BuildContext context, int index){
             width: 300,
             //margin: EdgeInsets.all(10),
             child: ElevatedButton(
-              child: Text('التفاصيل'),
+              child: Text('التفاصيل',style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: Colors.black54
+              ),),
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF2B2A2D),
+                  backgroundColor: Color(0xff9cb5bc),
                   shape: StadiumBorder(),
-                  side: BorderSide(color: Colors.grey)
+                  side: BorderSide(color: Color(0xff9cb5bc))
               ),
               onPressed: (){
                 showModalBottomSheet(

@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 119, 119, 119),
+          backgroundColor: const Color.fromARGB(255, 212, 215, 222),
           extendBody: true,
           body: selectedPage == 1?const Home():const SavedItems(),
           bottomNavigationBar: Container(
@@ -33,11 +33,11 @@ class _MainScreenState extends State<MainScreen> {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(50)),
               border: Border.all(
-                  color: const Color(0xff171817).withOpacity(0.05), width: 3),
+                  color: const Color(0xff3c4a50).withOpacity(0.9), width: 3),
               color: Colors.transparent,
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xff171817).withOpacity(0.2),
+                  color: const Color(0xff3c4a50),
                   spreadRadius: 5,
                   blurRadius: 0,
                   offset: const Offset(0, 0),
@@ -57,20 +57,21 @@ class _MainScreenState extends State<MainScreen> {
                       },
                       icon: Icon(
                         Icons.bookmarks_outlined,
-                        size: 20,
-                        color:Color(selectedPage == 0? 0xFFE8E5E1: 0xFF92918D),
+                        size: 30,
+                        color: Color(selectedPage == 0 ? 0xFFE8E5E1 : 0xffD4D7DEFF ),
                       )),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
-                    },
-                    child: CircleAvatar(
-                      radius: 20,
-                      child: ClipOval(
-                        child: Image.asset(user['profilePhoto'], scale: 1),
-                      ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+              },
+                  child: CircleAvatar(
+                    radius: 20,
+                    child: ClipOval(
+                      child: Image.asset('images/pfp.jpeg', scale: 1),
                     ),
+
                   ),
+            ),
                   IconButton(
                       onPressed: () {
                         setState(() {
@@ -79,8 +80,8 @@ class _MainScreenState extends State<MainScreen> {
                       },
                       icon: Icon(
                         Icons.home_filled,
-                        size: 20,
-                        color: Color(selectedPage == 1? 0xFFE8E5E1: 0xFF92918D),
+                        size: 30,
+                        color: Color(selectedPage == 1 ?  0xFFE8E5E1:  0xffD4D7DEFF ),
                       )),
                 ],
               ),
@@ -162,6 +163,17 @@ class _HomeState extends State<Home> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: 30,),
+          Container(
+            alignment: Alignment.topRight,
+            margin: EdgeInsets.only(right: 20),
+            child: Text("اهم الفرص", style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+              fontWeight: FontWeight.w200,
+
+            ),),
+          ),
           CarouselSlider(
             items: jobPostersList(),
             options: CarouselOptions(
@@ -180,12 +192,25 @@ class _HomeState extends State<Home> {
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 30,
+          ),
+          Container(
+
+            alignment: Alignment.topRight,
+            margin: EdgeInsets.only(right: 20),
+            child: Text("المدن", style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+              fontWeight: FontWeight.w200,
+
+            ),),
           ),
           SizedBox(
+
             height: 300,
             width: double.infinity,
             child: ListView.builder(
+
               scrollDirection: Axis.horizontal,
               itemCount: cityPosterAssets.length,
               itemBuilder: (context, index) => CityPoster(
@@ -194,15 +219,18 @@ class _HomeState extends State<Home> {
             ),
           ),
           const SizedBox(
-            height: 8,
+            height: 30,
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
             child: Container(
               padding: const EdgeInsets.all(16.0),
               decoration: const BoxDecoration(
-                color: Color(0xff171817),
+                color: Color(0xff3c4a50),
                 borderRadius: BorderRadius.all(Radius.circular(15)),
+
+                // gradient colors
+
               ),
               child: GestureDetector(
                 onTap: () => setState(() {

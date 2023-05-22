@@ -52,73 +52,67 @@ class _city_screen extends State<city_screen> {
   var selectedPage = 1;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 119, 119, 119),
-        appBar: AppBar(
-          backgroundColor: Colors.grey,
-          title: Text("مدينة السادات", textAlign: TextAlign.center),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ),
-        extendBody: true,
-        body: const main_city_screen(),
-        bottomNavigationBar: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 2),
-          margin: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(50)),
-            border: Border.all(
-                color: const Color(0xff171817).withOpacity(0.05), width: 3),
-            color: Colors.transparent,
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xff171817).withOpacity(0.2),
-                spreadRadius: 5,
-                blurRadius: 0,
-                offset: const Offset(0, 0),
-              ),
-            ],
-          ),
-          child: BlurEffect(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedPage = 0;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.bookmarks_outlined,
-                      size: 20,
-                      color: Color(selectedPage == 0 ? 0xFFE8E5E1 : 0xFF92918D),
-                    )),
-                CircleAvatar(
-                  radius: 20,
-                  child: ClipOval(
-                    child: Image.asset('images/pfp.jpeg', scale: 1),
-                  ),
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: const Color.fromARGB(255, 212, 215, 222),
+          extendBody: true,
+          body: const main_city_screen(),
+          bottomNavigationBar: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 2),
+            margin: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
+              border: Border.all(
+                  color: const Color(0xff3c4a50).withOpacity(0.9), width: 3),
+              color: Colors.transparent,
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xff3c4a50),
+                  spreadRadius: 5,
+                  blurRadius: 0,
+                  offset: const Offset(0, 0),
                 ),
-                IconButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedPage = 1;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.home_filled,
-                      size: 20,
-                      color: Color(selectedPage == 1 ? 0xFFE8E5E1 : 0xFF92918D),
-                    )),
               ],
             ),
-          ),
-        ));
+            child: BlurEffect(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedPage = 0;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.bookmarks_outlined,
+                        size: 30,
+                        color: Color(selectedPage == 0 ? 0xFFE8E5E1 : 0xffD4D7DEFF ),
+                      )),
+                  CircleAvatar(
+                    radius: 20,
+                    child: ClipOval(
+                      child: Image.asset('images/pfp.jpeg', scale: 1),
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedPage = 1;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.home_filled,
+                        size: 30,
+                        color: Color(selectedPage == 1 ?  0xFFE8E5E1 :  0xffD4D7DEFF ),
+                      )),
+                ],
+              ),
+            ),
+          )),
+    );
   }
 }
 
@@ -144,7 +138,7 @@ class main_city_screen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           ),
@@ -158,16 +152,10 @@ class main_city_screen extends StatelessWidget {
                   ),*/
               margin: EdgeInsets.all(10),
               height: 300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Colors.grey,
-                  style: BorderStyle.solid,
-                  width: 10,
-                ),
-              ),
+
               child: FlutterGoogleStreetView(
-                initPos: LatLng(29.9285, 30.9188),
+                initPos: LatLng(37.78083, -122.40449),
+
                 initSource: StreetViewSource.outdoor,
                 initBearing: 30,
                 initTilt: 30,
@@ -190,7 +178,7 @@ class main_city_screen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           ),

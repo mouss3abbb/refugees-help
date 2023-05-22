@@ -22,6 +22,7 @@ class RestaurantsState extends State<RestaurantsPage>{
           children: [
             Padding(
               padding: EdgeInsets.only(top: 10),
+
               child:
               Container(
                 child:CircleAvatar(
@@ -35,7 +36,7 @@ class RestaurantsState extends State<RestaurantsPage>{
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w900,
-                    color: Colors.black87
+                    color: Colors.black,
                 ),
               ),
             ),
@@ -43,8 +44,8 @@ class RestaurantsState extends State<RestaurantsPage>{
               child: Text("${d.place}",
                 style: TextStyle(
                     fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black87
+                    //fontWeight: FontWeight.w900,
+                    color: Colors.black,
                 ),
               ),
             ),
@@ -56,7 +57,7 @@ class RestaurantsState extends State<RestaurantsPage>{
                 //margin: EdgeInsets.all(10),
                 child: IconButton(
                     iconSize: 50,
-                    icon: Icon(Icons.restaurant_menu,color: Colors.black,size: 30,),//Text("المنيو",style: TextStyle(fontSize: 20,color: Colors.black)),
+                    icon: Icon(Icons.restaurant_menu,color: Color(0xff3c4a50),size: 30,),//Text("المنيو",style: TextStyle(fontSize: 20,color: Colors.black)),
                     onPressed: (){showModalBottomSheet(
                         backgroundColor: Colors.transparent,
                         context: context, builder:
@@ -103,7 +104,7 @@ class RestaurantsState extends State<RestaurantsPage>{
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w900,
-                    color: Colors.black87
+                    color: Colors.black,
                 ),
               ),
             ),
@@ -111,8 +112,8 @@ class RestaurantsState extends State<RestaurantsPage>{
               child: Text("${d.place2}",
                 style: TextStyle(
                     fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black87
+                    //fontWeight: FontWeight.w900,
+                    color: Colors.black,
                 ),
               ),
             ),
@@ -125,7 +126,7 @@ class RestaurantsState extends State<RestaurantsPage>{
                 //margin: EdgeInsets.all(10),
                 child: IconButton(
                     iconSize: 50,
-                    icon: Icon(Icons.menu_book,color: Colors.black,size: 30,),//Text("المنيو",style: TextStyle(fontSize: 20,color: Colors.black)),
+                    icon: Icon(Icons.menu_book,color: Color(0xff3c4a50),size: 30,),//Text("المنيو",style: TextStyle(fontSize: 20,color: Colors.black)),
                     onPressed: (){showModalBottomSheet(
                         backgroundColor: Colors.transparent,
                         context: context, builder:
@@ -142,68 +143,77 @@ class RestaurantsState extends State<RestaurantsPage>{
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Scaffold(
-          appBar: AppBar(
-            elevation: 0.0,
-            backgroundColor:Colors.grey ,
-          ),
+      child: SafeArea(
+
+        child: Scaffold(
+         
 
 
-          body:SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Text(" المطاعم",
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.black87
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    child: Container(
-                      height: 300,
-                      margin: EdgeInsets.all(30),
-                      child: ListView.builder(
-                        itemBuilder: (context,index)=> R(Restaurants[index],context),
-                        //separatorBuilder: (context,index)=>SizedBox(height: 20,)
-                        itemCount: Restaurants.length,
-                        scrollDirection: Axis.horizontal,
-                      ),
+            body:SingleChildScrollView(
 
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Text(" الكافيهات",
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.black87
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    child: Container(
-                      height: 300,
-                      margin: EdgeInsets.all(30),
-                      child: ListView.builder(
-                        itemBuilder: (context,index)=> C(Cafes[index],context),
-                        //separatorBuilder: (context,index)=>SizedBox(height: 20,)
-                        itemCount: Cafes.length,
-                        scrollDirection: Axis.horizontal,
-                      ),
+              child: Container(
+                color: Color(0xff3c4a50),
+                height: 900,
+                child: Column(
+                  children: [
+                    SizedBox(height: 40,),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      margin: EdgeInsets.only(right: 20),
 
+                      child: Text(" المطاعم",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFFE8E5E1)
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    SingleChildScrollView(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        height: 300,
+                        //margin: EdgeInsets.all(30),
+                        child: ListView.builder(
+                          itemBuilder: (context,index)=> R(Restaurants[index],context),
+                          //separatorBuilder: (context,index)=>SizedBox(height: 20,)
+                          itemCount: Restaurants.length,
+                          scrollDirection: Axis.horizontal,
+                        ),
+
+                      ),
+                    ),
+                    SizedBox(height: 40,),
+                    Container(
+                      margin: EdgeInsets.only(right: 20),
+                      alignment: Alignment.centerRight,
+                      child: Text(" الكافيهات",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFFE8E5E1)
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      child: Container(
+                        height: 300,
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: ListView.builder(
+                          itemBuilder: (context,index)=> C(Cafes[index],context),
+                          //separatorBuilder: (context,index)=>SizedBox(height: 20,)
+                          itemCount: Cafes.length,
+                          scrollDirection: Axis.horizontal,
+                        ),
+
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          )
+            )
 
+        ),
       ),
     );
   }
