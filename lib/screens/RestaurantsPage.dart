@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:refugees_help/screens/menuScreen.dart';
 
-import 'menuScreen.dart';
+//import '../../Users/H.WIN-10/Downloads/refugees-help-master/lib/screens/menuScreen.dart';
 class RestaurantsPage extends StatefulWidget{
   @override
   RestaurantsState createState()=>RestaurantsState();
@@ -163,7 +164,6 @@ class RestaurantsState extends State<RestaurantsPage>{
               ),
             ),
             body:SingleChildScrollView(
-
               child: Container(
                 height: 900,
                 color: Color(0xffCFD8DC),
@@ -247,19 +247,19 @@ class CData{
 
 }
 List<RData> Restaurants=[
-  RData(image: 'images/taiba/taiba.jpg', name: " طيبه", place: "المنطقه الثالثه",screen: taiba()),
-  RData(image: 'images/dajaj/dajaj.jpg', name: " دجاج", place: "المنطقه الحادية عشر",screen: dajaj()),
-  RData(image: 'images/heartAttack/heartAttack.jpg', name: " هارت اتاك", place: "المنطقه الخامسه",screen: heartAttack()),
-  RData(image: 'images/shamy/shamy.jpg', name: " الشامي", place: "المنطقه الاولى",screen: shamy()),
-  RData(image: 'images/aboAlsoud/aboAlsoud.jpg', name: " ابو السعود", place: "المنطقه السابعه",screen: aboAlsoud()),
-  RData(image: 'images/ketchup/ketchup.jpg', name: " كاتشب", place: "المنطقه الثانيه",screen: ketchup()),
-  RData(image: 'images/fatatry/fatatry.jpg', name: " فطاطري المدينه", place: "المنطقه السابعه",screen: fatatry()),
+  RData(image: 'images/taiba/taiba.jpg', name: " طيبه", place: "المنطقه الثالثه",screen: m('images/taiba/menu1.jpg','images/taiba/menu2.jpg',"https://www.facebook.com/restaurant.taiba?mibextid=ZbWKwL")),
+  RData(image: 'images/dajaj/dajaj.jpg', name: " دجاج", place: "المنطقه الحادية عشر",screen: m('images/dajaj/menu1.jpg','images/dajaj/menu2.jpg',"https://www.facebook.com/djaj.fc.resturant?mibextid=ZbWKwL")),
+  RData(image: 'images/heartAttack/heartAttack.jpg', name: " هارت اتاك", place: "المنطقه الخامسه",screen: m('images/heartAttack/menu1.jpg','images/heartAttack/menu2.jpg',"https://www.facebook.com/profile.php?id=100089372753455&mibextid=ZbWKwL")),
+  RData(image: 'images/shamy/shamy.jpg', name: " الشامي", place: "المنطقه الاولى",screen: m('images/shamy/menu1.jpg','images/shamy/menu2.jpg',"https://www.facebook.com/profile.php?id=100064861143564&mibextid=ZbWKwL")),
+  RData(image: 'images/aboAlsoud/aboAlsoud.jpg', name: " ابو السعود", place: "المنطقه السابعه",screen: m('images/aboAlsoud/menu1.jpg','images/aboAlsoud/menu2.jpg',"https://www.facebook.com/Abo.AlS3oud1985?mibextid=ZbWKwL")),
+  RData(image: 'images/ketchup/ketchup.jpg', name: " كاتشب", place: "المنطقه الثانيه",screen: m('images/ketchup/menu1.jpg','images/ketchup/menu2.jpg',"https://www.facebook.com/ketshup.sadatcity?mibextid=ZbWKwL")),
+  RData(image: 'images/fatatry/fatatry.jpg', name: " فطاطري المدينه", place: "المنطقه السابعه",screen: m('images/fatatry/menu1.jpg','images/fatatry/menu2.jpg',"https://www.facebook.com/profile.php?id=100086228151439&mibextid=ZbWKwL")),
 ];
 List<CData> Cafes=[
-  CData(image2: 'images/hamza/hamza.jpg', name2: "حمزة", place2: "مجمع المطاعم",screen2: hamza()),
-  CData(image2: 'images/robaia/robaia.jpg', name2: "الرباعيه", place2: "المنطقه الحادية عشر",screen2: robaia()),
-  CData(image2: 'images/qasrALemaratiya/qasrALemaratiya.jpg', name2: "قصر الاماراتيه", place2: "المنطقه الثالثه",screen2: qasrALemaratiya()),
-  CData(image2: 'images/alnadyAlmalaky/alnadyAlmalaky.jpg', name2: "النادي الملكي", place2: "المنطقه السابعه",screen2: alnadyAlmalaky()),
-  CData(image2: 'images/tiger/tiger.jpg', name2: "تايجر", place2: "مجمع المطاعم",screen2: tiger()),
+  CData(image2: 'images/hamza/hamza.jpg', name2: "حمزة", place2: "مجمع المطاعم",screen2: m('images/hamza/menu1.jpg','images/hamza/menu2.jpg',"https://www.facebook.com/profile.php?id=100076055174332&mibextid=ZbWKwL")),
+  CData(image2: 'images/robaia/robaia.jpg', name2: "الرباعيه", place2: "المنطقه الحادية عشر",screen2: m('images/robaia/menu1.jpg','images/robaia/menu2.jpg',"https://www.facebook.com/4ShoppingCafe?mibextid=ZbWKwL")),
+  CData(image2: 'images/qasrALemaratiya/qasrALemaratiya.jpg', name2: "قصر الاماراتيه", place2: "المنطقه الثالثه",screen2: m('images/qasrALemaratiya/menu1.jpg','images/qasrALemaratiya/menu2.jpg',"https://www.facebook.com/Qasralemaratiya?mibextid=ZbWKwL")),
+  CData(image2: 'images/alnadyAlmalaky/alnadyAlmalaky.jpg', name2: "النادي الملكي", place2: "المنطقه السابعه",screen2: m('images/alnadyAlmalaky/menu1.jpg','images/alnadyAlmalaky/menu2.jpg',"https://www.facebook.com/RoyalClubSC?mibextid=ZbWKwL")),
+  CData(image2: 'images/tiger/tiger.jpg', name2: "تايجر", place2: "مجمع المطاعم",screen2: m('images/tiger/menu1.jpg','images/tiger/menu2.jpg',"https://www.facebook.com/elnemr2017/?mibextid=ZbWKwL")),
 
 ];

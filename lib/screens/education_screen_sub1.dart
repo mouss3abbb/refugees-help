@@ -288,7 +288,6 @@ Widget buildCount(data d,BuildContext context){
                                 backgroundColor: Colors.transparent,
                                 context: context, builder:
                                 (context)=>d.schoolScreen);
-                            //getindx(d.schoolName);
                           },
                           //_navigateToNextScreen(context);
                         ),
