@@ -41,13 +41,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
           ),
           leading: BackButton(
-            color: Colors.black54,
+            color: Colors.black,
             onPressed: (){
               Navigator.of(context).pop();
             },
           ),
         ),
-        backgroundColor: Color(0xffEFECE7),
+        backgroundColor: Color( 0xffCFD8DC),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -58,10 +58,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 height: 200.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 8.0,
-                  ),
                 ),
                 child: CircleAvatar(
                   radius: 90, // Image radius
@@ -71,6 +67,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               SizedBox(height: 10,),
               Container(
+                height: 50,
                 width: 260,
                   child: ElevatedButton(
 
@@ -80,11 +77,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         MaterialPageRoute(builder: (context) => const education_screen_sub2()),
                       );
                     },
-                    child: Text("جامعة مدينة السادات",style: TextStyle(fontWeight: FontWeight.bold),),
+                    child: Text("جامعة مدينة السادات",style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18,),),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black, backgroundColor: Colors.grey.shade400,
+                      foregroundColor: Colors.black, backgroundColor: Color(0xff506169),
                       shape: StadiumBorder(),
-                      side: BorderSide(color: Colors.grey, width: 2),
+                      side: BorderSide(color: Color(0xff506169), width: 2),
                     ),
 
                   )
@@ -95,10 +92,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 height: 200.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 8.0,
-                  ),
                 ),
                 child:
                 CircleAvatar(
@@ -108,6 +101,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),),
               SizedBox(height: 10,),
               Container(
+                height: 50,
                 width: 260,
                   child: ElevatedButton(
 
@@ -118,13 +112,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       );
                     },
                     child: Text("الجامعة المصرية للتعلم الإلكتروني الأهلية",
-                      style: TextStyle(fontWeight: FontWeight.bold),),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18,),),
 
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black, backgroundColor: Colors.grey.shade400,
+                      foregroundColor: Colors.black, backgroundColor: Color(0xff506169),
 
                       shape: StadiumBorder(),
-                      side: BorderSide(color: Colors.grey, width: 2),
+                      side: BorderSide(color: Color(0xff506169), width: 2),
                     ),
 
                   )

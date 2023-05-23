@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.5,
                   decoration: const BoxDecoration(
-                    color: Color(0xff3C4A50),
+                    color: Color(0xffCFD8DC),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),
@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
                     const Text(
                       'مرحبا!',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Color(0xff506169),
                         fontSize: 28,
                         fontWeight: FontWeight.w600,
                         letterSpacing: 1.2,

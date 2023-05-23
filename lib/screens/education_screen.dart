@@ -36,15 +36,15 @@ class _MySub1 extends State<MySub1> {
               ),
             ),
             leading: BackButton(
-              color: Colors.black54,
+              color: Colors.black,
               onPressed: (){
                 Navigator.of(context).pop();
               },
             ),
           ),
-          backgroundColor: Color(0xFFE8E5E1),
+          backgroundColor: Color(0xffCFD8DC),
           body:
-          SingleChildScrollView(
+        /*  SingleChildScrollView(
             child: Center(
                 child: Column(children: <Widget>[
 
@@ -150,7 +150,112 @@ class _MySub1 extends State<MySub1> {
                   ),
                 ]
                 )),
-          )
+          ),*/
+        Center(
+          child: Column(
+            children:[
+              SizedBox(height: 20,),
+              Container(
+            width: 350,
+            height: 350,
+            decoration: BoxDecoration(
+              color: Color(0xFFFFFFFF),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Center(
+              child: Column(
+                children: [
+                  Container(
+                      width: 300,
+                      margin: EdgeInsets.all(10),
+                      child:ClipRRect(
+                        borderRadius: BorderRadius.circular(30),
+                        child: Image.asset('assets/images/22.jpg',
+                        ),
+                      )
+                  ),
+                  SizedBox(height: 2,),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 25),
+                    height: 45,
+                    width: 300,
+                    //margin: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      child: Text('المدارس',style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white
+                      ),),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff506169),
+                          shape: StadiumBorder(),
+                          side: BorderSide(color: Color(0xff506169))
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const education_screen_sub1()),
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
+
+      ),
+           SizedBox(height: 20,),
+           Container(
+              width: 350,
+              height: 350,
+              decoration: BoxDecoration(
+                color: Color(0xFFFFFFFF),
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: Center(
+                child: Column(
+                  children: [
+                    SizedBox(height: 2,),
+                    Center(
+                      child: Container(
+                          width: 300,
+                          margin: EdgeInsets.symmetric(vertical: 20),
+                          child:ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                              child: Image.asset('assets/images/sadat-city-university.jpg',),
+                          )
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      height: 45,
+                      width: 300,
+                      //margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        child: Text('الجامعات',style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white
+                        ),),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xff506169),
+                            shape: StadiumBorder(),
+                            side: BorderSide(color: Color(0xff506169))
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const education_screen_sub21()),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+            ),
+          ],
+          ),
+        ),
       ),
     );
   }

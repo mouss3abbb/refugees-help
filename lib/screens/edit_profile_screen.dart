@@ -53,125 +53,138 @@ class _EditProfilePageState extends State<EditProfilePage> {
     print(user['about']);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xffCFD8DC),
         elevation: 0,
         title: Text(
           "تعديل البيانات",
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.white70,
+            color: Colors.black,
           ),
         ),
         leading: BackButton(
-          color: Colors.white70,
+          color: Colors.black,
           onPressed: (){
             Navigator.of(context).pop();
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: () async {
-                  image = await picker.pickImage(source: ImageSource.gallery);
-                  setState(() {
-                    newUser['profilePhoto'] = image!.path;
-                  });
-                },
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: MediaQuery.of(context).size.width / 3,
-                  child: Stack(children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: user['profilePhoto'] == 'assets/images/pfp.webp'
-                          ? Image.asset(
-                              user['profilePhoto'],
-                              fit: BoxFit.cover,
-                            )
-                          : Image.file(
-                              File(user['profilePhoto']),
-                              fit: BoxFit.cover,
-                            ),
-                    ),
-                    Align(
-                        alignment: Alignment.bottomRight,
-                        child: Icon(
-                          Icons.add_a_photo,
-                          size: 30,
-                        )),
-                  ]),
+      body: Container(
+        color: Color(0xffCFD8DC),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    image = await picker.pickImage(source: ImageSource.gallery);
+                    setState(() {
+                      newUser['profilePhoto'] = image!.path;
+                    });
+                  },
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width / 3,
+                    height: MediaQuery.of(context).size.width / 3,
+                    child: Stack(children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: user['profilePhoto'] == 'assets/images/pfp.webp'
+                            ? Image.asset(
+                                user['profilePhoto'],
+                                fit: BoxFit.cover,
+                              )
+                            : Image.file(
+                                File(user['profilePhoto']),
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                      Align(
+                          alignment: Alignment.bottomRight,
+                          child: Icon(
+                            Icons.add_a_photo,
+                            size: 30,
+                          )),
+                    ]),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              CustomTextField(controller: nameController, text: user['name'],labelText: 'الاسم',),
-              const SizedBox(height: 24),
-              CustomTextField(
-                controller: phoneController,
-                text: user['phone'],
-                labelText: 'رقم الهاتف',
-              ),
-              const SizedBox(height: 24),
-              CustomTextField(
-                controller: whatsController,
-                text: user['whatsAppLink'],
-                labelText: 'رقم الواتساب',
-              ),
-              const SizedBox(height: 24),
-              CustomTextField(
-                controller: faceController,
-                text: user['facebookLink'],
-                labelText: 'رابط الفيسبوك',
-              ),
-              const SizedBox(height: 24),
-              CustomTextField(
-                controller: instaController,
-                text: user['istagramLink'],
-                labelText: 'رابط الانستاجرام',
-              ),
-              const SizedBox(height: 24),
-              CustomTextField(
-                controller: aboutController,
-                text: user['about'],
-                labelText: 'حول',
-                maxLines: 5,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    user['name'] = nameController.text.toString();
-                    user['phone'] = phoneController.text.toString();
-                    user['whatsAppLink'] = whatsController.text.toString();
-                    user['facebookLink'] = faceController.text.toString();
-                    user['istagramLink'] = instaController.text.toString();
-                    user['about'] = aboutController.text.toString();
-                    if(image != null) {
-                      user['profilePhoto'] = image!.path;
-                    }
-                    Hive.box('users').put(loggedUser, user);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Row(
-                          children: [
-                            Text(
-                              'تم حفظ البيانات بنجاح'
+                const SizedBox(height: 24),
+                CustomTextField(controller: nameController, text: user['name'],labelText: 'الاسم',),
+                const SizedBox(height: 24),
+                CustomTextField(
+                  controller: phoneController,
+                  text: user['phone'],
+                  labelText: 'رقم الهاتف',
+                ),
+                const SizedBox(height: 24),
+                CustomTextField(
+                  controller: whatsController,
+                  text: user['whatsAppLink'],
+                  labelText: 'رقم الواتساب',
+                ),
+                const SizedBox(height: 24),
+                CustomTextField(
+                  controller: faceController,
+                  text: user['facebookLink'],
+                  labelText: 'رابط الفيسبوك',
+                ),
+                const SizedBox(height: 24),
+                CustomTextField(
+                  controller: instaController,
+                  text: user['istagramLink'],
+                  labelText: 'رابط الانستاجرام',
+                ),
+                const SizedBox(height: 24),
+                CustomTextField(
+                  controller: aboutController,
+                  text: user['about'],
+                  labelText: 'حول',
+                  maxLines: 5,
+                ),
+                const SizedBox(height: 20),
+                Container(
+                    width: 100,
+                    height: 40,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff506169),
+                      shape: StadiumBorder(),
+
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        user['name'] = nameController.text.toString();
+                        user['phone'] = phoneController.text.toString();
+                        user['whatsAppLink'] = whatsController.text.toString();
+                        user['facebookLink'] = faceController.text.toString();
+                        user['istagramLink'] = instaController.text.toString();
+                        user['about'] = aboutController.text.toString();
+                        if(image != null) {
+                          user['profilePhoto'] = image!.path;
+                        }
+                        Hive.box('users').put(loggedUser, user);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Row(
+                              children: [
+                                Text(
+                                  'تم حفظ البيانات بنجاح'
+                                )
+                              ],
                             )
-                          ],
                         )
-                    )
-                    );
-                    Navigator.of(context).pop();
-                  });
-                },
-                child: Text('حفظ'),
-              ),
-              SizedBox(
-                height: 60,
-              )
-            ],
+                        );
+                        Navigator.of(context).pop();
+                      });
+                    },
+                    child: Text('حفظ', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -193,7 +206,7 @@ class CustomTextField  extends StatelessWidget{
       decoration: InputDecoration(
         labelText: labelText,
         filled: true,
-        fillColor: const Color(0xfff2f9fc),
+        fillColor: const Color(0xffffffff),
         disabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
               color: Color.fromRGBO(238, 238, 238, 1)),
@@ -201,12 +214,12 @@ class CustomTextField  extends StatelessWidget{
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-              color: Color.fromRGBO(238, 238, 238, 1)),
+              color: Color(0xff506169)),
           borderRadius: BorderRadius.circular(25),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-              color: Color.fromRGBO(238, 238, 238, 1)),
+              color: Color(0xff506169),),
           borderRadius: BorderRadius.circular(25),
         ),
       ),
@@ -226,18 +239,17 @@ AppBar buildAppBar(BuildContext context) {
     backgroundColor: Colors.transparent,
     elevation: 0,
     actions: [
-      ThemeSwitcher(
+     /* ThemeSwitcher(
         builder: (context) => IconButton(
           icon: Icon(icon),
           color: Colors.black,
           onPressed: () {
             final theme = isDarkMode ? MyThemes.lightTheme : MyThemes.darkTheme;
-
             final switcher = ThemeSwitcher.of(context)!;
             switcher.changeTheme(theme: theme);
           },
         ),
-      ),
+      ),*/
     ],
   );
 }
@@ -258,7 +270,7 @@ class ButtonWidget extends StatelessWidget {
           shape: StadiumBorder(),
           onPrimary: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-          backgroundColor: Color(0xff817c77)),
+          backgroundColor: Color(0xffCFD8DC)),
       child: Text(text),
       //onPressed: onClicked,
       onPressed: () {
@@ -284,8 +296,8 @@ class ContactWidget extends StatelessWidget {
           runSpacing: 5,
           children: [
             Container(
-              height: 46,
-              width: 46,
+              height: 60,
+              width: 60,
               decoration: BoxDecoration(
                   shape: BoxShape.circle, color: Color(0xffef4881)),
               child: Material(
@@ -300,14 +312,14 @@ class ContactWidget extends StatelessWidget {
                   child: Icon(
                     FontAwesomeIcons.instagram,
                     color: Colors.white,
-                    size: 35,
+                    size: 40,
                   ),
                 ),
               ),
             ),
             Container(
-              height: 46,
-              width: 46,
+              height: 60,
+              width: 60,
               decoration: BoxDecoration(
                   shape: BoxShape.circle, color: Color(0xff0576d4)),
               child: Material(
@@ -322,14 +334,14 @@ class ContactWidget extends StatelessWidget {
                   child: Icon(
                     FontAwesomeIcons.facebook,
                     color: Colors.white,
-                    size: 35,
+                    size: 45,
                   ),
                 ),
               ),
             ),
             Container(
-              height: 46,
-              width: 46,
+              height: 60,
+              width: 60,
               decoration:
               BoxDecoration(shape: BoxShape.circle, color: Colors.green),
               child: Material(
@@ -344,7 +356,7 @@ class ContactWidget extends StatelessWidget {
                   child: Icon(
                     FontAwesomeIcons.whatsapp,
                     color: Colors.white,
-                    size: 35,
+                    size: 45,
                   ),
                 ),
               ),

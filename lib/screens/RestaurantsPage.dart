@@ -12,10 +12,9 @@ class RestaurantsState extends State<RestaurantsPage>{
       padding: const EdgeInsets.all(4.0),
       child: Container(
         width: 200,
-        height: 250
-        ,
+        height: 250,
         decoration: BoxDecoration(
-          color: Color(0xFFE8E5E1),
+          color: Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Column(
@@ -57,7 +56,7 @@ class RestaurantsState extends State<RestaurantsPage>{
                 //margin: EdgeInsets.all(10),
                 child: IconButton(
                     iconSize: 50,
-                    icon: Icon(Icons.restaurant_menu,color: Color(0xff3c4a50),size: 30,),//Text("المنيو",style: TextStyle(fontSize: 20,color: Colors.black)),
+                    icon: Icon(Icons.restaurant_menu,color: Color(0xff506169),size: 30,),//Text("المنيو",style: TextStyle(fontSize: 20,color: Colors.black)),
                     onPressed: (){showModalBottomSheet(
                         backgroundColor: Colors.transparent,
                         context: context, builder:
@@ -84,7 +83,7 @@ class RestaurantsState extends State<RestaurantsPage>{
               //blurRadius: 20,
             ),
           ],*/
-          color: Color(0xFFE8E5E1),
+          color: Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Column(
@@ -126,7 +125,7 @@ class RestaurantsState extends State<RestaurantsPage>{
                 //margin: EdgeInsets.all(10),
                 child: IconButton(
                     iconSize: 50,
-                    icon: Icon(Icons.menu_book,color: Color(0xff3c4a50),size: 30,),//Text("المنيو",style: TextStyle(fontSize: 20,color: Colors.black)),
+                    icon: Icon(Icons.menu_book,color: Color(0xff506169),size: 30,),//Text("المنيو",style: TextStyle(fontSize: 20,color: Colors.black)),
                     onPressed: (){showModalBottomSheet(
                         backgroundColor: Colors.transparent,
                         context: context, builder:
@@ -144,13 +143,20 @@ class RestaurantsState extends State<RestaurantsPage>{
     return Directionality(
       textDirection: TextDirection.rtl,
       child: SafeArea(
-
         child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Color(0xffCFD8DC),
               elevation: 0,
+              title: Text(
+                "المطاعم والكافيهات",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
               leading: BackButton(
-                color: Colors.black54,
+                color: Colors.black,
                 onPressed: (){
                   Navigator.of(context).pop();
                 },
@@ -159,20 +165,19 @@ class RestaurantsState extends State<RestaurantsPage>{
             body:SingleChildScrollView(
 
               child: Container(
-                color: Color(0xff3c4a50),
                 height: 900,
+                color: Color(0xffCFD8DC),
                 child: Column(
                   children: [
-                    SizedBox(height: 40,),
+                    SizedBox(height: 15,),
                     Container(
                       alignment: Alignment.centerRight,
                       margin: EdgeInsets.only(right: 20),
-
                       child: Text(" المطاعم",
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w900,
-                            color: Color(0xFFE8E5E1)
+                            color: Colors.black
                         ),
                       ),
                     ),
@@ -190,7 +195,7 @@ class RestaurantsState extends State<RestaurantsPage>{
 
                       ),
                     ),
-                    SizedBox(height: 40,),
+                    SizedBox(height: 15,),
                     Container(
                       margin: EdgeInsets.only(right: 20),
                       alignment: Alignment.centerRight,
@@ -198,7 +203,7 @@ class RestaurantsState extends State<RestaurantsPage>{
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w900,
-                            color: Color(0xFFE8E5E1)
+                            color: Colors.black,
                         ),
                       ),
                     ),

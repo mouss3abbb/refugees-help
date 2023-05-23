@@ -36,7 +36,7 @@ List<data> ca=[
   data(image: 'images/55.jpg',rate:5.0,name: 'صيدلية العزبي '),
   data(image: 'images/66.jpg',rate: 5.0,name: 'صيدلية والي '),];
 List<data2> ca2=[
-  data2(image: 'images/11.jpg',name: 'مستشفى السادات التخصصي',mapp: 'https://goo.gl/maps/sZwxSYtvh89PfsJ88'),
+  data2(image: 'images/11.jpg',name: 'السادات التخصصي',mapp: 'https://goo.gl/maps/sZwxSYtvh89PfsJ88'),
   data2(image: 'images/22.jpg',name: 'مستشفى دار الشفاء',mapp: 'https://goo.gl/maps/SsqAUFppEyQksUo78'),
   data2(image: 'images/33.jpg',name: 'مستشفى لايف هيلث كير',mapp: 'https://goo.gl/maps/dPD5GJgQqBf4pgA6A'),
   data2(image: 'images/77.jpg',name: 'مركز سمارت كير ',mapp: 'https://goo.gl/maps/HUr71L7DBEE8nF4v9'),
@@ -48,6 +48,14 @@ List<data2> ca2=[
 
 
 ];
+urlLaunch(data2 d2) async{
+  String url='${d2.mapp}';
+  if(await canLaunch(url)){
+    await launch(url);
+  }else{
+    throw "Could not launch $url";
+  }
+}
 class MyHomePage extends StatefulWidget {
    MyHomePage({Key? key}) : super(key: key);
 
@@ -122,8 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             radius: 4,
                             dotHeight: 10.0,
                             dotWidth: 10.0,
-                            dotColor: Colors.black,
-                            activeDotColor: Colors.white70,
+                            dotColor: Color( 0xffCFD8DC),
+                            activeDotColor: Color(0xff506169),
 
                           ),),
                       )
@@ -131,8 +139,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
 
+                SizedBox(height: 10,),
                 Divider(
-                  thickness: 1,
+                  thickness: 1.5,
+                  color: Color(0xff506169),
                 ),
                 SizedBox(height: 10,),
                  Column(
@@ -146,32 +156,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
                 SizedBox(height: 5,),
-              /* Container(
-                  //width: double.maxFinite,
-                  //height: 60,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: DefaultTabController(length: 2,
-                      child: TabBar(
-                        isScrollable: true,
-                        indicatorColor: Colors.black,
-                        indicatorWeight: 3.5,
-                        labelColor: Colors.black,
-                        unselectedLabelColor: Colors.black45,
-                        tabs: [
-                          Tab(child:Text( 'المستشفيات',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),),
-                          Tab(child:Text( 'الصيدليات',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),*/
-
-
                 SizedBox(height: 20,),
                 SingleChildScrollView(
                   child: Container(
-                    height: 1070,
+                    height: 1450,
                     margin: EdgeInsets.all(5),
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -269,9 +257,9 @@ Widget newList(data2 d2){
     width: double.infinity,
     margin: EdgeInsets.only(bottom: 20),
     padding: EdgeInsets.all(10.0),
-    height: 160,
+    height: 190,
     decoration: BoxDecoration(
-      color: Color(0XFF92918D),
+      color: Color(0xffCFD8DC),
      // color: Colors.black,
       borderRadius: BorderRadius.circular(26),
     ),
@@ -290,75 +278,51 @@ Widget newList(data2 d2){
         SizedBox(width: 10,),
         Flexible(
           // flex:1 ,
-            child: Column(children: [
-            Text('${d2.name}',style: TextStyle(
-              color: Colors.white,fontWeight: FontWeight.w900,
-              fontSize: 20
-            ),),
+            child: Center(
+              child: Column(children: [
+              Text('${d2.name}',style: TextStyle(
+                color: Colors.black,fontWeight: FontWeight.w900,
+                fontSize: 21
+              ),),
+                SizedBox(height: 20,),
 
-              /*Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: Icon(
-                      Icons.location_on,
-                      color: Colors.black,
-                      size: 40,
-                    ),
+                Material(
+                  clipBehavior: Clip.hardEdge,
+                  shape: CircleBorder(),
+                  color: Colors.transparent,
+                  child: InkResponse(
+                    splashColor: Colors.black12,
+                    focusColor: Colors.black12,
+                    hoverColor: Colors.black,
+                    highlightColor: Colors.black12,
                     onTap: (){
                       urlLaunch(d2);
                     },
 
-                  ),
-                ],
-              ),*/
-              SizedBox(height: 20,),
-
-              Material(
-                clipBehavior: Clip.hardEdge,
-                shape: CircleBorder(),
-                color: Colors.transparent,
-                child: InkResponse(
-                  splashColor: Colors.black12,
-                  focusColor: Colors.black12,
-                  hoverColor: Colors.black,
-                  highlightColor: Colors.black12,
-                  onTap: (){
-                    urlLaunch(d2);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.all(3),
-                    width: 46,
-                    height:50,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-
-                      borderRadius: BorderRadius.circular(40.0),
-                      image: DecorationImage(
-                        image: AssetImage('images/loc.jpg'),
-                        //fit: BoxFit.fitHeight,
-
+                    child: Container(
+                      margin: EdgeInsets.all(3),
+                      width: 46,
+                      height:50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(40.0),
+                        image: DecorationImage(
+                          image: AssetImage('images/loc.jpg'),
+                          //fit: BoxFit.fitHeight,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
         ],),
+            ),
         ),
       ],
     ),
   );
 }
 
-urlLaunch(data2 d2) async{
-  String url='${d2.mapp}';
-  if(await canLaunch(url)){
-    await launch(url);
-  }else{
-    throw "Could not launch $url";
-  }
-}
+
 
 
 Widget card(data d,BuildContext context){
@@ -416,100 +380,3 @@ Widget card(data d,BuildContext context){
   );
 
 }
-
-
-
-/* Column(
-        children: [
-
-          Container(
-              width: 300,
-              margin: EdgeInsets.all(10),
-              child:ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset("${d.image}",
-                ),
-              )
-          ),
-        //  SizedBox(height: 2,),
-
-          Row(
-            children: [
-              Text('${d.rate}',style: TextStyle(fontSize: 30,color: Colors.amber),),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(width: 10,),
-              Text('${d.name}',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-            ],
-          )
-
-        ],
-      ),*/
-
-
-
-/*  Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0),
-               gradient: LinearGradient(
-                 colors: [Colors.transparent,Colors.black],
-                 begin: Alignment.topCenter,
-                 end: Alignment.bottomCenter
-               )
-            ) ,
-
-
-        ),*/
-
-
-
-/*Column(
-      children: [
-        Container(
-          width: 250,
-          height: 400,
-          decoration: BoxDecoration(
-
-             boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.4),
-                  spreadRadius: 1,
-                  blurRadius: 5,
-                ),
-              ],
-            color: Color(0xFFE8E5E1),
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child:Column(
-            children: [
-
-              Container(
-                  width: 300,
-                  margin: EdgeInsets.all(10),
-                  child:ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset("${d.image}",
-                    ),
-                  )
-              ),
-              //  SizedBox(height: 2,),
-
-              Row(
-                children: [
-                  Text('${d.rate}',style: TextStyle(fontSize: 30,color: Colors.amber),),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(width: 10,),
-                  Text('${d.name}',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                ],
-              )
-
-            ],
-          ) ,
-        ),
-      ],
-    )*/

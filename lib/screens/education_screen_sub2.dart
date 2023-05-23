@@ -19,7 +19,7 @@ class data{
 }
 
 List<data> college=[
-  data( collegeName: 'كلية الحاسبات والذكاء الاصطناعي',
+  data( collegeName: 'حاسبات وذكاء اصطناعي',
     collegeNameE: 'Faculty of Computers and Artificial Intelligence',
     collegeImg: 'assets/images/fcai.png',
     collegeURL: 'http://fcai.usc.edu.eg/',
@@ -106,13 +106,13 @@ class _MySub2 extends State<MySub2>{
             ),
           ),
           leading: BackButton(
-            color: Colors.black54,
+            color: Colors.black,
             onPressed: (){
               Navigator.of(context).pop();
             },
           ),
         ),
-        backgroundColor: Color(0xffEFECE7),
+        backgroundColor: Color(0xffffffff),
         body: Container(
           margin: EdgeInsets.all(10),
           child: ListView.separated(
@@ -129,7 +129,7 @@ Widget buildCount(data d,BuildContext context){
 
   return SingleChildScrollView(
     child:
-    Card(
+   /* Card(
       //color: Color(0xffCCC8BF),
       color: Color(0xff3c4a50),
       shape: RoundedRectangleBorder(
@@ -159,6 +159,64 @@ Widget buildCount(data d,BuildContext context){
             //_navigateToNextScreen(context);
           )
       ),
+    ),*/
+
+    Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      height: 190,
+      decoration: BoxDecoration(
+        color: Color(0xffCFD8DC),
+        // color: Colors.black,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(
+        children: [
+          Flexible(child: Container(
+            height: 140,
+            child:  CircleAvatar(
+              radius: 70, // Image radius
+              backgroundImage: AssetImage("${d.collegeImg}"),
+              backgroundColor: Colors.white,
+            ),
+          )),
+          SizedBox(width: 5,),
+          Flexible(
+            // flex:1 ,
+            child: Center(
+              child: Column(children: [
+                SizedBox(height: 25,),
+                Text('${d.collegeName}',style: TextStyle(
+                    color: Colors.black,fontWeight: FontWeight.w900,
+                    fontSize: 21
+                ),),
+                SizedBox(height: 30,),
+                Container(
+                  width: 130,
+                  height: 40,
+                  child: ElevatedButton(
+                    child: Text('تفاصيل',style: TextStyle(fontSize:18,
+                      color:Colors.white,
+                      fontWeight: FontWeight.w900,),),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black, backgroundColor: Color(0xff506169),
+                      shape: StadiumBorder(),
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                          backgroundColor: Colors.transparent,
+                          context: context, builder:
+                          (context)=>d.collegeScreen);
+                      //getindx(d.schoolName);
+                    },
+                    //_navigateToNextScreen(context);
+                  ),
+                ),
+              ],),
+            ),
+          ),
+        ],
+      ),
     ),
 
   );
@@ -175,25 +233,24 @@ class details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFFE8E5E1),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
+    return Container(
 
-          ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+
         ),
-        child: Scaffold(
+      ),
+      child: Scaffold(
+        backgroundColor: Color(0xffffffff).withOpacity(0),
 
-          body: Container(
+        body: Container(
 
-            margin: EdgeInsets.all(10),
-            child:buildCount2(college[dataIndex], context),
+          margin: EdgeInsets.all(10),
+          child:buildCount2(college[dataIndex], context),
 
-          ),
         ),
       ),
     );
@@ -202,23 +259,38 @@ class details extends StatelessWidget {
 
 Widget buildCount2(data d,BuildContext context){
 
-  return SingleChildScrollView(
+  return Container(
+
     child: Column(
       children: [
-        SizedBox(height: 10,),
+
+        SizedBox(height: 5,),
         Container(
             height: 5,
             width: 60,
-            color: Color(0xff9cb5bc).withOpacity(0.99)
+            color: Color(0xff506169)
         ),
-        ListTile (
-          leading: CircleAvatar(
-            //  radius: 48, // Image radius
-            backgroundColor: Colors.white,
-            backgroundImage: AssetImage("${d.collegeImg}"),
+       SizedBox(height: 10,),
+
+        Card(
+
+          color: Color(0xff3c4a50),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+
           ),
-          title:  Text("${d.collegeName}\n ${d.collegeNameE}",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14,color: Colors.black),),
+          child: Center(
+            child: ListTile (
+              leading: Flexible(child: Container(
+                child:  CircleAvatar(
+                  radius: 30, // Image radius
+                  backgroundImage: AssetImage("${d.collegeImg}"),
+                  backgroundColor: Colors.white,
+                ),
+              )),
+              title:  Text("${d.collegeName}\n ${d.collegeNameE}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white),),
+            ),
+          ),
         ),
         SizedBox(height: 20,),
         SizedBox(height: 40,),
@@ -228,14 +300,14 @@ Widget buildCount2(data d,BuildContext context){
                 onPressed: (){
                   //action coe when button is pressed
                 },
-                icon: Icon(Icons.school),
+                icon: Icon(Icons.school,color: Color(0xffb93232),),
               ),
               Text("${d.collegeURL}"),
 
             ]
         ),
         SizedBox(height: 100,),
-        Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,),),
+        Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26,),),
 
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -245,13 +317,13 @@ Widget buildCount2(data d,BuildContext context){
 
                   //action coe when button is pressed
                 },
-                icon: Icon(Icons.phone_enabled),
+                icon: Icon(Icons.phone_enabled,color: Colors.green,size: 35,),
               ),
               IconButton(
                 onPressed: (){
                   //action coe when button is pressed
                 },
-                icon: Icon(Icons.message),
+                icon: Icon(Icons.message, color: Colors.blue,size: 35,),
               ),
               //Text("${d.phone}"),
             ]
