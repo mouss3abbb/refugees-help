@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:refugees_help/screens/login_screen.dart';
+import 'package:refugees_help/screens/main_screen.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
 import 'package:refugees_help/screens/profile_screen.dart';
 import 'package:get/get.dart';
@@ -16,8 +17,6 @@ Future main() async {
   await Hive.openBox('users');
   runApp(const MyApp());
 }
-
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -36,8 +35,7 @@ class MyApp extends StatelessWidget {
         Locale('ar'),
       ],
       theme: ThemeData(fontFamily: 'Massir'),
-      home: Login(),
+      home: Splash(),
     );
   }
 }
-

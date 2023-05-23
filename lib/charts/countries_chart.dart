@@ -71,7 +71,7 @@ class _CountriesPieChart extends State {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: Colors.lightBlueAccent[300],
+            color: Color(0XFF8BA0D4),
             value: 40,
             title: '40%',
             radius: radius,
@@ -89,7 +89,7 @@ class _CountriesPieChart extends State {
           );
         case 1:
           return PieChartSectionData(
-            color: Colors.orangeAccent[200],
+            color: Color(0XFF4D5D90),
             value: 30,
             title: '30%',
             radius: radius,
@@ -107,7 +107,7 @@ class _CountriesPieChart extends State {
           );
         case 2:
           return PieChartSectionData(
-            color: Colors.purple[400],
+            color: Color(0XFF3A4159),
             value: 16,
             title: '16%',
             radius: radius,
@@ -125,7 +125,7 @@ class _CountriesPieChart extends State {
           );
         case 3:
           return PieChartSectionData(
-            color: Colors.green[300],
+            color: Color(0XFF8D93A9),
             value: 15,
             title: '15%',
             radius: radius,

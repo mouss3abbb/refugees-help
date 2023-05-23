@@ -40,7 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     'https://assets3.lottiefiles.com/private_files/lf30_TBKozE.json'
                 ),
                 buildPage(
-                    Colors.amberAccent[100]!,
+                    Color(0xfffff2bb)!,
                     [
                       '',
                   'التعليم',
@@ -121,6 +121,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ]
                 )
             ),
+            SizedBox(height: 40),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:controller.currentPage != 3? [
@@ -146,7 +147,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                     child: Text('تخطي'),
                   ),
-                ]:[
+                ]: [
                   OutlinedButton(
                       onPressed: (){
                         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Login()));
@@ -155,7 +156,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         fixedSize: MaterialStatePropertyAll(Size(120,40)),
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(25)))),
                         foregroundColor: MaterialStatePropertyAll(Colors.white),
-                        backgroundColor: MaterialStatePropertyAll(Colors.blueAccent[200]),
+                        backgroundColor: MaterialStatePropertyAll(Color(0xff506169),),
                       ),
                       child: Text('ابدأ الاستخدام!')
                   ),

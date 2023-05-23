@@ -118,7 +118,7 @@ class _CitiesPieChart extends State {
                       height: 4,
                     ),
                     Indicator(
-                      color: Colors.orangeAccent,
+                      color: Color(0XFF8867DC),
                       text: 'أكتوبر',
                       isSquare: true,
                     ),
@@ -134,7 +134,7 @@ class _CitiesPieChart extends State {
                       height: 4,
                     ),
                     Indicator(
-                      color: Colors.green,
+                      color: Color(0xff67ADDC),
                       text: 'الزقازيق',
                       isSquare: true,
                     ),
@@ -176,7 +176,7 @@ class _CitiesPieChart extends State {
           );
         case 1:
           return PieChartSectionData(
-            color: Colors.orangeAccent,
+            color: Color(0XFFA367DC),
             value: 30,
             title: '30%',
             radius: radius,
@@ -202,7 +202,7 @@ class _CitiesPieChart extends State {
           );
         case 3:
           return PieChartSectionData(
-            color: Colors.green,
+            color: Color(0XFF66B2D6),
             value: 15,
             title: '15%',
             radius: radius,

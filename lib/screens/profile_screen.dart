@@ -17,6 +17,7 @@ class ProfileScreen extends StatefulWidget {
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 class _ProfileScreenState extends State<ProfileScreen> {
+  var selectedPage = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -24,53 +25,137 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     });
     return Scaffold(
-        appBar: buildAppBar(context),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: (){
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => EditProfilePage()),
-                  );
-                },
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width/3,
-                  height: MediaQuery.of(context).size.width/3,
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                        child: user['profilePhoto'] == 'assets/images/pfp.webp' ? Image.asset(user['profilePhoto'],fit: BoxFit.cover,)
-                            : Image.file(File(user['profilePhoto']),fit: BoxFit.cover,),
-                    ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                          child: Icon(Icons.add_a_photo,size: 30,)
-                      ),
-                    ]
-                  ),
-                ),
-              ),
-              // ProfileWidget(
-              //   imagePath: user['profilePhoto'],
-              //   onClicked: () {
-              //     Navigator.of(context).push(
-              //       MaterialPageRoute(builder: (context) => EditProfilePage()),
-              //     );
-              //   },
-              // ),
-              const SizedBox(height: 24),
-              buildName(user),
-              const SizedBox(height: 25),
-              // Center(child: buildUpgradeButton()),
-              // const SizedBox(height: 24),
-              ContactWidget(),
-              const SizedBox(height: 20),
-              buildAbout(user),
-            ],
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            "الملف الشخصي",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          leading: BackButton(
+            color: Colors.black,
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
           ),
         ),
+        body: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => EditProfilePage()),
+                    );
+                  },
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width/3,
+                    height: MediaQuery.of(context).size.width/3,
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                          child: user['profilePhoto'] == 'assets/images/pfp.webp' ? Image.asset(user['profilePhoto'],fit: BoxFit.cover,)
+                              : Image.file(File(user['profilePhoto']),fit: BoxFit.cover,),
+                      ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                            child: Icon(Icons.add_a_photo,size: 30,)
+                        ),
+                      ]
+                    ),
+                  ),
+                ),
+                // ProfileWidget(
+                //   imagePath: user['profilePhoto'],
+                //   onClicked: () {
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(builder: (context) => EditProfilePage()),
+                //     );
+                //   },
+                // ),
+                const SizedBox(height: 24),
+                buildName(user),
+                const SizedBox(height: 25),
+                // Center(child: buildUpgradeButton()),
+                // const SizedBox(height: 24),
+                ContactWidget(),
+                const SizedBox(height: 20),
+                buildAbout(user),
+              ],
+            ),
+          ),
+        bottomNavigationBar: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 2),
+          margin: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
+            // border: Border.all(
+            //     color: const Color(0xff3c4a50).withOpacity(0.9), width: 3),
+            color: Colors.transparent,
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xff3c4a50).withOpacity(0.7),
+                spreadRadius: 5,
+                blurRadius: 0,
+                offset: const Offset(0, 0),
+              ),
+            ],
+          ),
+          child: BlurEffect(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        selectedPage = 0;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.bookmarks_outlined,
+                      size: 30,
+                      color: Color(selectedPage == 0 ? 0xFFE8E5E1 : 0xffD4D7DEFF ),
+                    )),
+                GestureDetector(
+                  onTap: (){
+                    setState(() {
+
+                    });
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+                  },
+                  child: CircleAvatar(
+                    radius: 20,
+                    child: ClipOval(
+                      child: user['profilePhoto'] == 'assets/images/pfp.webp' ? Image.asset(user['profilePhoto'],fit: BoxFit.cover,)
+                          : Image.file(File(user['profilePhoto']),fit: BoxFit.cover,),
+                    ),
+
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const MainScreen()),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.home_filled,
+                      size: 30,
+                      color: Color(selectedPage == 1 ?  0xFFE8E5E1:  0xffD4D7DEFF ),
+                    )),
+              ],
+            ),
+          ),
+        )
     );
   }
 
@@ -94,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Text(
             user['country'],
             style:
-            TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            TextStyle(color: Colors.black54,fontSize: 16),
           ),
         ],
       ),
@@ -106,7 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           InkWell(
             child: Text(
               user['phone'],
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: Colors.black54, fontSize: 16),
             ),
             onTap: () {
               calling();
@@ -122,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           InkWell(
             child: Text(
               loggedUser,
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: Colors.black54,fontSize: 16),
             ),
             onTap: () {
               email();
@@ -133,10 +218,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ],
   );
 
-  Widget buildUpgradeButton() => ButtonWidget(
-    text: 'تعديل الملف الشخصي',
-    onClicked: () {},
-  );
+  // Widget buildUpgradeButton() => ButtonWidget(
+  //   text: 'تعديل الملف الشخصي',
+  //   onClicked: () {},
+  // );
 
   Widget buildAbout(user) => Container(
     padding: EdgeInsets.symmetric(horizontal: 48),
@@ -150,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const SizedBox(height: 16),
         Text(
           user['about'],
-          style: TextStyle(fontSize: 16, height: 1.4),
+          style: TextStyle(fontSize: 16, height: 1.4,color: Colors.black),
         ),
       ],
     ),

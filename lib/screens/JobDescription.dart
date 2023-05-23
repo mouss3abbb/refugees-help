@@ -29,9 +29,9 @@ class _JobDescriptionState extends State<JobDescription> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(25),
+      padding: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
-        color: Color(0xFFE8E5E1),
+        color: Color(0xFFFFFFFF),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
@@ -45,7 +45,7 @@ class _JobDescriptionState extends State<JobDescription> {
             Container(
               height: 5,
               width: 60,
-                color: Color(0xff9cb5bc).withOpacity(0.99)
+                color: Color(0xff506169).withOpacity(0.99)
             ),
             const SizedBox(height: 30,),
             Column(
@@ -62,7 +62,7 @@ class _JobDescriptionState extends State<JobDescription> {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                color: Colors.grey.withOpacity(0.4)
+                                color: Color(0xffCFD8DC)
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(30),
@@ -85,7 +85,7 @@ class _JobDescriptionState extends State<JobDescription> {
                         }, icon: Icon(
                             Icons.bookmark,
                             size: 30,
-                            color: Color(isMark?  0xff3c4a50:  0xff9cb5bc ),
+                            color: Color(isMark?  0xff506169:  0xff9cb5bc ),
 
                         )),
 
@@ -96,25 +96,25 @@ class _JobDescriptionState extends State<JobDescription> {
               ],
             ),
             const SizedBox(height: 15,),
-
             Container(
               width: 200,
-              height: 50,
-
-              padding: const EdgeInsets.all(8),
+              height: 60,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color(0xff9cb5bc).withOpacity(0.5)
+                  color:Color(0xffCFD8DC),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("تفاصيل الشغل ", style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                  ),),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 0),
+                    child:  Text("تفاصيل الشغل", style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                    ),),
+                  ),
                 ],
               ),
             ),
@@ -125,7 +125,7 @@ class _JobDescriptionState extends State<JobDescription> {
 
                 children: [
                   Text(details, style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 
@@ -135,26 +135,26 @@ class _JobDescriptionState extends State<JobDescription> {
                 ],
               ),
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(height: 8,),
             Container(
               width: 200,
-              height: 50,
-
-              padding: const EdgeInsets.all(8),
+              height: 60,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xff9cb5bc).withOpacity(0.5)
+                borderRadius: BorderRadius.circular(10),
+                color:Color(0xffCFD8DC),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text('المتطلبات :', style: TextStyle(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 0),
+                    child:  Text("المتطلبات", style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
-                  ),)
-
+                    ),),
+                  ),
                 ],
               ),
             ),
@@ -164,37 +164,37 @@ class _JobDescriptionState extends State<JobDescription> {
               child: Row(
                 children: [
                   Text(requirements, style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                   ),)
                 ],
               ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 5,),
             Container(
               width: 200,
-              height: 50,
-
-              padding: const EdgeInsets.all(8),
+              height: 60,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xff9cb5bc).withOpacity(0.5)
+                borderRadius: BorderRadius.circular(10),
+                color:Color(0xffCFD8DC),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text('.. تواصل معنا', style: TextStyle(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 0),
+                    child:  Text("تواصل معنا", style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
-                  ),)
-
+                    ),),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 20,),
             Container(
              // margin: EdgeInsets.symmetric(vertical: 25),
               height: 45,

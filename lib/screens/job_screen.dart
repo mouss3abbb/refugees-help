@@ -106,17 +106,17 @@ class MyHomePage extends StatelessWidget {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.white70,
+              color: Colors.black,
             ),
           ),
           leading: BackButton(
-            color: Colors.white70,
+            color: Colors.black,
             onPressed: (){
               Navigator.of(context).pop();
             },
           ),
         ),
-        backgroundColor: Color(0xFF36454C),
+        backgroundColor: Color(0xffCFD8DC),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(top: 25),
@@ -126,7 +126,7 @@ class MyHomePage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: Text("اختر ما يناسبك", style: TextStyle(
-                    color: Colors.white70,
+                    color: Colors.black,
                     fontSize: 22,
                   ),),
                 ),
@@ -134,7 +134,7 @@ class MyHomePage extends StatelessWidget {
                 SizedBox(height:5,),
                 SingleChildScrollView(
                   child: Container(
-                    height: 600,
+                    height: 650,
                     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                     child: ListView.builder(
                       itemBuilder: (context,index)=> buildCount(context,index),
@@ -167,7 +167,7 @@ Widget buildCount(BuildContext context, int index){
       width: 250,
       height: 400,
       decoration: BoxDecoration(
-        color: Color(0xFFE8E5E1),
+        color: Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Column(
@@ -202,12 +202,12 @@ Widget buildCount(BuildContext context, int index){
             child: ElevatedButton(
               child: Text('التفاصيل',style: TextStyle(
                 fontWeight: FontWeight.w900,
-                color: Colors.black54
+                color: Colors.white
               ),),
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff9cb5bc),
+                  backgroundColor: Color(0xff506169),
                   shape: StadiumBorder(),
-                  side: BorderSide(color: Color(0xff9cb5bc))
+                  side: BorderSide(color: Color(0xff506169))
               ),
               onPressed: (){
                 showModalBottomSheet(

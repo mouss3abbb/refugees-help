@@ -1,16 +1,21 @@
 import 'dart:developer';
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_google_street_view/flutter_google_street_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:refugees_help/screens/education_screen.dart';
 import 'package:refugees_help/screens/job_screen.dart';
 import 'package:refugees_help/screens/Service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:refugees_help/screens/profile_screen.dart';
 import 'dart:ui';
 
+import '../main.dart';
 import 'RestaurantsPage.dart';
-
+import 'main_screen.dart';
+import 'dart:io';
 class data {
   @required
   String? title;
@@ -50,6 +55,13 @@ class city_screen extends StatefulWidget {
 
 class _city_screen extends State<city_screen> {
   var selectedPage = 1;
+  void initState() {
+    super.initState();
+    if(user['profilePhoto']==null){
+      user['profilePhoto'] = 'assets/images/pfp.webp';
+    }
+  }
+  var user = Hive.box('users').get(loggedUser);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -66,13 +78,13 @@ class _city_screen extends State<city_screen> {
             ),
           ),
           leading: BackButton(
-            color: Colors.black54,
+            color: Colors.black,
             onPressed: (){
               Navigator.of(context).pop();
             },
           ),
         ),
-          backgroundColor: const Color.fromARGB(255, 212, 215, 222),
+          backgroundColor: Colors.white,
           extendBody: true,
           body: const main_city_screen(),
           bottomNavigationBar: Container(
@@ -81,12 +93,12 @@ class _city_screen extends State<city_screen> {
             margin: const EdgeInsets.fromLTRB(24, 0, 24, 24),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(50)),
-              border: Border.all(
-                  color: const Color(0xff3c4a50).withOpacity(0.9), width: 3),
+              // border: Border.all(
+              //     color: const Color(0xff3c4a50).withOpacity(0.9), width: 3),
               color: Colors.transparent,
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xff3c4a50),
+                  color: const Color(0xff3c4a50).withOpacity(0.7),
                   spreadRadius: 5,
                   blurRadius: 0,
                   offset: const Offset(0, 0),
@@ -109,22 +121,33 @@ class _city_screen extends State<city_screen> {
                         size: 30,
                         color: Color(selectedPage == 0 ? 0xFFE8E5E1 : 0xffD4D7DEFF ),
                       )),
-                  CircleAvatar(
-                    radius: 20,
-                    child: ClipOval(
-                      child: Image.asset('images/pfp.jpeg', scale: 1),
+                 GestureDetector(
+                    onTap: (){
+                      setState(() {
+
+                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+                    },
+                    child: CircleAvatar(
+                      radius: 20,
+                      child: ClipOval(
+                        child: user['profilePhoto'] == 'assets/images/pfp.webp' ? Image.asset(user['profilePhoto'],fit: BoxFit.cover,)
+                            : Image.file(File(user['profilePhoto']),fit: BoxFit.cover,),
+                      ),
+
                     ),
                   ),
                   IconButton(
                       onPressed: () {
-                        setState(() {
-                          selectedPage = 1;
-                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MainScreen()),
+                        );
                       },
                       icon: Icon(
                         Icons.home_filled,
                         size: 30,
-                        color: Color(selectedPage == 1 ?  0xFFE8E5E1 :  0xffD4D7DEFF ),
+                        color: Color(selectedPage == 1 ?  0xFFE8E5E1:  0xffD4D7DEFF ),
                       )),
                 ],
               ),

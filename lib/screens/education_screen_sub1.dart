@@ -29,7 +29,7 @@ class data{
 }
 
 List<data> school=[
-  data( schoolName: 'مدرسة المتفوقين للعلوم والتكنولوجيا',
+  data( schoolName: 'المتفوقين للعلوم والتكنولوجيا',
     schoolNameE: 'Sadat STEM high School',
     schoolImg: 'assets/images/stem.jfif',
     schoolType:'حكومية',
@@ -39,7 +39,7 @@ List<data> school=[
     phone:'11111111111',
     schoolScreen:details(dataIndex: 0),
   ),
-  data( schoolName: 'مدارس الجيل الجديد الدولية',
+  data( schoolName: 'الجيل الجديد الدولية',
     schoolNameE: 'New Generation International School',
     schoolImg: 'assets/images/ngis.png',
     schoolType:'دولية',
@@ -49,7 +49,7 @@ List<data> school=[
     phone:'0155 555 2082',
     schoolScreen:details(dataIndex: 1),
   ),
-  data( schoolName: 'مدارس النيل المصرية',
+  data( schoolName: 'النيل المصرية',
     schoolNameE:'Nile Egyptian Schools',
     schoolImg: 'assets/images/nile.jfif',
     schoolType:'دولية',
@@ -59,7 +59,7 @@ List<data> school=[
     phone:'01275931480',
     schoolScreen:details(dataIndex: 2),
   ),
-  data( schoolName: 'مدرسة Oxford college ',
+  data( schoolName: 'Oxford college ',
     schoolNameE:'Oxford college School',
     schoolImg: 'assets/images/oxford.jfif',
     schoolType:'دولية',
@@ -69,7 +69,7 @@ List<data> school=[
     phone:'01200512557',
     schoolScreen:details(dataIndex: 3),
   ),
-  data( schoolName: 'مدارس المستقبل الدولية',
+  data( schoolName: 'المستقبل الدولية',
     schoolNameE:'Future International School',
     schoolImg: 'assets/images/future.jfif',
     schoolType:'دولية',
@@ -79,7 +79,7 @@ List<data> school=[
     phone:'0121 144 4464',
     schoolScreen:details(dataIndex: 4),
   ),
-  data( schoolName: 'مدرسة كامبريدج للغات',
+  data( schoolName: 'كامبريدج للغات',
     schoolNameE:'Cambridge Languages School',
     schoolImg: 'assets/images/c.jpg',
     schoolType:'دولية',
@@ -89,7 +89,7 @@ List<data> school=[
     phone:'0155 628 8008',
     schoolScreen:details(dataIndex: 5),
   ),
-  data( schoolName:'مدرسة سارة سعد نواره',
+  data( schoolName:'سارة سعد نواره',
     schoolNameE: 'Sara Saad Nawara School',
     schoolImg: 'assets/images/ss.jpg',
     schoolType:'حكومية',
@@ -99,7 +99,7 @@ List<data> school=[
     phone:'01234567890',
     schoolScreen:details(dataIndex: 6),
   ),
-  data( schoolName: 'مدرسة السادات الرسمية لغات',
+  data( schoolName: 'السادات الرسمية لغات',
     schoolNameE:'Sadat Experimental School of Languages',
     schoolImg: 'assets/images/ministry.png',
     schoolType:'حكومية',
@@ -109,7 +109,7 @@ List<data> school=[
     phone:'2610001',
     schoolScreen:details(dataIndex: 7),
   ),
-  data( schoolName:'مدرسة السادات الثانويه للبنات',
+  data( schoolName:'السادات الثانويه للبنات',
     schoolNameE: 'Sadat City High School for girls',
     schoolImg: 'assets/images/ministry.png',
     schoolType:'حكومية',
@@ -119,7 +119,7 @@ List<data> school=[
     phone:'048 3558221',
     schoolScreen:details(dataIndex: 8),
   ),
-  data( schoolName:'مدرسه الفاروق الثانويه للبنين',
+  data( schoolName:'الفاروق الثانويه للبنين',
     schoolNameE: 'Alfarouk High School for boys',
     schoolImg: 'assets/images/ministry.png',
     schoolType:'حكومية',
@@ -129,7 +129,7 @@ List<data> school=[
     phone:'048 2610006',
     schoolScreen:details(dataIndex: 9),
   ),
-  data( schoolName:'مدرسه القادسية الخاصة',
+  data( schoolName:'القادسية الخاصة',
     schoolNameE: 'Al-Qadisiyah school',
     schoolImg: 'assets/images/ministry.png',
     schoolType:'خاصة',
@@ -170,13 +170,13 @@ class _MySub1 extends State<MySub1> {
             ),
           ),
           leading: BackButton(
-            color: Colors.black54,
+            color: Colors.black,
             onPressed: (){
               Navigator.of(context).pop();
             },
           ),
         ),
-        backgroundColor: Color(0xffEFECE7),
+        backgroundColor: Color(0xffffffff),
         body: Container(
           margin: EdgeInsets.all(10),
           child: ListView.separated(
@@ -217,14 +217,7 @@ Widget buildCount(data d,BuildContext context){
     child: Column(
 
       children:[
-        //decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),),
-        Card(
-          //color: Color(0xffCCC8BF),
-          color: Color(0xff3c4a50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          child: ListTile (
+        /* ListTile (
             leading: CircleAvatar(
               radius: 25, // Image radius
               backgroundImage: AssetImage("${d.schoolImg}"),
@@ -248,8 +241,65 @@ Widget buildCount(data d,BuildContext context){
               },
               //_navigateToNextScreen(context);
             ),
+          ),*/
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            height: 190,
+            decoration: BoxDecoration(
+              color: Color(0xffCFD8DC),
+              // color: Colors.black,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Row(
+              children: [
+                Flexible(child: Container(
+                  height: 140,
+                  child:  CircleAvatar(
+                        radius: 70, // Image radius
+                        backgroundImage: AssetImage("${d.schoolImg}"),
+                        backgroundColor: Colors.white,
+                      ),
+                )),
+                SizedBox(width: 5,),
+                Flexible(
+                  // flex:1 ,
+                  child: Center(
+                    child: Column(children: [
+                      SizedBox(height: 25,),
+                      Text('${d.schoolName}',style: TextStyle(
+                          color: Colors.black,fontWeight: FontWeight.w900,
+                          fontSize: 21
+                      ),),
+                      SizedBox(height: 30,),
+                      Container(
+                        width: 130,
+                        height: 40,
+                        child: ElevatedButton(
+                          child: Text('تفاصيل',style: TextStyle(fontSize:18,
+                            color:Colors.white,
+                            fontWeight: FontWeight.w900,),),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black, backgroundColor: Color(0xff506169),
+                            shape: StadiumBorder(),
+                          ),
+                          onPressed: () {
+                            showModalBottomSheet(
+                                backgroundColor: Colors.transparent,
+                                context: context, builder:
+                                (context)=>d.schoolScreen);
+                            //getindx(d.schoolName);
+                          },
+                          //_navigateToNextScreen(context);
+                        ),
+                      ),
+                    ],),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+
       ],
     ),
   );
@@ -264,8 +314,8 @@ class details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
-      backgroundColor: Color(0xffEFECE7).withOpacity(0),
+
+      backgroundColor: Color(0xffffffff).withOpacity(0),
       body: Container(
         child: buildCount2(school[dataIndex], context),
 
@@ -278,7 +328,7 @@ Widget buildCount2(data d,BuildContext context){
   return Container(
 
     decoration: const BoxDecoration(
-      color: Color(0xFFE8E5E1),
+      color: Color(0xFFFFFFFF),
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(30),
         topRight: Radius.circular(30),
@@ -292,23 +342,31 @@ Widget buildCount2(data d,BuildContext context){
         Container(
             height: 5,
             width: 60,
-            color: Color(0xff9cb5bc).withOpacity(0.99)
+            color: Color(0xff506169).withOpacity(0.99)
         ),
         SizedBox(height: 20,),
-        Card(
-          color: Color(0xff3c4a50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
+        Container(
+          height: 120,
+          child: Card(
 
-          ),
-          child: ListTile (
-            leading: CircleAvatar(
-              radius: 25, // Image radius
-              backgroundColor: Colors.white,
-              backgroundImage: AssetImage("${d.schoolImg}"),
+            color: Color(0xff3c4a50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+
             ),
-            title:  Text("${d.schoolName}\n ${d.schoolNameE}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14,color: Colors.white),),
-            trailing: Text("${d.schoolType}",style: TextStyle(color: Colors.white, fontSize: 14,),),
+            child: Center(
+              child: ListTile (
+                leading: Flexible(child: Container(
+                  child:  CircleAvatar(
+                    radius: 30, // Image radius
+                    backgroundImage: AssetImage("${d.schoolImg}"),
+                    backgroundColor: Colors.white,
+                  ),
+                )),
+                title:  Text("${d.schoolName}\n ${d.schoolNameE}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white),),
+                trailing: Text("${d.schoolType}",style: TextStyle(color: Colors.white, fontSize: 16,),),
+              ),
+            ),
           ),
         ),
         SizedBox(height: 40,),
@@ -318,7 +376,7 @@ Widget buildCount2(data d,BuildContext context){
                 onPressed: (){
                   //action coe when button is pressed
                 },
-                icon: Icon(Icons.school),
+                icon: Icon(Icons.school,color: Color(0xffe18a16),),
               ),
               Text("${d.schoolURL}"),
             ]
@@ -329,7 +387,7 @@ Widget buildCount2(data d,BuildContext context){
                 onPressed: (){
                   //action coe when button is pressed
                 },
-                icon: Icon(Icons.location_city),
+                icon: Icon(Icons.location_city, color: Colors.blueGrey,),
               ),
               Text("${d.address}"),
             ]
@@ -339,7 +397,7 @@ Widget buildCount2(data d,BuildContext context){
               IconButton(
                 onPressed: (){
                 },
-                icon: Icon(Icons.location_on),
+                icon: Icon(Icons.location_on,color: Colors.red.shade700,),
               ),
               Text("${d.addressURL}"),
             ]
@@ -348,7 +406,7 @@ Widget buildCount2(data d,BuildContext context){
 
 
         SizedBox(height: 40,),
-        Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,),),
+        Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26,),),
 
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -358,13 +416,13 @@ Widget buildCount2(data d,BuildContext context){
 
                   //action coe when button is pressed
                 },
-                icon: Icon(Icons.phone_enabled),
+                icon: Icon(Icons.phone_enabled,color: Colors.green,size: 35,),
               ),
               IconButton(
                 onPressed: (){
                   //action coe when button is pressed
                 },
-                icon: Icon(Icons.message),
+                icon: Icon(Icons.message, color: Colors.blue,size: 35,),
               ),
               //Text("${d.phone}"),
             ]

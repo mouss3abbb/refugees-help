@@ -10,11 +10,11 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-        splashIconSize: 500,
+        splashIconSize: 150,
         backgroundColor: Colors.white,
         pageTransitionType: PageTransitionType.topToBottom,
-        splashTransition: SplashTransition.fadeTransition,
-        splash: Image.asset('assets/images/home2.gif',width: 1.5*MediaQuery.of(context).size.width/2,),
+        splashTransition: SplashTransition.scaleTransition,
+        splash: Image.asset('assets/images/home.gif',width: 1.5*MediaQuery.of(context).size.width/2,),
         nextScreen: const OnBoardingScreen(),
         duration: 4000,
         animationDuration: const Duration(seconds: 2));

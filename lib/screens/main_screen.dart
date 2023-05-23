@@ -59,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           )
         ),
-          backgroundColor: const Color.fromARGB(255, 212, 215, 222),
+          backgroundColor: Colors.white,
           extendBody: true,
           body: selectedPage == 1?const Home():const SavedItems(),
           bottomNavigationBar: Container(
@@ -355,17 +355,20 @@ class IdiomsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("العبارات المشهورة",style: TextStyle(color: Colors.black),),
         elevation: 0,
-        backgroundColor: Colors.black54,
+        backgroundColor: Color(0xffffffff),
         foregroundColor: Colors.white70,
         leading: BackButton(
+          color: Colors.black,
           onPressed: (){
             Navigator.of(context).pop();
           },
         ),
       ),
-      backgroundColor: Colors.white54,
-      body: Padding(
+      backgroundColor: Color(0xffffffff),
+      body:
+      Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: ListView.builder(
           shrinkWrap: true,
@@ -376,7 +379,6 @@ class IdiomsPage extends StatelessWidget {
     );
   }
 }
-
 
 
 class IdiomCard extends StatefulWidget {
@@ -402,7 +404,7 @@ class _IdiomCardState extends State<IdiomCard> {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: const BoxDecoration(
-          color: Colors.black12,
+          color: Color(0xffCFD8DC),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: GestureDetector(
@@ -645,7 +647,7 @@ class _SavedItemsState extends State<SavedItems> {
               "المدن المحفوظة",
               style: TextStyle(
                 fontSize: 24,
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -705,7 +707,7 @@ class _SavedItemsState extends State<SavedItems> {
               "الوظائف المحفوظة",
               style: TextStyle(
                 fontSize: 24,
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),

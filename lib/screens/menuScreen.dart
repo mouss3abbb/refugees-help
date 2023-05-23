@@ -10,7 +10,8 @@ facebook(String u) async{
   }
 }
 
-class menuScreen extends StatefulWidget{
+class menuScreen extends StatefulWidget {
+
   @override
   menuState createState()=>menuState();
 
@@ -99,7 +100,7 @@ Widget taiba(){
               alignment: Alignment.centerRight,
               child: Text("المنيو",
                 style: TextStyle(
-                    fontSize: 5,
+                    fontSize: 15,
                     fontWeight: FontWeight.w900,
                     color: Colors.black87
                 ),
