@@ -32,14 +32,44 @@ Map<String,String> newUser = {
 };
 
 
-List<String> fields = ['name','phone','country','facebookLink','istagramLink','whatsAppLink','about'];
+List<String> fields = ['name','phone','facebookLink','istagramLink','whatsAppLink','about'];
 
 class _EditProfilePageState extends State<EditProfilePage> {
   ImagePicker picker = ImagePicker();
   XFile? image;
+  final TextEditingController nameController = TextEditingController(),phoneController=TextEditingController(),faceController=TextEditingController(),instaController=TextEditingController(),whatsController=TextEditingController(),aboutController=TextEditingController();
   @override
-  Widget build(BuildContext context) => Scaffold(
-      appBar: buildAppBar(context),
+  void initState() {
+    nameController.text = user['name'];
+    phoneController.text = user['phone'];
+    aboutController.text = user['about'];
+    faceController.text = user['facebookLink'];
+    whatsController.text = user['whatsAppLink'];
+    instaController.text = user['istagramLink'];
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    print(user['about']);
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          "تعديل البيانات",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white70,
+          ),
+        ),
+        leading: BackButton(
+          color: Colors.white70,
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
         child: SingleChildScrollView(
@@ -49,89 +79,94 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 onTap: () async {
                   image = await picker.pickImage(source: ImageSource.gallery);
                   setState(() {
-                    user['profilePhoto'] = Image.memory(File(image!.path).readAsBytes() as Uint8List).image;
+                    newUser['profilePhoto'] = image!.path;
                   });
                 },
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width/3,
-                  height: MediaQuery.of(context).size.width/3,
-                  child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Image.asset(user['profilePhoto'],fit: BoxFit.cover,),
-                        ),
-                        Align(
-                            alignment: Alignment.bottomRight,
-                            child: Icon(Icons.add_a_photo,size: 30,)
-                        ),
-                      ]
-                  ),
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.width / 3,
+                  child: Stack(children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: user['profilePhoto'] == 'assets/images/pfp.webp'
+                          ? Image.asset(
+                              user['profilePhoto'],
+                              fit: BoxFit.cover,
+                            )
+                          : Image.file(
+                              File(user['profilePhoto']),
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                    Align(
+                        alignment: Alignment.bottomRight,
+                        child: Icon(
+                          Icons.add_a_photo,
+                          size: 30,
+                        )),
+                  ]),
                 ),
               ),
               const SizedBox(height: 24),
-              TextFieldWidget(
-                label: 'الاسم كامل',
-                text: user['name'],
-                onChanged: (name) {
-                  newUser['name'] = name;
-                },
-              ),
+              CustomTextField(controller: nameController, text: user['name'],labelText: 'الاسم',),
               const SizedBox(height: 24),
-              TextFieldWidget(
-                label: ' الهاتف',
+              CustomTextField(
+                controller: phoneController,
                 text: user['phone'],
-                onChanged: (phone) {
-                  newUser['phone'] = phone;
-                },
+                labelText: 'رقم الهاتف',
               ),
               const SizedBox(height: 24),
-              TextFieldWidget(
-                label: ' الواتس آب',
+              CustomTextField(
+                controller: whatsController,
                 text: user['whatsAppLink'],
-                onChanged: (whats) {
-                  newUser['whatsappLink'] = whats;
-                },
+                labelText: 'رقم الواتساب',
               ),
               const SizedBox(height: 24),
-              TextFieldWidget(
-                label: ' الفيس بوك',
+              CustomTextField(
+                controller: faceController,
                 text: user['facebookLink'],
-                onChanged: (face) {
-                  newUser['facebookLink'] = face;
-                },
+                labelText: 'رابط الفيسبوك',
               ),
               const SizedBox(height: 24),
-              TextFieldWidget(
-                label: ' الانستجرام',
+              CustomTextField(
+                controller: instaController,
                 text: user['istagramLink'],
-                onChanged: (insta) {
-                  newUser['istagramLink'] = insta;
-                },
+                labelText: 'رابط الانستاجرام',
               ),
               const SizedBox(height: 24),
-              TextFieldWidget(
-                label: 'حول',
+              CustomTextField(
+                controller: aboutController,
                 text: user['about'],
+                labelText: 'حول',
                 maxLines: 5,
-                onChanged: (about) {
-                  newUser['about'] = about;
-                },
               ),
               ElevatedButton(
-                  onPressed: (){
-                    setState(() {
-                      for(int i = 0;i<fields.length;i++){
-                        if(newUser[fields[i]]!.isNotEmpty){
-                          user[fields[i]] = newUser[fields[i]];
-                        }
-                      }
-                      Hive.box('users').put(loggedUser, user);
-                    });
-                  },
-                  child: Text(
-                    'حفظ'
-                  ),
+                onPressed: () {
+                  setState(() {
+                    user['name'] = nameController.text.toString();
+                    user['phone'] = phoneController.text.toString();
+                    user['whatsAppLink'] = whatsController.text.toString();
+                    user['facebookLink'] = faceController.text.toString();
+                    user['istagramLink'] = instaController.text.toString();
+                    user['about'] = aboutController.text.toString();
+                    if(image != null) {
+                      user['profilePhoto'] = image!.path;
+                    }
+                    Hive.box('users').put(loggedUser, user);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Row(
+                          children: [
+                            Text(
+                              'تم حفظ البيانات بنجاح'
+                            )
+                          ],
+                        )
+                    )
+                    );
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: Text('حفظ'),
               ),
               SizedBox(
                 height: 60,
@@ -140,7 +175,44 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ),
       ),
-  );
+    );
+  }
+}
+
+class CustomTextField  extends StatelessWidget{
+  final TextEditingController controller;
+  final String text,labelText;
+  final int maxLines;
+
+  const CustomTextField({super.key, required this.controller, required this.text,this.maxLines = 1, required this.labelText});
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      maxLines: maxLines,
+      decoration: InputDecoration(
+        labelText: labelText,
+        filled: true,
+        fillColor: const Color(0xfff2f9fc),
+        disabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+              color: Color.fromRGBO(238, 238, 238, 1)),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+              color: Color.fromRGBO(238, 238, 238, 1)),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+              color: Color.fromRGBO(238, 238, 238, 1)),
+          borderRadius: BorderRadius.circular(25),
+        ),
+      ),
+    );
+  }
+
 }
 
 AppBar buildAppBar(BuildContext context) {

@@ -98,21 +98,30 @@ class MyHomePage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            "فرص العمل المتاحة",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white70,
+            ),
+          ),
+          leading: BackButton(
+            color: Colors.white70,
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         backgroundColor: Color(0xFF36454C),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(top: 25),
             child: Column(
               children: [
-                SizedBox(height: 5,),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Text("فرص العمل المتاحه ", style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 32,
-                  ),),
-                ),
                 SizedBox(height: 5,),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),

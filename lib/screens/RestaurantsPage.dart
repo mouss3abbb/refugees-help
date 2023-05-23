@@ -146,9 +146,16 @@ class RestaurantsState extends State<RestaurantsPage>{
       child: SafeArea(
 
         child: Scaffold(
-         
-
-
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: BackButton(
+                color: Colors.black54,
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
             body:SingleChildScrollView(
 
               child: Container(

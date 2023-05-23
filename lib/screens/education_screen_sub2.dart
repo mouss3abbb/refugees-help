@@ -94,6 +94,24 @@ class _MySub2 extends State<MySub2>{
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            "جامعة مدينة السادات",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          leading: BackButton(
+            color: Colors.black54,
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         backgroundColor: Color(0xffEFECE7),
         body: Container(
           margin: EdgeInsets.all(10),

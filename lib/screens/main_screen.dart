@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -20,9 +21,42 @@ var user = Hive.box('users').get(loggedUser);
 class _MainScreenState extends State<MainScreen> {
   var selectedPage = 1;
   @override
+  void initState() {
+    super.initState();
+    if(user['profilePhoto']==null){
+      user['profilePhoto'] = 'assets/images/pfp.webp';
+    }
+  }
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: RichText(
+            text: TextSpan(
+              style: TextStyle(
+                fontSize: 38,
+                fontFamily: 'Massir'
+              ),
+              children: [
+                TextSpan(
+                  text: "مرحبا في ",
+                  style: TextStyle(
+                      color: Colors.black87,
+                  ),
+                ),
+                TextSpan(
+                  text: "بيتك!",
+                  style: TextStyle(
+                      color: Colors.blue,
+                  ),
+                ),
+              ]
+            ),
+          )
+        ),
           backgroundColor: const Color.fromARGB(255, 212, 215, 222),
           extendBody: true,
           body: selectedPage == 1?const Home():const SavedItems(),
@@ -32,12 +66,12 @@ class _MainScreenState extends State<MainScreen> {
             margin: const EdgeInsets.fromLTRB(24, 0, 24, 24),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(50)),
-              border: Border.all(
-                  color: const Color(0xff3c4a50).withOpacity(0.9), width: 3),
+              // border: Border.all(
+              //     color: const Color(0xff3c4a50).withOpacity(0.9), width: 3),
               color: Colors.transparent,
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xff3c4a50),
+                  color: const Color(0xff3c4a50).withOpacity(0.7),
                   spreadRadius: 5,
                   blurRadius: 0,
                   offset: const Offset(0, 0),
@@ -62,12 +96,16 @@ class _MainScreenState extends State<MainScreen> {
                       )),
             GestureDetector(
               onTap: (){
+                setState(() {
+
+                });
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
               },
                   child: CircleAvatar(
                     radius: 20,
                     child: ClipOval(
-                      child: Image.asset('images/pfp.jpeg', scale: 1),
+                      child: user['profilePhoto'] == 'assets/images/pfp.webp' ? Image.asset(user['profilePhoto'],fit: BoxFit.cover,)
+                          : Image.file(File(user['profilePhoto']),fit: BoxFit.cover,),
                     ),
 
                   ),
@@ -206,11 +244,9 @@ class _HomeState extends State<Home> {
             ),),
           ),
           SizedBox(
-
             height: 300,
             width: double.infinity,
             child: ListView.builder(
-
               scrollDirection: Axis.horizontal,
               itemCount: cityPosterAssets.length,
               itemBuilder: (context, index) => CityPoster(
@@ -274,7 +310,7 @@ class _HomeState extends State<Home> {
                 child: const Text(
                   "المزيد",
                   style: TextStyle(
-                    color: Colors.white70,
+                    color: Colors.black54,
                     fontSize: 22,
                     fontWeight: FontWeight.w200,
                   ),
@@ -311,6 +347,11 @@ class IdiomsPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.black54,
         foregroundColor: Colors.white70,
+        leading: BackButton(
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       backgroundColor: Colors.white54,
       body: Padding(
@@ -368,7 +409,7 @@ class _IdiomCardState extends State<IdiomCard> {
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white,
+                      color: Colors.black54,
                     ),
                   ),
                 ],
@@ -382,7 +423,7 @@ class _IdiomCardState extends State<IdiomCard> {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
-                  color: Colors.white,
+                  color: Colors.black54,
                 ),
               )
                   : Container(),

@@ -29,19 +29,30 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            "الجامعات",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          leading: BackButton(
+            color: Colors.black54,
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         backgroundColor: Color(0xffEFECE7),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
 
             children: [
-              Text("التعليم",style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: 30,
-
-              ),),
-              SizedBox(height: 40,),
               Container(
                 width: 200.0,
                 height: 200.0,

@@ -24,6 +24,24 @@ class _MySub1 extends State<MySub1> {
   Widget build(BuildContext context) {
     return  SafeArea(
       child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text(
+              "التعليم",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            leading: BackButton(
+              color: Colors.black54,
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
           backgroundColor: Color(0xFFE8E5E1),
           body:
           SingleChildScrollView(

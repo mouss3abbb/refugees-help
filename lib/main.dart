@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:refugees_help/screens/login_screen.dart';
 import 'package:refugees_help/screens/splash_screen.dart';
 import 'package:refugees_help/screens/profile_screen.dart';
 import 'package:get/get.dart';
@@ -34,8 +35,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar'),
       ],
-      theme: ThemeData(fontFamily: 'Marhey'),
-      home: Splash(),
+      theme: ThemeData(fontFamily: 'Massir'),
+      home: Login(),
     );
   }
 }

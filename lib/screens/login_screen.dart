@@ -212,7 +212,6 @@ class _LoginState extends State<Login> {
     final user = usersBox.get(email);
 
     if (user == null || user['password'] != password) {
-      print(user['password']);
       showDialog(
         context: context,
         builder: (context) => AlertDialog(

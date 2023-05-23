@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+
+    });
     return Scaffold(
         appBar: buildAppBar(context),
         body: SingleChildScrollView(
@@ -36,7 +41,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       ClipRRect(
                       borderRadius: BorderRadius.circular(100),
-                      child: Image.asset(user['profilePhoto'],fit: BoxFit.cover,),
+                        child: user['profilePhoto'] == 'assets/images/pfp.webp' ? Image.asset(user['profilePhoto'],fit: BoxFit.cover,)
+                            : Image.file(File(user['profilePhoto']),fit: BoxFit.cover,),
                     ),
                       Align(
                         alignment: Alignment.bottomRight,

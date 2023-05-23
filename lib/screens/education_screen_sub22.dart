@@ -61,7 +61,7 @@ class _MySub22 extends State<MySub22>{
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('الكليات المتاحة في الجامعة المصرية للتعلم الإلكتروني الأهلية',
+        title: Text('الجامعة المصرية للتعلم الإلكتروني الأهلية',
           style: TextStyle(fontSize: 15),),
         leading: BackButton(
           onPressed: (){

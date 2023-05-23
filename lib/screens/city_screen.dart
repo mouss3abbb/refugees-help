@@ -54,6 +54,24 @@ class _city_screen extends State<city_screen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            "اكتشف المدينة",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          leading: BackButton(
+            color: Colors.black54,
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
           backgroundColor: const Color.fromARGB(255, 212, 215, 222),
           extendBody: true,
           body: const main_city_screen(),
@@ -127,20 +145,6 @@ class main_city_screen extends StatelessWidget {
         children: [
           SizedBox(
             height: 15,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                right: 20), //apply padding to all four sides
-            child: Text(
-              'اكتشف المدينة',
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
           ),
           Container(
             child: Container(

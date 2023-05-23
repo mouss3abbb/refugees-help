@@ -113,9 +113,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-      - family: Marhey
+      - family: Massir
         fonts:
-          - asset: assets/Marhey-VariableFont_wght.ttf
+        - asset: assets/massir.ttf
 
   #   - family: Trajan Pro
   #     fonts:
