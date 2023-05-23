@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:refugees_help/charts/cities_chart.dart';
+import 'package:refugees_help/charts/countries_chart.dart';
 import 'package:refugees_help/main.dart';
 import 'package:refugees_help/screens/JobDescription.dart';
 import 'package:refugees_help/screens/city_screen.dart';
@@ -233,7 +235,6 @@ class _HomeState extends State<Home> {
             height: 30,
           ),
           Container(
-
             alignment: Alignment.topRight,
             margin: EdgeInsets.only(right: 20),
             child: Text("المدن", style: TextStyle(
@@ -257,6 +258,19 @@ class _HomeState extends State<Home> {
           const SizedBox(
             height: 30,
           ),
+          SizedBox(
+            height: 300,
+            width: 300,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  CountriesPieChart(),
+                  CitiesPieChart(),
+                ],
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
             child: Container(
@@ -264,9 +278,6 @@ class _HomeState extends State<Home> {
               decoration: const BoxDecoration(
                 color: Color(0xff3c4a50),
                 borderRadius: BorderRadius.all(Radius.circular(15)),
-
-                // gradient colors
-
               ),
               child: GestureDetector(
                 onTap: () => setState(() {

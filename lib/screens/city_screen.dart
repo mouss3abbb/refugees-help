@@ -146,33 +146,33 @@ class main_city_screen extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          Container(
-            child: Container(
-              /* decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 10,
-                    ),
-                  ),*/
-              margin: EdgeInsets.all(10),
-              height: 300,
-
-              child: FlutterGoogleStreetView(
-                initPos: LatLng(37.78083, -122.40449),
-
-                initSource: StreetViewSource.outdoor,
-                initBearing: 30,
-                initTilt: 30,
-                initZoom: 1.5,
-                onStreetViewCreated: (controller) async {
-                  controller.animateTo(
-                      duration: 50,
-                      camera: StreetViewPanoramaCamera(
-                          bearing: 15, tilt: 10, zoom: 3));
-                },
-              ),
-            ),
-          ),
+          // Container(
+          //   child: Container(
+          //     /* decoration: BoxDecoration(
+          //           border: Border.all(
+          //             color: Colors.grey,
+          //             width: 10,
+          //           ),
+          //         ),*/
+          //     margin: EdgeInsets.all(10),
+          //     height: 300,
+          //
+          //     child: FlutterGoogleStreetView(
+          //       initPos: LatLng(37.78083, -122.40449),
+          //
+          //       initSource: StreetViewSource.outdoor,
+          //       initBearing: 30,
+          //       initTilt: 30,
+          //       initZoom: 1.5,
+          //       onStreetViewCreated: (controller) async {
+          //         controller.animateTo(
+          //             duration: 50,
+          //             camera: StreetViewPanoramaCamera(
+          //                 bearing: 15, tilt: 10, zoom: 3));
+          //       },
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: EdgeInsets.only(
                 right: 20), //apply padding to all four sides
