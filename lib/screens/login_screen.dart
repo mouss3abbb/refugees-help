@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:refugees_help/main.dart';
+import 'package:refugees_help/model/default.dart';
 import 'package:refugees_help/screens/main_screen.dart';
 import 'package:refugees_help/screens/register_screen.dart';
 
@@ -37,7 +38,7 @@ class _LoginState extends State<Login> {
                 Column(
                   children: [
                     const SizedBox(
-                      height: 80,
+                      height: 65,
                     ),
                     const Text(
                       'مرحبا!',
@@ -64,31 +65,12 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
-                    TextFormField(
+                    defaultFormField(
                       controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xfff2f9fc),
-                        prefixIcon: const Icon(Icons.email),
-                        labelText: 'البريد الإلكتروني',
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      validator: (value) {
+                      type: TextInputType.emailAddress,
+                      label: 'البريد الإلكتروني',
+                      prefixIcon: Icons.email,
+                      validate: (value) {
                         if (value!.isEmpty) {
                           return 'من فضلك قم بإدخال البريد الاكتروني ';
                         }
@@ -102,43 +84,19 @@ class _LoginState extends State<Login> {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
+                    defaultFormField(
                       controller: passwordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xfff2f9fc),
-                        prefixIcon: const Icon(Icons.lock),
-                        labelText: 'كلمة المرور',
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isPassword = !isPassword;
-                            });
-                          },
-                          icon: Icon(
-                            isPassword
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      validator: (value) {
+                      type: TextInputType.visiblePassword,
+                      prefixIcon: Icons.lock,
+                      label: 'كلمة المرور',
+                      suffix:
+                          isPassword ? Icons.visibility_off : Icons.visibility,
+                      suffixPressed: () {
+                        setState(() {
+                          isPassword = !isPassword;
+                        });
+                      },
+                      validate: (value) {
                         if (value!.isEmpty) {
                           return 'من فضبك ادخل كلمة المرور';
                         }
@@ -147,7 +105,7 @@ class _LoginState extends State<Login> {
                         }
                         return null;
                       },
-                      obscureText: isPassword,
+                      isPassword: isPassword,
                     ),
                     const SizedBox(
                       height: 20,
@@ -157,7 +115,7 @@ class _LoginState extends State<Login> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff506169),
+                          backgroundColor: const Color(0xff506169),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
