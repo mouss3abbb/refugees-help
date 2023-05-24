@@ -149,15 +149,9 @@ List cityPosterAssets = [
   'images/cairo.jpeg',
 ];
 List cityPosterNames = [
-  'مدينة السادات',
+  'السادات',
   'أكتوبر',
   'القاهرة',
-];
-List cityScreens=[
-  city_screen(),
-  city_screen(),
-  city_screen(),
-
 ];
 
 List popularIdioms = [
@@ -505,7 +499,7 @@ class CityPoster extends StatelessWidget {
   }
 
   openCity(BuildContext context,String name) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const city_screen(),));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => city_screen(name: name),));
   }
 
   saveCity(BuildContext context, String name) {
@@ -771,7 +765,6 @@ class _SavedItemsState extends State<SavedItems> {
 
   CityPoster buildCity(at) {
     String imageAsset = '';
-    print(at);
     if(at =='مدينة السادات')imageAsset = 'images/sadat.jpeg';
     if(at == 'أكتوبر')imageAsset = 'images/october.jpg';
     if(at == 'القاهرة')imageAsset = 'images/cairo.jpeg';
