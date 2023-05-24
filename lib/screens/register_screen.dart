@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:refugees_help/model/default.dart';
 import 'package:refugees_help/screens/login_screen.dart';
 
 class Register extends StatefulWidget {
@@ -22,6 +23,16 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xffCFD8DC),
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.black,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -40,7 +51,7 @@ class _RegisterState extends State<Register> {
                 Column(
                   children: [
                     const SizedBox(
-                      height: 80,
+                      height: 65,
                     ),
                     const Text(
                       'يسعدنا أن تنضم لنا',
@@ -67,31 +78,12 @@ class _RegisterState extends State<Register> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
-                    TextFormField(
+                    defaultFormField(
                       controller: nameController,
-                      keyboardType: TextInputType.name,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xfff2f9fc),
-                        prefixIcon: const Icon(Icons.person),
-                        labelText: 'الاسم',
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      validator: (value) {
+                      type: TextInputType.name,
+                      label: 'الاسم',
+                      prefixIcon: Icons.person,
+                      validate: (value) {
                         if (value!.isEmpty) {
                           return 'من فضلك قم بإدخال اسمك ';
                         }
@@ -101,31 +93,12 @@ class _RegisterState extends State<Register> {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
+                    defaultFormField(
                       controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xfff2f9fc),
-                        prefixIcon: const Icon(Icons.email),
-                        labelText: 'البريد الإلكتروني',
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      validator: (value) {
+                      type: TextInputType.emailAddress,
+                      label: 'البريد الإلكتروني',
+                      prefixIcon: Icons.email,
+                      validate: (value) {
                         if (value!.isEmpty) {
                           return 'من فضلك قم بإدخال البريد الاكتروني ';
                         }
@@ -139,43 +112,19 @@ class _RegisterState extends State<Register> {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
+                    defaultFormField(
                       controller: passswordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xfff2f9fc),
-                        prefixIcon: const Icon(Icons.lock),
-                        labelText: 'كلمة المرور',
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isPassword = !isPassword;
-                            });
-                          },
-                          icon: Icon(
-                            isPassword
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      validator: (value) {
+                      type: TextInputType.visiblePassword,
+                      prefixIcon: Icons.lock,
+                      label: 'كلمة المرور',
+                      suffix:
+                          isPassword ? Icons.visibility_off : Icons.visibility,
+                      suffixPressed: () {
+                        setState(() {
+                          isPassword = !isPassword;
+                        });
+                      },
+                      validate: (value) {
                         if (value!.isEmpty) {
                           return 'من فضبك ادخل كلمة المرور';
                         }
@@ -184,36 +133,17 @@ class _RegisterState extends State<Register> {
                         }
                         return null;
                       },
-                      obscureText: isPassword,
+                      isPassword: isPassword,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
+                    defaultFormField(
                       controller: countryController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xfff2f9fc),
-                        prefixIcon: const Icon(Icons.flag),
-                        labelText: 'الدولة',
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(238, 238, 238, 1)),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      validator: (value) {
+                      type: TextInputType.name,
+                      label: 'الدولة',
+                      prefixIcon: Icons.flag,
+                      validate: (value) {
                         if (value!.isEmpty) {
                           return 'من فضلك ادخل اسم الدولة';
                         }
@@ -256,7 +186,7 @@ class _RegisterState extends State<Register> {
                       width: double.infinity,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff506169),
+                            backgroundColor: const Color(0xff506169),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
