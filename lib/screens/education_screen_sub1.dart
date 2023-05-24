@@ -370,86 +370,91 @@ Widget buildCount2(data d,BuildContext context){
       ),
     ),
 
-    child: Column(
-      children: [
-        SizedBox(height: 10,),
-        Container(
-            height: 5,
-            width: 60,
-            color: Color(0xff506169).withOpacity(0.99)
-        ),
-        SizedBox(height: 20,),
-        Container(
-          height: 120,
-          child: Card(
+    child: SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 10,),
+          Container(
+              height: 5,
+              width: 60,
+              color: Color(0xff506169).withOpacity(0.99)
+          ),
+          SizedBox(height: 20,),
+          Container(
+            height: 120,
+            child: Card(
 
-            color: Color(0xff3c4a50),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
+              color: Color(0xff3c4a50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
 
-            ),
-            child: Center(
-              child: ListTile (
-                leading: Flexible(child: Container(
-                  child:  CircleAvatar(
-                    radius: 30, // Image radius
-                    backgroundImage: AssetImage("${d.schoolImg}"),
-                    backgroundColor: Colors.white,
-                  ),
-                )),
-                title:  Text("${d.schoolName}\n ${d.schoolNameE}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white),),
-                trailing: Text("${d.schoolType}",style: TextStyle(color: Colors.white, fontSize: 16,),),
+              ),
+              child: Center(
+                child: ListTile (
+                  leading: Flexible(child: Container(
+                    child:  CircleAvatar(
+                      radius: 30, // Image radius
+                      backgroundImage: AssetImage("${d.schoolImg}"),
+                      backgroundColor: Colors.white,
+                    ),
+                  )),
+                  title:  Text("${d.schoolName}\n ${d.schoolNameE}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white),),
+                  trailing: Text("${d.schoolType}",style: TextStyle(color: Colors.white, fontSize: 16,),),
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(height: 40,),
-        Row(
-            children:[
-                Icon(Icons.school,color: Color(0xffe18a16),),
-              Text("${d.schoolURL}",overflow: TextOverflow.clip),
-            ]
-        ),
-        Row(
-            children:[
-                Icon(Icons.location_city, color: Colors.blueGrey,),
-              Text("${d.address}",overflow: TextOverflow.fade),
-            ]
-        ),
-        Row(
-            children:[
-                Icon(Icons.location_on,color: Colors.red.shade700,),
-              Text("${d.addressURL}",overflow: TextOverflow.fade),
-            ]
-        ),
+          SizedBox(height: 40,),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+                children:[
+                    Icon(Icons.school,color: Color(0xffe18a16),),
+                  Text("${d.schoolURL}",overflow: TextOverflow.clip),
+                ]
+            ),
+          ),
+          Row(
+              children:[
+                  Icon(Icons.location_city, color: Colors.blueGrey,),
+                Text("${d.address}",overflow: TextOverflow.fade),
+              ]
+          ),
+          Row(
+              children:[
+                  Icon(Icons.location_on,color: Colors.red.shade700,),
+                Text("${d.addressURL}",overflow: TextOverflow.fade),
+              ]
+          ),
 
 
 
-        SizedBox(height: 40,),
-        Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26,),),
+          SizedBox(height: 40,),
+          Text("تواصل معنا..",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26,),),
 
-        Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:[
-              IconButton(
-                onPressed: (){
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                IconButton(
+                  onPressed: (){
 
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.phone_enabled,color: Colors.green,size: 35,),
-              ),
-              IconButton(
-                onPressed: (){
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.message, color: Colors.blue,size: 35,),
-              ),
-              //Text("${d.phone}"),
-            ]
-        ),
+                    //action coe when button is pressed
+                  },
+                  icon: Icon(Icons.phone_enabled,color: Colors.green,size: 35,),
+                ),
+                IconButton(
+                  onPressed: (){
+                    //action coe when button is pressed
+                  },
+                  icon: Icon(Icons.message, color: Colors.blue,size: 35,),
+                ),
+                //Text("${d.phone}"),
+              ]
+          ),
 
 
-      ],
+        ],
+      ),
     ),
   );
 }
