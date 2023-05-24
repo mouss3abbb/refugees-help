@@ -102,7 +102,7 @@ class _RegisterState extends State<Register> {
                         if (value!.isEmpty) {
                           return 'من فضلك قم بإدخال البريد الاكتروني ';
                         }
-                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                        if (!RegExp(r'^[\w\.]+@([\w]+\.)+[\w]{2,4}$')
                             .hasMatch(value)) {
                           return 'من فضلك ادخل البريد الاكتروني بطريقة صحيحة';
                         }
