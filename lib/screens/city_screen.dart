@@ -6,6 +6,7 @@ import 'package:flutter_google_street_view/flutter_google_street_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:refugees_help/screens/education_screen.dart';
+import 'package:refugees_help/screens/education_screen_sub21.dart';
 import 'package:refugees_help/screens/job_screen.dart';
 import 'package:refugees_help/screens/Service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -39,26 +40,54 @@ List optionPosterDescriptions = [
   "الخدمات الصحية",
   "المطاعم والكافيهات"
 ];
-List optionPosterScreens = [
-  education_screen(),
-  job_screen(),
-  "الخدمات الصحية",
-  "المطاعم والكافيهات"
-];
 
+List imageAssets = [];
+
+List sadatImages = [
+  'assets/images/sadat_c1.JPG',
+  'assets/images/sadat_c2.JPG',
+  'assets/images/sadat_c3.JPG',
+  'assets/images/sadat_c4.jpg',
+  'assets/images/sadat_c5.jpg',
+];
+List octoberImages = [
+  'assets/images/oct_c1.jpg',
+  'assets/images/oct_c2.jpg',
+  'assets/images/oct_c3.jpg',
+  'assets/images/oct_c4.jpg',
+];
+List cairoImages = [
+  'assets/images/cairo_c1.webp',
+  'assets/images/cairo_c2.jpg',
+  'assets/images/cairo_c3.jpg',
+  'assets/images/cairo_c4.jpg',
+];
 class city_screen extends StatefulWidget {
-  const city_screen({super.key});
+  final String name;
+  const city_screen({super.key, required this.name});
 
   @override
-  State<city_screen> createState() => _city_screen();
+  State<city_screen> createState() => _city_screen(name);
 }
 
 class _city_screen extends State<city_screen> {
   var selectedPage = 1;
+  final String name;
+
+  _city_screen(this.name);
   void initState() {
     super.initState();
     if(user['profilePhoto']==null){
       user['profilePhoto'] = 'assets/images/pfp.webp';
+    }
+    if(name == 'السادات'){
+      imageAssets = sadatImages;
+    }
+    if(name == 'أكتوبر'){
+      imageAssets = octoberImages;
+    }
+    if(name == 'القاهرة'){
+      imageAssets = cairoImages;
     }
   }
   var user = Hive.box('users').get(loggedUser);
@@ -69,12 +98,26 @@ class _city_screen extends State<city_screen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text(
-            "اكتشف المدينة",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+          title: RichText(
+            text: TextSpan(
+                style: TextStyle(
+                    fontSize: 38,
+                    fontFamily: 'Massir'
+                ),
+                children: [
+                  TextSpan(
+                    text: "اكتشف مدينة ",
+                    style: TextStyle(
+                      color: Colors.black87,
+                    ),
+                  ),
+                  TextSpan(
+                    text: name,
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                ]
             ),
           ),
           leading: BackButton(
@@ -86,7 +129,7 @@ class _city_screen extends State<city_screen> {
         ),
           backgroundColor: Colors.white,
           extendBody: true,
-          body: const main_city_screen(),
+          body: main_city_screen(name: name,),
           bottomNavigationBar: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 2),
@@ -158,44 +201,41 @@ class _city_screen extends State<city_screen> {
 }
 
 class main_city_screen extends StatelessWidget {
-  const main_city_screen({super.key});
-
+  const main_city_screen({super.key, required this.name});
+  final String name;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Container(
+            width: MediaQuery.of(context).size.width-32,
+            height: 450,
+            child: CarouselSlider(
+              items: cityImages(),
+              options: CarouselOptions(
+                padEnds: true,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 2),
+                autoPlayAnimationDuration:
+                const Duration(milliseconds: 600),
+                autoPlayCurve: Curves.decelerate,
+                enlargeCenterPage: true,
+                enlargeFactor: 1,
+                scrollDirection: Axis.horizontal,
+                animateToClosest: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                scrollPhysics: BouncingScrollPhysics(),
+              ),
+            ),
+          ),
           SizedBox(
             height: 15,
           ),
-          // Container(
-          //   child: Container(
-          //     /* decoration: BoxDecoration(
-          //           border: Border.all(
-          //             color: Colors.grey,
-          //             width: 10,
-          //           ),
-          //         ),*/
-          //     margin: EdgeInsets.all(10),
-          //     height: 300,
-          //
-          //     child: FlutterGoogleStreetView(
-          //       initPos: LatLng(37.78083, -122.40449),
-          //
-          //       initSource: StreetViewSource.outdoor,
-          //       initBearing: 30,
-          //       initTilt: 30,
-          //       initZoom: 1.5,
-          //       onStreetViewCreated: (controller) async {
-          //         controller.animateTo(
-          //             duration: 50,
-          //             camera: StreetViewPanoramaCamera(
-          //                 bearing: 15, tilt: 10, zoom: 3));
-          //       },
-          //     ),
-          //   ),
-          // ),
           Padding(
             padding: EdgeInsets.only(
                 right: 20), //apply padding to all four sides
@@ -214,7 +254,7 @@ class main_city_screen extends StatelessWidget {
             height: 250,
             margin: EdgeInsets.all(5),
             child: CarouselSlider(
-              items: optionPostersList(),
+              items: optionPostersList(name),
               options: CarouselOptions(
                 height: 250,
                 padEnds: false,
@@ -241,22 +281,42 @@ class main_city_screen extends StatelessWidget {
     );
   }
 
-  List<Widget> optionPostersList() {
+  List<Widget> optionPostersList(String name) {
     List<Widget> posters = [];
     for (var i = 0; i < optionPosterAssets.length; i++) {
       posters.add(optionsPoster(
-        index: i,));
+        index: i, cityName: name,));
     }
     return posters;
+  }
+
+  List<Widget> cityImages() {
+    List<Widget> list = [];
+    for(int i =0 ;i<imageAssets.length;i++){
+      list.add(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                imageAssets[i],
+                fit: BoxFit.cover,
+                height: 450,
+              ),
+            ),
+          )
+      );
+    }
+    return list;
   }
 }
 
 class optionsPoster extends StatelessWidget {
   const optionsPoster({
     super.key,
-    required this.index,
+    required this.index, required this.cityName,
   });
-
+  final String cityName;
   final int index;
 
   @override
@@ -265,10 +325,10 @@ class optionsPoster extends StatelessWidget {
       onTap: (){
         switch(index){
           case 0:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => education_screen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => education_screen(cityName: cityName)));
             break;
           case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => job_screen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => job_screen(cityName: cityName)));
             break;
           case 2:
             Navigator.push(context, MaterialPageRoute(builder: (context)=> Service()));

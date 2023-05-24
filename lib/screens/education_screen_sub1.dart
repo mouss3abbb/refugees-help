@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:refugees_help/screens/education_screen_sub22.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/widgets.dart';
-import 'package:refugees_help/screens/education_screen_sub21.dart';
-import 'package:refugees_help/screens/education_screen_sub2.dart';
-import 'package:refugees_help/screens/education_screen.dart';
 
 
 class data{
@@ -27,8 +24,8 @@ class data{
     required this.phone,
     required this.schoolScreen});
 }
-
-List<data> school=[
+List<data> schools = [];
+List<data> sadatSchools=[
   data( schoolName: 'المتفوقين للعلوم والتكنولوجيا',
     schoolNameE: 'Sadat STEM high School',
     schoolImg: 'assets/images/stem.jfif',
@@ -140,21 +137,85 @@ List<data> school=[
     schoolScreen:details(dataIndex: 10),
   ),
 ];
-class education_screen_sub1 extends StatelessWidget {
-  const education_screen_sub1({super.key});
 
+List<data> cairoSchools = [
+  data( schoolName:'مدرسة بالم الدولية',
+    schoolNameE: 'Palm International School',
+    schoolImg: 'assets/images/cairo_palm.jpeg',
+    schoolType:'خاصة',
+    schoolURL: 'https://visionseducational.com/acadp_listings/al-qadisiyah-private-school-alsaadat/',
+    address:'مدينة النخيل - الطيق الدائري',
+    addressURL: 'https://goo.gl/maps/7vSagp6nFCFtP8rDA',
+    phone:'01280658581',
+    schoolScreen:details(dataIndex: 0),
+  ),
+  data( schoolName:'مدرسة روضة مصر',
+    schoolNameE: 'Rawdat Misr School',
+    schoolImg: 'assets/images/cairo_rawda.webp',
+    schoolType:'خاصة',
+    schoolURL: 'https://visionseducational.com/acadp_listings/al-qadisiyah-private-school-alsaadat/',
+    address:'8 شارع سمعان - دوران شبرا',
+    addressURL: 'https://goo.gl/maps/7vSagp6nFCFtP8rDA',
+    phone:'01280658581',
+    schoolScreen:details(dataIndex: 1),
+  ),
+];
+
+List<data> octoberSchools = [
+  data( schoolName:'مدرسة ايليت للغات',
+    schoolNameE: 'Elite Language School',
+    schoolImg: 'assets/images/october_els.webp',
+    schoolType:'خاصة',
+    schoolURL: 'https://visionseducational.com/acadp_listings/al-qadisiyah-private-school-alsaadat/',
+    address:'كومباوند سكن مصر - طريق الواحات',
+    addressURL: 'https://goo.gl/maps/7vSagp6nFCFtP8rDA',
+    phone:'01280658581',
+    schoolScreen:details(dataIndex: 0),
+  ),
+  data( schoolName:'مدرسة ايبيك الدولية',
+    schoolNameE: 'EPIC School Egypt',
+    schoolImg: 'assets/images/october_epic.webp',
+    schoolType:'خاصة',
+    schoolURL: 'https://visionseducational.com/acadp_listings/al-qadisiyah-private-school-alsaadat/',
+    address:'كومباوند الخمايل',
+    addressURL: 'https://goo.gl/maps/7vSagp6nFCFtP8rDA',
+    phone:'01280658581',
+    schoolScreen:details(dataIndex: 1),
+  ),
+];
+
+
+class education_screen_sub1 extends StatelessWidget {
+  const education_screen_sub1({super.key, required this.cityName});
+  final String cityName;
   @override
   Widget build(BuildContext context) {
-    return MySub1();
+    return MySub1(cityName: cityName,);
   }
 }
 class MySub1 extends StatefulWidget {
-  MySub1({super.key});
-
+  MySub1({super.key, required this.cityName});
+  final String cityName;
   @override
-  State<MySub1> createState() => _MySub1();
+  State<MySub1> createState() => _MySub1(cityName);
 }
 class _MySub1 extends State<MySub1> {
+  final String cityName;
+
+  _MySub1(this.cityName);
+  @override
+  void initState() {
+    super.initState();
+    if(cityName == 'السادات'){
+      schools = sadatSchools;
+    }
+    if(cityName == 'أكتوبر'){
+      schools = octoberSchools;
+    }
+    if(cityName == 'القاهرة'){
+      schools = cairoSchools;
+    }
+  }
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -181,9 +242,9 @@ class _MySub1 extends State<MySub1> {
           margin: EdgeInsets.all(10),
           child: ListView.separated(
               itemBuilder: (context, index) =>
-                  buildCount(school[index], context),
+                  buildCount(schools[index], context),
               separatorBuilder: (context, index) => SizedBox(height: 15,)
-              , itemCount: school.length),
+              , itemCount: schools.length),
         ),
       ),
     );
@@ -217,31 +278,6 @@ Widget buildCount(data d,BuildContext context){
     child: Column(
 
       children:[
-        /* ListTile (
-            leading: CircleAvatar(
-              radius: 25, // Image radius
-              backgroundImage: AssetImage("${d.schoolImg}"),
-              backgroundColor: Colors.white,
-            ),
-            title:  Text("${d.schoolName}",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.white),
-            ),
-            trailing: ElevatedButton(
-              child: Text('تفاصيل',style: TextStyle(fontSize:13,fontWeight: FontWeight.w900,),),
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black, backgroundColor: Color(0xffEFECE7),
-                shape: StadiumBorder(),
-              ),
-              onPressed: () {
-                showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    context: context, builder:
-                    (context)=>d.schoolScreen);
-                //getindx(d.schoolName);
-              },
-              //_navigateToNextScreen(context);
-            ),
-          ),*/
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -316,7 +352,7 @@ class details extends StatelessWidget {
 
       backgroundColor: Color(0xffffffff).withOpacity(0),
       body: Container(
-        child: buildCount2(school[dataIndex], context),
+        child: buildCount2(schools[dataIndex], context),
 
       ),
     );
@@ -325,7 +361,6 @@ class details extends StatelessWidget {
 
 Widget buildCount2(data d,BuildContext context){
   return Container(
-
     decoration: const BoxDecoration(
       color: Color(0xFFFFFFFF),
       borderRadius: BorderRadius.only(
@@ -371,34 +406,20 @@ Widget buildCount2(data d,BuildContext context){
         SizedBox(height: 40,),
         Row(
             children:[
-              IconButton(
-                onPressed: (){
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.school,color: Color(0xffe18a16),),
-              ),
-              Text("${d.schoolURL}"),
+                Icon(Icons.school,color: Color(0xffe18a16),),
+              Text("${d.schoolURL}",overflow: TextOverflow.clip),
             ]
         ),
         Row(
             children:[
-              IconButton(
-                onPressed: (){
-                  //action coe when button is pressed
-                },
-                icon: Icon(Icons.location_city, color: Colors.blueGrey,),
-              ),
-              Text("${d.address}"),
+                Icon(Icons.location_city, color: Colors.blueGrey,),
+              Text("${d.address}",overflow: TextOverflow.fade),
             ]
         ),
         Row(
             children:[
-              IconButton(
-                onPressed: (){
-                },
-                icon: Icon(Icons.location_on,color: Colors.red.shade700,),
-              ),
-              Text("${d.addressURL}"),
+                Icon(Icons.location_on,color: Colors.red.shade700,),
+              Text("${d.addressURL}",overflow: TextOverflow.fade),
             ]
         ),
 

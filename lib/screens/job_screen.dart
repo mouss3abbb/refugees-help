@@ -9,7 +9,10 @@ class data{
   data({this.jobType,this.image,required this.screen});
 }
 
-List jobsList=[
+
+List jobsList = [];
+
+List sadatJobsList=[
   JobDescription(imageAsset: 'images/1.jpg', title: 'محاسب', details: '''
     مواعيد العمل من 7 صباحا الي 5 مساءا
     المرتب 5 الاف جنيه شهريا
@@ -36,12 +39,33 @@ List jobsList=[
     عدد سنوات خبرة في نفس المجال المطلوب
     يجب ارفاق سابقة خبرة تؤكد العمل السابق
   ''', contact: ''),
+];
+
+List cairoJobsList=[
   JobDescription(imageAsset: 'images/4.jpg', title: 'محامي', details: '''
     العمل من 9 صباحا الى 5 مساءا
     المرتب 5 الاف جنيه شهريا
   ''', requirements: '''
     مؤهل عالي
     خبرة لا تقل عن 3 سنوات
+  ''', contact: ''),
+  JobDescription(imageAsset: 'images/5.jpg', title: 'مهندس ميكانيكا', details: '''
+    دوام كامل
+    المرتب حسب الخبرة الهندسية
+  ''', requirements: '''
+    خبرة لا تقل عن سنتين
+    حاصل على شهادة بكاليريوس
+  ''', contact: ''),
+];
+
+List octoberJobsList=[
+  JobDescription(imageAsset: 'assets/images/web_dev.jpg', title: 'مطور مواقع', details: '''
+    العمل من 9 صباحا الى 5 مساءا
+    المرتب 15 الاف جنيه شهريا
+  ''', requirements: '''
+    HTML, CSS, Javascript
+    PHP 
+    Laravel
   ''', contact: ''),
   JobDescription(imageAsset: 'images/5.jpg', title: 'مهندس ميكانيكا', details: '''
     دوام كامل
@@ -77,25 +101,45 @@ saveJob(BuildContext context,String imageAsset, String description) {
 }
 
 class job_screen extends StatelessWidget {
-  const job_screen({super.key});
-
+  const job_screen({super.key, required this.cityName});
+  final String cityName;
 
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MyHomePage();
+    return MyHomePage(cityName: cityName,);
   }
 }
 
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.cityName}) : super(key: key);
+  final String cityName;
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState(cityName);
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final String cityName;
+
+  _MyHomePageState(this.cityName);
+  @override
+  void initState() {
+    super.initState();
+    if(cityName == 'السادات'){
+      jobsList = sadatJobsList;
+    }
+    if(cityName == 'أكتوبر'){
+      jobsList = octoberJobsList;
+    }
+    if(cityName == 'القاهرة'){
+      jobsList = cairoJobsList;
+    }
+  }
+  @override
   Widget build(BuildContext context) {
-
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -138,7 +182,6 @@ class MyHomePage extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                     child: ListView.builder(
                       itemBuilder: (context,index)=> buildCount(context,index),
-                      //separatorBuilder: (context,index)=>SizedBox(height: 20,)
                       itemCount: jobsList.length,
                     ),
 
@@ -151,12 +194,9 @@ class MyHomePage extends StatelessWidget {
 
           ),
         ),
-
-
       ),
     );
   }
-
 }
 
 Widget buildCount(BuildContext context, int index){
@@ -190,6 +230,7 @@ Widget buildCount(BuildContext context, int index){
               child:ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: Image.asset(data.imageAsset,
+                  height: 200,
                 ),
               )
           ),
